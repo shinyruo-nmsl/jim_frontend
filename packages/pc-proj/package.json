@@ -5,9 +5,7 @@
   "author": "jim <jiminhu@trip.com>",
   "homepage": "https://github.com/shinyruo-nmsl/jim_frontend#readme",
   "license": "ISC",
-  "main": "src/main.ts",
-  "directories": {},
-  "files": [],
+  "main": "src/main.tsx",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shinyruo-nmsl/jim_frontend.git"
