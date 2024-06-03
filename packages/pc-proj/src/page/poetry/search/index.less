@@ -1,0 +1,29 @@
+.poetry-search {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 20px;
+  > .search {
+    flex: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+
+    > .author,
+    > .keyword {
+      display: flex;
+      align-items: center;
+      > span {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .poetry-content {
+    .keyword {
+      background-color: yellow;
+    }
+  }
+}

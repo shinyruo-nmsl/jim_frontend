@@ -1,0 +1,31 @@
+.chat-message {
+  &.user {
+    justify-content: flex-end;
+    > .dialog {
+      background-color: green;
+      color: #fff;
+    }
+  }
+
+  &.gpt {
+    > .dialog {
+      background-color: azure;
+      border: 1px solid blue;
+    }
+  }
+
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+
+  > .dialog {
+    width: fit-content;
+    max-width: 800px;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 12px;
+    line-height: 16px;
+    word-break: break-all;
+  }
+}
