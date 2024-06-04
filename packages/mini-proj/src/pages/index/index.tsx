@@ -1,21 +1,24 @@
-import { Component, PropsWithChildren } from 'react'
-import { View, Text } from '@tarojs/components'
-import './index.less'
+import { Component, PropsWithChildren } from "react";
+import { View, Text } from "@tarojs/components";
+import "./index.less";
+
+import { User } from "proj-service";
 
 export default class Index extends Component<PropsWithChildren> {
-  componentDidMount () { }
+  componentDidMount() {}
 
-  componentWillUnmount () { }
+  componentWillUnmount() {}
 
-  componentDidShow () { }
+  componentDidShow() {}
 
-  componentDidHide () { }
+  componentDidHide() {}
 
-  render () {
+  render() {
     return (
-      <View className='index'>
+      <View className="index">
+        <Text>{User.UserRoles.join(",")}</Text>
         <Text>Hello world!</Text>
       </View>
-    )
+    );
   }
 }

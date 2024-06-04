@@ -1,6 +1,6 @@
-import { Opiton } from "../global-type/model";
-import { Role } from "../global-type/user";
-import { AuthToken } from "../util/http";
+import { Opiton } from "@/global-type/model";
+import { Role } from "@/global-type/user";
+import { AuthToken } from "@/util/http";
 
 export const UserRoles: Role[] = ["admin", "member", "ordinary"];
 

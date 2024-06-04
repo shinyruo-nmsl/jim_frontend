@@ -14,13 +14,14 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"] // @将映射到src目录
+    },
     "rootDir": ".",
     "jsx": "react-jsx",
     "allowJs": true,
     "resolveJsonModule": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types"]
   },
   "include": ["./src", "./types"],
   "compileOnSave": false

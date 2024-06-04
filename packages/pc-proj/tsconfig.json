@@ -19,9 +19,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"] // @将映射到src目录
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

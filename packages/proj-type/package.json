@@ -1,0 +1,29 @@
+{
+  "name": "proj-type",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "jim <jiminhu@trip.com>",
+  "homepage": "https://github.com/shinyruo-nmsl/jim_frontend#readme",
+  "license": "ISC",
+  "main": "src/index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://registry.npm.release.ctripcorp.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shinyruo-nmsl/jim_frontend.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/proj-type.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/shinyruo-nmsl/jim_frontend/issues"
+  }
+}

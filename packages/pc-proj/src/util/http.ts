@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { HttpMethod, HttpEventType } from "../global-type/http";
+import { HttpMethod, HttpEventType } from "@/global-type/http";
 import StorageUtil from "./storage";
 import { EventEmitter } from "./event";
 import { createPromiseResolvers } from "./tool";
