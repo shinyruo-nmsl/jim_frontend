@@ -1,7 +1,7 @@
-import { CharacterAvatar, UserAvatar } from "../../../../../component/Avatar";
+import { CharacterAvatar, UserAvatar } from "@/component/Avatar";
+import { createMarkdown } from "@/util/html";
 
 import "./index.less";
-import { createMarkdown } from "../../../../../util/html";
 
 export interface Message {
   role: "gpt" | "user";

@@ -1,6 +1,6 @@
 import { Menu as _Menu, MenuProps as _MenuProps } from "antd";
 
-import { SubRoute } from "../../global-type/router";
+import { SubRoute } from "@/global-type/router";
 
 interface MenuProps {
   keys: string[];

@@ -1,11 +1,12 @@
 import { useCallback, useState } from "react";
 import { Input, Button, message } from "antd";
+import { PaginationTableAsync } from "@/component/PaginationTable";
 import {
   fetchGetPoetriesByAuthorAndKeyWords,
   splitPoetryContentByKeyWords,
   PoetryPagination,
 } from "./service";
-import { PaginationTableAsync } from "../../../component/PaginationTable";
+
 import "./index.less";
 
 function PoetrySearch() {

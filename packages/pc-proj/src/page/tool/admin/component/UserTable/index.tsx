@@ -1,9 +1,9 @@
 import { TableProps, Space } from "antd";
-import { CharacterAvatar } from "../../../../../component/Avatar";
-import { PaginationTableAsync } from "../../../../../component/PaginationTable";
-import { Pagination } from "../../../../../global-type/model";
-import { UserLoginInfo } from "../../../../../global-type/user";
-import { formatUserRole } from "../../../../../service/user";
+import { CharacterAvatar } from "@/component/Avatar";
+import { PaginationTableAsync } from "@/component/PaginationTable";
+import { Pagination } from "@/global-type/model";
+import { UserLoginInfo } from "@/global-type/user";
+import { formatUserRole } from "@/service/user";
 
 interface UserTableProps {
   data: Pagination<UserLoginInfo>;

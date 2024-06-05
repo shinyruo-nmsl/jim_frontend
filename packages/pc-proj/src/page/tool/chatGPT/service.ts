@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { useUserLoginInfo } from "../../../context/user";
-import { createFetchStream } from "../../../util/http";
-import StorageUtil from "../../../util/storage";
+import { useUserLoginInfo } from "@/context/user";
+import { createFetchStream } from "@/util/http";
+import StorageUtil from "@/util/storage";
 import { Message } from "./component/Message";
 
 export function fetchPostPromotMessage(prompt: string) {

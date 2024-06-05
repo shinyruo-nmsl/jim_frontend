@@ -1,5 +1,5 @@
-import { request } from "../util/http";
-import { UserLoginDisplayInfo, UserLoginInfo } from "../global-type/user";
+import { request } from "@/util/http";
+import { UserLoginDisplayInfo, UserLoginInfo } from "@/global-type/user";
 
 export async function fetchGetUserLoginInfo() {
   return request<UserLoginInfo>({

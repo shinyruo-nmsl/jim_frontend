@@ -1,6 +1,6 @@
-import { Pagination, PaginationQuery } from "../../../global-type/model";
-import { Role, UserLoginInfo } from "../../../global-type/user";
-import { request } from "../../../util/http";
+import { Pagination, PaginationQuery } from "@/global-type/model";
+import { Role, UserLoginInfo } from "@/global-type/user";
+import { request } from "@/util/http";
 
 export interface UsersQuery extends PaginationQuery {
   type: "userId" | "userName" | "account";

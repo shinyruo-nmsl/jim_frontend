@@ -1,9 +1,9 @@
 import { Table, TableProps, Pagination as PaginationComp } from "antd";
+import { useEffect, useState } from "react";
 
-import { Pagination } from "../../global-type/model";
+import { Pagination } from "@/global-type/model";
 
 import "./index.less";
-import { useEffect, useState } from "react";
 
 interface AsyncProps<T> {
   tableProps?: TableProps<T>;

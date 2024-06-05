@@ -1,5 +1,5 @@
 import { Button, Form, Input, Select } from "antd";
-import { Opiton } from "../../../../../global-type/model";
+import { Opiton } from "@/global-type/model";
 
 import "./index.less";
 

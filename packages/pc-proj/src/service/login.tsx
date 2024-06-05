@@ -1,4 +1,4 @@
-import { useUserLoginInfo } from "../context/user";
+import { useUserLoginInfo } from "@/context/user";
 import { Navigate } from "react-router-dom";
 
 export function withLogin(WrappedComponent: React.ComponentType) {

@@ -1,5 +1,5 @@
-import { request } from "../../../util/http";
-import { Pagination, PaginationQuery } from "../../../global-type/model";
+import { request } from "@/util/http";
+import { Pagination, PaginationQuery } from "@/global-type/model";
 
 export interface AuthorAndKeyWordsQuery extends PaginationQuery {
   keyword1: string;

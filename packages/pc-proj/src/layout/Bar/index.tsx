@@ -1,6 +1,6 @@
 import { Breadcrumb, Dropdown, MenuProps } from "antd";
-import { UserLoginInfo } from "../../global-type/user";
-import { UserAvatar } from "../../component/Avatar";
+import { UserLoginInfo } from "@/global-type/user";
+import { UserAvatar } from "@/component/Avatar";
 
 import "./bar.less";
 

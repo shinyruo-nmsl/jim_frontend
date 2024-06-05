@@ -1,4 +1,4 @@
-import { AuthToken, request } from "../../util/http";
+import { AuthToken, request } from "@/util/http";
 
 export type LoginParam = {
   account: string;

@@ -9,9 +9,9 @@ import {
   UserLoginInfo,
   UserLoginDispatch,
   UserLoginDisplayInfo,
-} from "../global-type/user";
-import { fetchGetUserLoginInfo, fetchUpdateUserDisplayInfo } from "../api/user";
-import { exitLogin } from "../service/user";
+} from "@/global-type/user";
+import { fetchGetUserLoginInfo, fetchUpdateUserDisplayInfo } from "@/api/user";
+import { exitLogin } from "@/service/user";
 
 export const UserLoginInfoContext = createContext<UserLoginInfo>({
   role: "visitor",

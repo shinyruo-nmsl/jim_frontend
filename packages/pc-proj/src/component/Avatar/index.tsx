@@ -1,5 +1,5 @@
 import { Avatar, AvatarProps } from "antd";
-import { useUserLoginInfo } from "../../context/user";
+import { useUserLoginInfo } from "@/context/user";
 
 function UserAvatar(avatarProps: AvatarProps) {
   const { userName, avatar } = useUserLoginInfo();

@@ -1,6 +1,6 @@
 import { Form, Select, Modal } from "antd";
-import { UserLoginInfo } from "../../../../../global-type/user";
-import { UserRoleOptions } from "../../../../../service/user";
+import { UserLoginInfo } from "@/global-type/user";
+import { UserRoleOptions } from "@/service/user";
 
 interface EditDialogProps {
   visible: boolean;

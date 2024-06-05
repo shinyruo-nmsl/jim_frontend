@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Button, Form, Input, Tabs, message } from "antd";
-import { navigate2Pre } from "../../util/navigate";
+import { navigate2Pre } from "@/util/navigate";
+import { useUserLoginDispatch } from "@/context/user";
 
 import { login, regist } from "./service";
 
 import "./index.less";
-import { useUserLoginDispatch } from "../../context/user";
 
 function Login() {
   const loginDispatch = useUserLoginDispatch();

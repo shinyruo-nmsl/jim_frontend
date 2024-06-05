@@ -2,9 +2,9 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { MenuProps, message } from "antd";
 import { useState } from "react";
 
-import Router from "../router";
-import { UserLoginDisplayInfo } from "../global-type/user";
-import { useUserLoginInfo, useUserLoginDispatch } from "../context/user";
+import Router from "@/router";
+import { UserLoginDisplayInfo } from "@/global-type/user";
+import { useUserLoginInfo, useUserLoginDispatch } from "@/context/user";
 
 import Menu from "./Menu";
 import Bar from "./Bar";

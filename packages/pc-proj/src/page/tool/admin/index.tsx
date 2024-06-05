@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { message, Modal } from "antd";
 import { ExclamationCircleFilled } from "@ant-design/icons";
-import { UserLoginInfo } from "../../../global-type/user";
+import { UserLoginInfo } from "@/global-type/user";
+import { Pagination } from "@/global-type/model";
+
 import {
   fetchRemoveUser,
   fetchSearchUserLoginInfo,
   fetchUpdateUserRole,
 } from "./service";
-
 import SearchBar, { SearchBarQuery } from "./component/SearchBar";
 import UserTable from "./component/UserTable";
-import { Pagination } from "../../../global-type/model";
 import EditDialog from "./component/EditDialog";
 
 import "./index.less";

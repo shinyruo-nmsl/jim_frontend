@@ -1,7 +1,7 @@
-import { SubRoute } from "../global-type/router";
 import { AppstoreOutlined, MailOutlined } from "@ant-design/icons";
 
-import { PoetrySearch } from "../page/poetry";
+import { SubRoute } from "@/global-type/router";
+import { PoetrySearch } from "@/page/poetry";
 
 const subRouter: SubRoute = {
   path: "poetry",

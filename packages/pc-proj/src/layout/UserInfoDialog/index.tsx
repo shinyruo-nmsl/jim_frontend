@@ -1,9 +1,9 @@
 import { Modal, Form, Input, message } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-import { UserLoginDisplayInfo } from "../../global-type/user";
-import { CharacterAvatar } from "../../component/Avatar";
 import { useState } from "react";
-import { formatUserRole } from "../../service/user";
+import { UserOutlined } from "@ant-design/icons";
+import { UserLoginDisplayInfo } from "@/global-type/user";
+import { CharacterAvatar } from "@/component/Avatar";
+import { formatUserRole } from "@/service/user";
 
 interface UserInfoDialogProps extends UserLoginDisplayInfo {
   visible: boolean;

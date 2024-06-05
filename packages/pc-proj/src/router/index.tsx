@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { SubRoute } from "../global-type/router";
-import { Role } from "../global-type/user";
-import App from "../App";
+import { SubRoute } from "@/global-type/router";
+import { Role } from "@/global-type/user";
+import App from "@/App";
 
-import Login from "../page/login";
+import Login from "@/page/login";
 import PoetryRouter from "./poetry";
 import ToolRouter from "./tool";
 
