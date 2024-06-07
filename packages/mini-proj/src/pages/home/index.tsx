@@ -1,15 +1,18 @@
-import { View, Text } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
+
+import { useUserLoginInfo } from "@/context/user";
+
 import "./index.less";
 
-import { User } from "proj-service";
-
 function Home() {
+  const { userName, avatar } = useUserLoginInfo();
+
   return (
     <View className="index">
-      <Text>{User.UserRoles.join(",")}</Text>
+      <Text>{userName}</Text>
+      <Image src={avatar!} />
     </View>
   );
 }
 
-
-export default Home
+export default Home;

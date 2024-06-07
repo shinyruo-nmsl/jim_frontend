@@ -13,9 +13,9 @@
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "sourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"] // @将映射到src目录
+      "@/*": ["./src/*"] // @将映射到src目录
     },
     "rootDir": ".",
     "jsx": "react-jsx",

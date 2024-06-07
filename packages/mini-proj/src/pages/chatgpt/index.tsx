@@ -1,14 +1,31 @@
 import { View, Text } from "@tarojs/components";
+import { ChatGPT } from "proj-service";
+
+import { useUserLoginInfo } from "@/context/user";
+import StorageUtil from "@/util/storage";
+
 import "./index.less";
+import { useEffect, useState } from "react";
+import { fetchPostPromotMessage } from "./service";
 
-import { User } from "proj-service";
+function ChatGPTPage() {
+  const { avatar, userId } = useUserLoginInfo();
 
-function ChatGPT() {
-  return (
-    <View className="index">
-      <Text>{User.UserRoles.join(",")}</Text>
-    </View>
-  );
+  const {
+    prompt,
+    setPrompt,
+
+    messages,
+    setMessages,
+
+    receiveMessage,
+  } = ChatGPT.useChatGPT(userId, StorageUtil);
+
+  useEffect(() => {
+    receiveMessage(fetchPostPromotMessage);
+  }, []);
+
+  return <View className="chat-gpt-page"></View>;
 }
 
-export default ChatGPT;
+export default ChatGPTPage;

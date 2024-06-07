@@ -42,6 +42,14 @@ export function handleResponse<T>(res: { status: number; data: T }) {
   }
 }
 
+export function arrayBuffer2String(buffer: ArrayBuffer) {
+  const uintArray = new Uint8Array(buffer);
+  const decoder = new TextDecoder();
+  const result = decoder.decode(uintArray);
+
+  return result;
+}
+
 export class AuthToken<C extends StorageCore> {
   constructor(private storage: Storage<C>) {}
 

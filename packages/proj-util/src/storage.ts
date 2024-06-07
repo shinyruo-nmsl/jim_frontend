@@ -4,7 +4,7 @@ export interface StorageCore {
   setItem: (key: string, value: string) => void;
 }
 
-export class Storage<C extends StorageCore> {
+export class Storage<C extends StorageCore = StorageCore> {
   constructor(private core: C) {}
 
   set(key: string, value: string, ttl: number) {

@@ -35,12 +35,10 @@ export function createEventSourceStream<
     option
   );
 
-  type Iterator = { value: V; done: boolean };
-
-  let p = createPromiseResolvers<Iterator, Event>();
+  let p = createPromiseResolvers<IteratorResult<V>, Event>();
 
   eventSource.addEventListener("message", (event) => {
-    p.resolve(JSON.parse(event.data) as Iterator);
+    p.resolve(JSON.parse(event.data) as IteratorResult<V>);
   });
 
   eventSource.addEventListener("error", (error) => {

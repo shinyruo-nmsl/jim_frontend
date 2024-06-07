@@ -1,15 +1,7 @@
-import { useLaunch } from "@tarojs/taro";
-import { login } from "@tarojs/taro";
+import { UserLoginProvider } from "./context/user";
 
 function App({ children }) {
-  useLaunch(async () => {
-    try {
-      const { code } = await login();
-      console.log("code", code);
-    } catch (err) {}
-  });
-
-  return <>{children}</>;
+  return <UserLoginProvider>{children}</UserLoginProvider>;
 }
 
 export default App;
