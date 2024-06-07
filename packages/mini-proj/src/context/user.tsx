@@ -1,7 +1,9 @@
-import { User } from "proj-type";
-import { createContext, useContext, useState } from "react";
-import { getUserLoginInfo } from "@/service/user";
 import { useLaunch } from "@tarojs/taro";
+import { createContext, useContext, useState } from "react";
+import { User } from "proj-type";
+import { getUserLoginInfo } from "@/service/user";
+
+import { login } from "@/service/login";
 
 const userInitLoginInfo: User.UserLoginInfo = {
   role: "visitor",
@@ -17,6 +19,7 @@ export function UserLoginProvider({ children }) {
     useState<User.UserLoginInfo>(userInitLoginInfo);
 
   useLaunch(async () => {
+    await login();
     const user = await getUserLoginInfo();
     setUserLoginInfo(user);
   });

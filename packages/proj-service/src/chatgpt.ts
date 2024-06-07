@@ -40,7 +40,7 @@ export function useChatGPT(userId: string, store: Store.Storage) {
     store
   );
 
-  const [prompt, setPrompt] = useState("实现一个红黑树");
+  const [prompt, setPrompt] = useState("介绍一下完全平衡二叉树");
   const [messages, setMessages] = useState<Message[]>(
     historyMessages.length > 0
       ? [...historyMessages]
@@ -56,28 +56,27 @@ export function useChatGPT(userId: string, store: Store.Storage) {
       { role: "user", content: prompt },
     ]);
 
-    console.log("prompt", prompt);
-
     const stream = await api(prompt);
-    // setMessages((messages: Message[]) => [
-    //   ...messages,
-    //   { role: "gpt", content: "" },
-    // ]);
-    // let gptMessage4Store = "";
-    // for await (const chunk of stream) {
-    //   setMessages((messages: Message[]) => {
-    //     const gptMessage = messages[messages.length - 1];
-    //     return [
-    //       ...messages.slice(0, messages.length - 1),
-    //       { ...gptMessage, content: gptMessage.content + chunk },
-    //     ];
-    //   });
-    //   gptMessage4Store = gptMessage4Store + chunk;
-    // }
-    // saveMessages2LocalStore([
-    //   { role: "user", content: prompt },
-    //   { role: "gpt", content: gptMessage4Store },
-    // ]);
+    setMessages((messages: Message[]) => [
+      ...messages,
+      { role: "gpt", content: "" },
+    ]);
+    let gptMessage4Store = "";
+    for await (const chunk of stream) {
+      console.log(chunk);
+      setMessages((messages: Message[]) => {
+        const gptMessage = messages[messages.length - 1];
+        return [
+          ...messages.slice(0, messages.length - 1),
+          { ...gptMessage, content: gptMessage.content + chunk },
+        ];
+      });
+      gptMessage4Store = gptMessage4Store + chunk;
+    }
+    saveMessages2LocalStore([
+      { role: "user", content: prompt },
+      { role: "gpt", content: gptMessage4Store },
+    ]);
   };
 
   return {

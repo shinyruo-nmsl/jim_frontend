@@ -25,7 +25,7 @@ export async function request<T>(config: RequestConfig) {
 }
 
 export async function createMiniStreamm<
-  V,
+  V = string,
   P extends Record<string, string | number> = {},
 >(url: string, query: P, headers = {}) {
   const requestTask = Taro.request({
@@ -41,11 +41,10 @@ export async function createMiniStreamm<
   let p = Tool.createPromiseResolvers<IteratorResult<V>, Event>();
 
   requestTask.onChunkReceived((res) => {
-    console.log(Http.arrayBuffer2String(res.data));
-    // p.resolve({
-    //   value: JSON.parse(Http.arrayBuffer2String(res.data)),
-    //   done: false,
-    // });
+    p.resolve({
+      value: Http.arrayBuffer2String(res.data) as V,
+      done: false,
+    });
   });
 
   requestTask.offChunkReceived((res) => {
