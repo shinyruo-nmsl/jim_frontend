@@ -7,16 +7,3 @@ export type UserLoginInfo = {
   userName?: string;
   avatar?: string;
 };
-
-export type UserLoginDisplayInfo = {
-  userName?: string;
-  avatar?: string;
-  role: Role;
-};
-
-export type UserLoginDispatch = (
-  action:
-    | { type: "exit" }
-    | { type: "refresh" }
-    | { type: "update_display_info"; userInfo: UserLoginDisplayInfo }
-) => Promise<void>;

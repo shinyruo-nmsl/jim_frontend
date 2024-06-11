@@ -1,10 +1,11 @@
-import { View, Text } from "@tarojs/components";
+import { View, Text, Input, Textarea } from "@tarojs/components";
+import {AtInput} from 'taro-ui'
 import { ChatGPT } from "proj-service";
 
 import { useUserLoginInfo } from "@/context/user";
 import StorageUtil from "@/util/storage";
 
-import "./index.less";
+import "./index.scss";
 import { useEffect, useState } from "react";
 import { fetchPostPromotMessage } from "./service";
 
@@ -18,14 +19,23 @@ function ChatGPTPage() {
     messages,
     setMessages,
 
-    receiveMessage,
+   chat,
   } = ChatGPT.useChatGPT(userId, StorageUtil);
 
-  useEffect(() => {
-    receiveMessage(fetchPostPromotMessage);
-  }, []);
+  const [isPending, set] = useState(false)
 
-  return <View className="chat-gpt-page"></View>;
+  const handleConfirmPrompt = () => {
+
+  }
+
+
+
+  return <View className="chat-gpt-page">
+    <View className="main"></View>
+    <View className="bottom">
+      <Textarea autoHeight  value={prompt} onInput={(e) => setPrompt(e.detail.value)} onConfirm={handleConfirmPrompt} />
+    </View>
+  </View>;
 }
 
 export default ChatGPTPage;

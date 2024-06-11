@@ -1,0 +1,33 @@
+.chat-gpt-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    >.main {
+        flex: 1;
+        overflow: auto;
+        padding-bottom: 100px;
+    }
+
+    >.bottom {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #f7f7f7;
+        padding: 20px;
+        >textarea {
+            min-height: 50px;
+            border-radius: 10px;
+            box-sizing: border-box;
+            width: 600px;
+            background-color: #fff;
+            padding:5px;
+            word-wrap:break-all;
+            white-space: pre-line;
+
+        }
+    }
+
+}

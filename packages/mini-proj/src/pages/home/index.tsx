@@ -1,16 +1,19 @@
-import { View, Text, Image } from "@tarojs/components";
+import { View, Text, Image, Button } from "@tarojs/components";
+import { AtAvatar } from 'taro-ui'
 
 import { useUserLoginInfo } from "@/context/user";
 
-import "./index.less";
+import "./index.scss";
+import { useCallback, useState } from "react";
 
 function Home() {
+
   const { userName, avatar } = useUserLoginInfo();
 
   return (
     <View className="index">
       <Text>{userName}</Text>
-      <Image src={avatar!} />
+      <AtAvatar circle image={avatar}></AtAvatar>
     </View>
   );
 }

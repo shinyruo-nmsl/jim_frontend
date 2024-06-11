@@ -40,14 +40,14 @@ export function useChatGPT(userId: string, store: Store.Storage) {
     store
   );
 
-  const [prompt, setPrompt] = useState("介绍一下完全平衡二叉树");
+  const [prompt, setPrompt] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>(
     historyMessages.length > 0
       ? [...historyMessages]
       : [{ role: "gpt", content: "我是您的AI助手，欢迎提问👏🏻" }]
   );
 
-  const receiveMessage = async (
+  const chat = async (
     api: (prompt: string) => Promise<AsyncIterableIterator<string>>
   ) => {
     setPrompt("");
@@ -86,6 +86,6 @@ export function useChatGPT(userId: string, store: Store.Storage) {
     messages,
     setMessages,
 
-    receiveMessage,
+    chat,
   };
 }

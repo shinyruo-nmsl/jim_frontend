@@ -43,7 +43,7 @@ export async function getUserLoginInfo(): Promise<User.UserLoginInfo> {
     } else {
       return user;
     }
-  } catch (err) {
+  } catch  {
     return user;
   }
 }
