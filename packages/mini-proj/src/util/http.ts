@@ -47,9 +47,10 @@ export async function createMiniStreamm<
     });
   });
 
-  requestTask.offChunkReceived((res) => {
+  requestTask.then(() => {
+    console.log("结束");
     p.resolve({
-      value: JSON.parse(Http.arrayBuffer2String(res.data)),
+      value: "",
       done: true,
     });
   });
