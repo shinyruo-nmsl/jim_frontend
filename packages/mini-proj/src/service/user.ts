@@ -1,6 +1,7 @@
 import Taro from "@tarojs/taro";
-import { fetchGetUserLoginInfo } from "@/api/user";
 import { User } from "proj-type";
+import { fetchGetUserLoginInfo } from "@/api/user";
+
 import StorageUtil from "@/util/storage";
 
 export async function getUserLoginInfo(): Promise<User.UserLoginInfo> {
@@ -43,7 +44,7 @@ export async function getUserLoginInfo(): Promise<User.UserLoginInfo> {
     } else {
       return user;
     }
-  } catch  {
+  } catch {
     return user;
   }
 }

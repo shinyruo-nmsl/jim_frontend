@@ -1,14 +1,18 @@
 .chat-gpt-page {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
 
   > .chat-gpt-main {
     box-sizing: border-box;
-    flex: 1;
-    overflow: auto;
-    padding: 20px;
+    height: calc(100vh - 100px);
     margin-bottom: 100px;
+    .messages {
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      > .chat-message {
+        margin-bottom: 20px;
+      }
+    }
   }
 
   > .bottom {
@@ -22,10 +26,10 @@
     display: flex;
     align-items: center;
     > textarea {
-      min-height: 50px;
+      min-height: 60px;
       border-radius: 10px;
       box-sizing: border-box;
-      width: 600px;
+      width: 700px;
       background-color: #fff;
       padding: 5px;
       word-wrap: break-all;

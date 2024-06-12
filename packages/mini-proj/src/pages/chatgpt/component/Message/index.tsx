@@ -5,31 +5,32 @@ import { ChatGPT } from "proj-service";
 import { useUserLoginInfo } from "@/context/user";
 
 import "./index.scss";
+import OPENAI_IMG from "@/assets/openai.png";
 
-function UserMessageBox({ content, id }: { content: string; id: string }) {
+function UserMessageBox({ content }: { content: string }) {
   const { avatar } = useUserLoginInfo();
 
   return (
-    <View className="chat-message user" id={id}>
+    <View className="chat-message user">
       <View className="dialog">{content}</View>
       <AtAvatar size="small" circle image={avatar}></AtAvatar>
     </View>
   );
 }
 
-function GPTMessageBox({ content, id }: { content: string; id: string }) {
+function GPTMessageBox({ content }: { content: string }) {
   return (
-    <View className="chat-message gpt" id={id}>
-      <AtAvatar size="small" circle text="gpt"></AtAvatar>
+    <View className="chat-message gpt">
+      <AtAvatar size="small" circle image={OPENAI_IMG}></AtAvatar>
       <View className="dialog">{content}</View>
     </View>
   );
 }
 
-function MessageBox({ message, id }: { message: ChatGPT.Message; id: string }) {
+function MessageBox({ message }: { message: ChatGPT.Message }) {
   if (message.role === "gpt")
-    return <GPTMessageBox content={message.content} id={id} />;
-  return <UserMessageBox content={message.content} id={id} />;
+    return <GPTMessageBox content={message.content} />;
+  return <UserMessageBox content={message.content} />;
 }
 
 export default MessageBox;

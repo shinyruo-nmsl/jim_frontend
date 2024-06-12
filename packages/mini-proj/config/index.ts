@@ -11,7 +11,7 @@ const config = {
   },
   sourceRoot: "src",
   outputRoot: "dist",
-  plugins: [],
+  plugins: [[path.resolve(__dirname, "plugin/index")]],
   defineConstants: {},
   copy: {
     patterns: [],

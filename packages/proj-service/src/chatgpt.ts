@@ -44,14 +44,7 @@ export function useChatGPT(userId: string, store: Store.Storage) {
   const [messages, setMessages] = useState<Message[]>(
     historyMessages.length > 0
       ? [...historyMessages]
-      : [
-          { role: "gpt", content: "我是您的AI助手，欢迎提问👏🏻" },
-          {
-            role: "gpt",
-            content:
-              "Taro 的设计初衷就是为了统一跨平台的开发方式，并且已经尽力通过运行时框架、组件、API 去抹平多端差异，但是由于不同的平台之间还是存在一些无法消除的差异，所以为了更好的实现跨平台开发，Taro 中提供了如下的解决方案。",
-          },
-        ]
+      : [{ role: "gpt", content: "我是您的AI助手，欢迎提问👏🏻" }]
   );
 
   const chat = async (

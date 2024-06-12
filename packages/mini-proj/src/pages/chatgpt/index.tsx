@@ -1,4 +1,4 @@
-import { Component, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 import { View, Textarea, ScrollView } from "@tarojs/components";
 import { AtIcon } from "taro-ui";
@@ -24,7 +24,7 @@ function ChatGPTPage() {
   const [scrollTop, setScrollTop] = useState(0);
 
   const handleConfirmPrompt = async () => {
-    if (isPending) return;
+    if (isPending || !prompt) return;
     setIsPending(true);
     try {
       await chat(fetchPostPromotMessage);
@@ -38,12 +38,15 @@ function ChatGPTPage() {
     query.select(".chat-gpt-main").boundingClientRect();
     query.select(".messages").boundingClientRect();
     query.exec((res) => {
-      const scorllHeight = res[0].height;
-      const listHeight = res[1].height;
-
-      console.log(listHeight, scorllHeight);
-
-      setScrollTop(listHeight - scorllHeight + 50);
+      const scorllHeight = res[0]?.height;
+      const listHeight = res[1]?.height;
+      if (
+        typeof scorllHeight !== "undefined" &&
+        typeof listHeight !== "undefined"
+      ) {
+        console.log(listHeight, scorllHeight);
+        setScrollTop(listHeight - scorllHeight);
+      }
     });
   }, [messages]);
 
@@ -52,10 +55,11 @@ function ChatGPTPage() {
       <ScrollView className="chat-gpt-main" scrollY scrollTop={scrollTop}>
         <View className="messages">
           {messages.map((message, index) => (
-            <MessageBox id={`m_${index}`} key={index} message={message} />
+            <MessageBox key={index} message={message} />
           ))}
         </View>
       </ScrollView>
+
       <View className="bottom">
         <Textarea
           autoHeight
@@ -66,6 +70,7 @@ function ChatGPTPage() {
         <AtIcon
           value="message"
           size="20"
+          color="#5fc7c8"
           onClick={handleConfirmPrompt}
         ></AtIcon>
       </View>

@@ -1,5 +1,5 @@
 export default defineAppConfig({
-  pages: ["pages/home/index", "pages/chatgpt/index"],
+  pages: ["pages/chatgpt/index", "pages/home/index"],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#fff",
@@ -12,12 +12,12 @@ export default defineAppConfig({
     backgroundColor: "#e6f8fe",
     list: [
       {
-        pagePath: "pages/home/index",
-        text: "首页",
-      },
-      {
         pagePath: "pages/chatgpt/index",
         text: "AI助手",
+      },
+      {
+        pagePath: "pages/home/index",
+        text: "我的",
       },
     ],
   },
