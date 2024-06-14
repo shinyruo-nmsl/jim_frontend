@@ -1,13 +1,13 @@
 import { request } from "@/util/http";
-import { Pagination, PaginationQuery } from "@/global-type/model";
+import { Model } from "proj-type";
 
-export interface AuthorAndKeyWordsQuery extends PaginationQuery {
+export interface AuthorAndKeyWordsQuery extends Model.PaginationQuery {
   keyword1: string;
   keyword2: string;
   author?: string;
 }
 
-export type PoetryPagination = Pagination<{
+export type PoetryPagination = Model.Pagination<{
   id: number;
   title: string;
   author: string;

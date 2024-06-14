@@ -1,8 +1,9 @@
 import { request } from "@/util/http";
-import { UserLoginDisplayInfo, UserLoginInfo } from "@/global-type/user";
+import { User } from "proj-service";
+import { UserLoginDisplayInfo } from "@/global-type/user";
 
 export async function fetchGetUserLoginInfo() {
-  return request<UserLoginInfo>({
+  return request<User.UserLoginInfo>({
     method: "get",
     url: "/user/getUserLoginInfo",
   });

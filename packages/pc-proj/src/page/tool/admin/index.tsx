@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { message, Modal } from "antd";
 import { ExclamationCircleFilled } from "@ant-design/icons";
-import { UserLoginInfo } from "@/global-type/user";
-import { Pagination } from "@/global-type/model";
+import { User } from "proj-service";
+import { Model } from "proj-type";
 
 import {
   fetchRemoveUser,
@@ -23,16 +23,18 @@ function Admin() {
 
   const [pageNo, setPageNo] = useState(0);
   const [limit, setLimit] = useState(20);
-  const [userRecords, setUserRecords] = useState<Pagination<UserLoginInfo>>({
+  const [userRecords, setUserRecords] = useState<
+    Model.Pagination<User.UserLoginInfo>
+  >({
     total: 0,
-    data: [] as UserLoginInfo[],
+    data: [] as User.UserLoginInfo[],
     limit: 20,
     pageNo: 0,
   });
 
   const [selectIndex, setSelectIndex] = useState(-1);
   const [userLoginInfoForm, setUserLoginInfoForm] =
-    useState<UserLoginInfo | null>(null);
+    useState<User.UserLoginInfo | null>(null);
 
   const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
 

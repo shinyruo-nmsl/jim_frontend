@@ -1,6 +1,6 @@
 import { useLaunch } from "@tarojs/taro";
 import { createContext, useContext, useState } from "react";
-import { User } from "proj-type";
+import { User } from "proj-service";
 import { getUserLoginInfo } from "@/service/user";
 
 import { login } from "@/service/login";

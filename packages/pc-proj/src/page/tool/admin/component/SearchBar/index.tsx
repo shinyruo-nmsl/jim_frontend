@@ -1,5 +1,5 @@
 import { Button, Form, Input, Select } from "antd";
-import { Opiton } from "@/global-type/model";
+import { Model } from "proj-type";
 
 import "./index.less";
 
@@ -27,7 +27,7 @@ const formatSearchType = (type: SearchType) => {
   }
 };
 
-const searchTypeOptions: Opiton<SearchType>[] = (
+const searchTypeOptions: Model.Opiton<SearchType>[] = (
   ["userId", "userName", "account"] as SearchType[]
 ).map((type) => ({
   label: formatSearchType(type),

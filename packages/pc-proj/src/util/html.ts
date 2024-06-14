@@ -1,7 +1,7 @@
+import { CSSProperties } from "react";
 import MarkDown from "markdown-it";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark-reasonable.css";
-import { CSSProperties } from "react";
 
 export function createMarkdown(markdownStyle: CSSProperties = {}) {
   const markdown: MarkDown = MarkDown({

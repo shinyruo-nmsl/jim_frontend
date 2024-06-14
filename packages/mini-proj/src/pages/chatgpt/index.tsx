@@ -44,7 +44,6 @@ function ChatGPTPage() {
         typeof scorllHeight !== "undefined" &&
         typeof listHeight !== "undefined"
       ) {
-        console.log(listHeight, scorllHeight);
         setScrollTop(listHeight - scorllHeight);
       }
     });

@@ -1,12 +1,12 @@
 import { Breadcrumb, Dropdown, MenuProps } from "antd";
-import { UserLoginInfo } from "@/global-type/user";
+import { User } from "proj-service";
 import { UserAvatar } from "@/component/Avatar";
 
 import "./bar.less";
 
 interface BarProps {
   routerTrace: string[];
-  userInfo: UserLoginInfo;
+  userInfo: User.UserLoginInfo;
   onClickChangeUserInfoMenu: () => void;
   onClickExitLoginMenu: () => void;
   onClick2LoginMenu: () => void;

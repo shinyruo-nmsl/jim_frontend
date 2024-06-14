@@ -1,5 +1,4 @@
 import { AppstoreOutlined, MailOutlined } from "@ant-design/icons";
-
 import { SubRoute } from "@/global-type/router";
 import { AIChat, Admin } from "@/page/tool";
 
