@@ -5,15 +5,12 @@ import {
   useEffect,
   ReactElement,
 } from "react";
-import {
-  UserLoginInfo,
-  UserLoginDispatch,
-  UserLoginDisplayInfo,
-} from "@/global-type/user";
+import { User } from "proj-service";
+import { UserLoginDispatch, UserLoginDisplayInfo } from "@/global-type/user";
 import { fetchGetUserLoginInfo, fetchUpdateUserDisplayInfo } from "@/api/user";
 import { exitLogin } from "@/service/user";
 
-export const UserLoginInfoContext = createContext<UserLoginInfo>({
+export const UserLoginInfoContext = createContext<User.UserLoginInfo>({
   role: "visitor",
   userId: "",
   account: "",
@@ -25,7 +22,7 @@ export const UserLoginDispatchContext = createContext<UserLoginDispatch | null>(
 
 export function UserLoginProvider({ children }: { children: ReactElement }) {
   const [isInitUserLoginInfo, setIsInitUserLoginInfo] = useState(false);
-  const [userLoginInfo, setUserLoginInfo] = useState<UserLoginInfo>({
+  const [userLoginInfo, setUserLoginInfo] = useState<User.UserLoginInfo>({
     role: "visitor",
     userId: "",
     account: "",

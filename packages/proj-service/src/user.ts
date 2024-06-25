@@ -1,15 +1,23 @@
-import { Model, User } from "proj-type";
+import { Model } from "proj-type";
 
-export const UserRoles: User.Role[] = ["admin", "member", "ordinary"];
+export type Role = "admin" | "member" | "ordinary" | "visitor";
 
-export const UserRoleOptions: Model.Opiton<User.Role>[] = UserRoles.map(
-  (role) => ({
-    label: formatUserRole(role),
-    value: role,
-  })
-);
+export type UserLoginInfo = {
+  userId: string;
+  account: string;
+  role: Role;
+  userName?: string;
+  avatar?: string;
+};
 
-export function formatUserRole(role: User.Role) {
+export const UserRoles: Role[] = ["admin", "member", "ordinary"];
+
+export const UserRoleOptions: Model.Opiton<Role>[] = UserRoles.map((role) => ({
+  label: formatUserRole(role),
+  value: role,
+}));
+
+export function formatUserRole(role: Role) {
   switch (role) {
     case "admin":
       return "管理员";

@@ -7,5 +7,3 @@ export type HttpMethod =
   | "patch"
   | "options"
   | "head";
-
-export type HttpEventType = "code_401";

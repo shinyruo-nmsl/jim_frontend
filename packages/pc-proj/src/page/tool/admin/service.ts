@@ -1,5 +1,5 @@
 import { Pagination, PaginationQuery } from "@/global-type/model";
-import { Role, UserLoginInfo } from "@/global-type/user";
+import { User } from "proj-service";
 import { request } from "@/util/http";
 
 export interface UsersQuery extends PaginationQuery {
@@ -8,14 +8,14 @@ export interface UsersQuery extends PaginationQuery {
 }
 
 export function fetchSearchUserLoginInfo(query: UsersQuery) {
-  return request<Pagination<UserLoginInfo>>({
+  return request<Pagination<User.UserLoginInfo>>({
     method: "get",
     url: "/admin/searchUserLoginInfo",
     params: { ...query },
   });
 }
 
-export function fetchUpdateUserRole(userId: string, role: Role) {
+export function fetchUpdateUserRole(userId: string, role: User.Role) {
   return request({
     method: "post",
     url: "/admin/updateUserRole",

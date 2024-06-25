@@ -1,17 +1,9 @@
-export type Role = "admin" | "member" | "ordinary" | "visitor";
-
-export type UserLoginInfo = {
-  userId: string;
-  account: string;
-  role: Role;
-  userName?: string;
-  avatar?: string;
-};
+import { User } from "proj-service";
 
 export type UserLoginDisplayInfo = {
   userName?: string;
   avatar?: string;
-  role: Role;
+  role: User.Role;
 };
 
 export type UserLoginDispatch = (

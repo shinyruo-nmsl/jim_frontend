@@ -1,12 +1,9 @@
+import { ChatGPT } from "proj-service";
+
 import { CharacterAvatar, UserAvatar } from "@/component/Avatar";
 import { createMarkdown } from "@/util/html";
 
 import "./index.less";
-
-export interface Message {
-  role: "gpt" | "user";
-  content: string;
-}
 
 const markdown = createMarkdown({
   borderRadius: "5px",
@@ -34,7 +31,7 @@ function GPTMessageBox({ content }: { content: string }) {
   );
 }
 
-function MessageBox({ message }: { message: Message }) {
+function MessageBox({ message }: { message: ChatGPT.Message }) {
   if (message.role === "gpt")
     return <GPTMessageBox content={message.content} />;
   return <UserMessageBox content={message.content} />;

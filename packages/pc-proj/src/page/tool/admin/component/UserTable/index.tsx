@@ -1,12 +1,12 @@
 import { TableProps, Space } from "antd";
+import { Model } from "proj-type";
+import { User } from "proj-service";
 import { CharacterAvatar } from "@/component/Avatar";
 import { PaginationTableAsync } from "@/component/PaginationTable";
-import { Pagination } from "@/global-type/model";
-import { UserLoginInfo } from "@/global-type/user";
 import { formatUserRole } from "@/service/user";
 
 interface UserTableProps {
-  data: Pagination<UserLoginInfo>;
+  data: Model.Pagination<User.UserLoginInfo>;
   limit: number;
   pageNo: number;
   onChangeTable: (no: number, size: number) => void;
@@ -22,7 +22,7 @@ function UserTable({
   onClickEditTag,
   onClickDeleteTag,
 }: UserTableProps) {
-  const tableColumns: TableProps<UserLoginInfo>["columns"] = [
+  const tableColumns: TableProps<User.UserLoginInfo>["columns"] = [
     {
       title: "用户ID",
       dataIndex: "userId",

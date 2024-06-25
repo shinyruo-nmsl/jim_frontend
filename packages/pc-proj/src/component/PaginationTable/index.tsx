@@ -1,13 +1,12 @@
 import { Table, TableProps, Pagination as PaginationComp } from "antd";
 import { useEffect, useState } from "react";
-
-import { Pagination } from "@/global-type/model";
+import { Model } from "proj-type";
 
 import "./index.less";
 
 interface AsyncProps<T> {
   tableProps?: TableProps<T>;
-  paginationData: Pagination<T>;
+  paginationData: Model.Pagination<T>;
   pageNo: number;
   limit: number;
   onChangeTable: (no: number, size: number) => void;

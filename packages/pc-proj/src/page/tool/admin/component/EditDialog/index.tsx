@@ -1,12 +1,11 @@
 import { Form, Select, Modal } from "antd";
-import { UserLoginInfo } from "@/global-type/user";
-import { UserRoleOptions } from "@/service/user";
+import { User } from "proj-service";
 
 interface EditDialogProps {
   visible: boolean;
-  form: UserLoginInfo;
+  form: User.UserLoginInfo;
   onCloseModal: () => void;
-  onChangeForm: (form: UserLoginInfo) => void;
+  onChangeForm: (form: User.UserLoginInfo) => void;
   onConfirm: () => void;
 }
 
@@ -37,7 +36,7 @@ function EditDialog({
             value={form.role}
             onChange={(role) => onChangeForm({ ...form, role })}
           >
-            {UserRoleOptions.map(({ label, value }) => (
+            {User.UserRoleOptions.map(({ label, value }) => (
               <Select.Option value={value}>{label}</Select.Option>
             ))}
           </Select>
