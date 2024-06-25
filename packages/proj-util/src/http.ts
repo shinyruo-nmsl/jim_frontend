@@ -53,7 +53,7 @@ export function arrayBuffer2String(buffer: ArrayBuffer) {
 export class AuthToken<C extends StorageCore> {
   constructor(private storage: Storage<C>) {}
 
-  private _token: string | null;
+  private _token: string | null = null;
 
   readonly tokenKey = "__requset_token___";
 

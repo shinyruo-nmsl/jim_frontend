@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import legacy from "@vitejs/plugin-legacy";
@@ -19,5 +20,11 @@ export default defineConfig({
   ],
   server: {
     port: 8888,
+  },
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src"),
+    },
+    extensions: [".js", ".json", ".ts", ".tsx", ".jsx"],
   },
 });

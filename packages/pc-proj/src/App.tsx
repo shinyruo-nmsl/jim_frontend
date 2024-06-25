@@ -4,7 +4,7 @@ import { Modal } from "antd";
 import { ExclamationCircleFilled } from "@ant-design/icons";
 
 import Layout from "./layout";
-import { HttpEventEmitter } from "./util/http";
+import { Http } from "proj-util";
 
 import "./App.css";
 
@@ -28,9 +28,9 @@ function App() {
         },
       });
     };
-    HttpEventEmitter.registHandler("code_401", handler);
+    Http.HttpEventEmitter.registHandler("code_401", handler);
 
-    return () => HttpEventEmitter.removeHandler("code_401", handler);
+    return () => Http.HttpEventEmitter.removeHandler("code_401", handler);
   });
 
   return <Layout />;

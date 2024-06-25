@@ -1,14 +1,14 @@
-import { Pagination, PaginationQuery } from "@/global-type/model";
+import { Model } from "proj-type";
 import { User } from "proj-service";
 import { request } from "@/util/http";
 
-export interface UsersQuery extends PaginationQuery {
+export interface UsersQuery extends Model.PaginationQuery {
   type: "userId" | "userName" | "account";
   value: string;
 }
 
 export function fetchSearchUserLoginInfo(query: UsersQuery) {
-  return request<Pagination<User.UserLoginInfo>>({
+  return request<Model.Pagination<User.UserLoginInfo>>({
     method: "get",
     url: "/admin/searchUserLoginInfo",
     params: { ...query },

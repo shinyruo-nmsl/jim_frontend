@@ -1,10 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
+import { User } from "proj-service";
 
-import { SubRoute } from "@/global-type/router";
-import { Role } from "@/global-type/user";
 import App from "@/App";
-
 import Login from "@/page/login";
+import { SubRoute } from "@/global-type/router";
 import PoetryRouter from "./poetry";
 import ToolRouter from "./tool";
 
@@ -24,7 +23,7 @@ class Router {
 
   private static _getMenuRoutes(
     _children: SubRoute[],
-    role?: Role
+    role?: User.Role
   ): SubRoute[] | undefined {
     const children = _children.filter(
       (c) => !role || !c.auths || c.auths.includes(role)
@@ -40,7 +39,7 @@ class Router {
       : undefined;
   }
 
-  static getMenuRoutes(role?: Role) {
+  static getMenuRoutes(role?: User.Role) {
     return this._getMenuRoutes(this.subRouters, role);
   }
 

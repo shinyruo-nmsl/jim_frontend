@@ -1,19 +1,21 @@
-import { Opiton } from "@/global-type/model";
-import { Role } from "@/global-type/user";
+import { Model } from "proj-type";
+import { User } from "proj-service";
 import { AuthToken } from "@/util/http";
 
-export const UserRoles: Role[] = ["admin", "member", "ordinary"];
+export const UserRoles: User.Role[] = ["admin", "member", "ordinary"];
 
-export const UserRoleOptions: Opiton<Role>[] = UserRoles.map((role) => ({
-  label: formatUserRole(role),
-  value: role,
-}));
+export const UserRoleOptions: Model.Opiton<User.Role>[] = UserRoles.map(
+  (role) => ({
+    label: formatUserRole(role),
+    value: role,
+  })
+);
 
 export function exitLogin() {
   AuthToken.remove();
 }
 
-export function formatUserRole(role: Role) {
+export function formatUserRole(role: User.Role) {
   switch (role) {
     case "admin":
       return "管理员";
