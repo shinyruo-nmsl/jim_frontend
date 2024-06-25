@@ -28,6 +28,11 @@ function ChatGPTPage() {
     setIsPending(true);
     try {
       await chat(fetchPostPromotMessage);
+    } catch (error) {
+      Taro.showToast({
+        title: "网络异常，请稍后再试",
+        icon: "none",
+      });
     } finally {
       setIsPending(false);
     }
@@ -44,7 +49,6 @@ function ChatGPTPage() {
         typeof scorllHeight !== "undefined" &&
         typeof listHeight !== "undefined"
       ) {
-        console.log(listHeight, scorllHeight);
         setScrollTop(listHeight - scorllHeight);
       }
     });

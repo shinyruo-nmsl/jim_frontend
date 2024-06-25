@@ -41,7 +41,6 @@ export async function createMiniStreamm<
   let p = Tool.createPromiseResolvers<IteratorResult<V>, Event>();
 
   requestTask.onChunkReceived((res) => {
-    console.log("1");
     p.resolve({
       value: Http.arrayBuffer2String(res.data) as V,
       done: false,
@@ -49,7 +48,6 @@ export async function createMiniStreamm<
   });
 
   requestTask.then(() => {
-    console.log("结束");
     p.resolve({
       value: "",
       done: true,
@@ -61,6 +59,7 @@ export async function createMiniStreamm<
       const { value, done } = await p.promise;
       if (!done) {
         p = Tool.createPromiseResolvers<IteratorResult<V>, Event>();
+        console.log("next", value);
         return { value, done };
       }
       return { value, done } as IteratorReturnResult<V>;
