@@ -2,8 +2,7 @@ FROM --platform=linux/amd64 node:latest
 
 WORKDIR /app
 
-COPY package*.json ./
-COPY packages/* ./
+COPY . .
 
 RUN npm install
 
