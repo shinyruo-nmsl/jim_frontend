@@ -5,7 +5,7 @@ import { UserLoginDisplayInfo } from "@/global-type/user";
 export async function fetchGetUserLoginInfo() {
   return request<User.UserLoginInfo>({
     method: "get",
-    url: "/user/getUserLoginInfo",
+    url: User.URL.GetUserLoginInfo,
   });
 }
 
@@ -14,7 +14,7 @@ export async function fetchUpdateUserDisplayInfo(
 ) {
   return request({
     method: "post",
-    url: "/user/updateUserDisplayInfo",
+    url: User.URL.UpdateUserDisplayInfo,
     data: { ...userInfo },
   });
 }

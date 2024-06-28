@@ -1,5 +1,10 @@
 import { Model } from "proj-type";
 
+export enum URL {
+  GetUserLoginInfo = "/user/getUserLoginInfo",
+  UpdateUserDisplayInfo = "/user/updateUserDisplayInfo",
+}
+
 export type Role = "admin" | "member" | "ordinary" | "visitor";
 
 export type UserLoginInfo = {

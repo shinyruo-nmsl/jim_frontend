@@ -20,7 +20,7 @@ function UserMessageBox({ content }: { content: string }) {
 
 function GPTMessageBox({ content }: { content: string }) {
   return (
-    <View className="chat-message gpt">
+    <View className="chat-message assistant">
       <AtAvatar size="small" circle image={OPENAI_IMG}></AtAvatar>
       <View className="dialog">{content}</View>
     </View>
@@ -28,7 +28,7 @@ function GPTMessageBox({ content }: { content: string }) {
 }
 
 function MessageBox({ message }: { message: ChatGPT.Message }) {
-  if (message.role === "gpt")
+  if (message.role === "assistant")
     return <GPTMessageBox content={message.content} />;
   return <UserMessageBox content={message.content} />;
 }

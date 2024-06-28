@@ -1,8 +1,13 @@
 import { useRef, useState } from "react";
 import { Store } from "proj-util";
 
+export enum URL {
+  GetGPTContent = "/ai/gptContent",
+}
+
+type ChatRole = "assistant" | "user";
 export interface Message {
-  role: "gpt" | "user";
+  role: ChatRole;
   content: string;
 }
 
@@ -44,22 +49,29 @@ export function useChatGPT(userId: string, store: Store.Storage) {
   const [messages, setMessages] = useState<Message[]>(
     historyMessages.length > 0
       ? [...historyMessages]
-      : [{ role: "gpt", content: "我是您的AI助手，欢迎提问👏🏻" }]
+      : [{ role: "assistant", content: "我是您的AI助手，欢迎提问👏🏻" }]
   );
 
   const chat = async (
-    api: (prompt: string) => Promise<AsyncIterableIterator<string>>
+    api: (messages: Message[]) => Promise<AsyncIterableIterator<string>>
   ) => {
     setPrompt("");
-    setMessages((messages: Message[]) => [
-      ...messages,
-      { role: "user", content: prompt },
-    ]);
 
-    const stream = await api(prompt);
+    const newMessages = [
+      ...messages,
+      { role: "user" as ChatRole, content: prompt },
+    ];
+
+    const lastFourUserMessages: Message[] = newMessages
+      .filter((msg) => msg.role === "user")
+      .slice(-4);
+
+    setMessages(newMessages);
+
+    const stream = await api(lastFourUserMessages);
     setMessages((messages: Message[]) => [
       ...messages,
-      { role: "gpt", content: "" },
+      { role: "assistant", content: "" },
     ]);
     let gptMessage4Store = "";
     for await (const chunk of stream) {
@@ -74,7 +86,7 @@ export function useChatGPT(userId: string, store: Store.Storage) {
     }
     saveMessages2LocalStore([
       { role: "user", content: prompt },
-      { role: "gpt", content: gptMessage4Store },
+      { role: "assistant", content: gptMessage4Store },
     ]);
   };
 

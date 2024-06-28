@@ -24,7 +24,7 @@ function GPTMessageBox({ content }: { content: string }) {
   const html = markdown.render(content);
 
   return (
-    <div className="chat-message gpt">
+    <div className="chat-message assistant">
       <CharacterAvatar characterName="A" />
       <div className="dialog" dangerouslySetInnerHTML={{ __html: html }}></div>
     </div>
@@ -32,7 +32,7 @@ function GPTMessageBox({ content }: { content: string }) {
 }
 
 function MessageBox({ message }: { message: ChatGPT.Message }) {
-  if (message.role === "gpt")
+  if (message.role === "assistant")
     return <GPTMessageBox content={message.content} />;
   return <UserMessageBox content={message.content} />;
 }

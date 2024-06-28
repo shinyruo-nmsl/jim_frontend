@@ -1,5 +1,8 @@
 import { createFetchStream } from "@/util/http";
+import { ChatGPT } from "proj-service";
 
-export function fetchPostPromotMessage(prompt: string) {
-  return createFetchStream("/ai/gptContent", { prompt });
+export function fetchPostPromotMessage(messages: ChatGPT.Message[]) {
+  return createFetchStream(ChatGPT.URL.GetGPTContent, {
+    messages: JSON.stringify(messages),
+  });
 }
