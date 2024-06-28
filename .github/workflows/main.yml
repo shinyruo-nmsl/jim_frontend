@@ -40,4 +40,4 @@ jobs:
             docker stop poetry_frotend
             docker rm poetry_frotend
             docker pull registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest 
-            docker run -d -p 80:80/tcp --name poetry_frotend registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest
+            docker run -d -p 80:8080 --name poetry_frotend registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest
