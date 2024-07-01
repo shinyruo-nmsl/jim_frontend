@@ -8,7 +8,7 @@ import {
 import { User } from "proj-service";
 import { UserLoginDispatch, UserLoginDisplayInfo } from "@/global-type/user";
 import { fetchGetUserLoginInfo, fetchUpdateUserDisplayInfo } from "@/api/user";
-import { exitLogin } from "@/service/user";
+import { exitLogin } from "@/service/login";
 
 export const UserLoginInfoContext = createContext<User.UserLoginInfo>({
   role: "visitor",

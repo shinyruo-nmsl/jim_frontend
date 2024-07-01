@@ -1,5 +1,10 @@
-import { useUserLoginInfo } from "@/context/user";
 import { Navigate } from "react-router-dom";
+import { useUserLoginInfo } from "@/context/user";
+import { AuthToken } from "@/util/http";
+
+export function exitLogin() {
+  AuthToken.remove();
+}
 
 export function withLogin(WrappedComponent: React.ComponentType) {
   const ComponentWithLogin = () => {

@@ -3,7 +3,6 @@ import { Model } from "proj-type";
 import { User } from "proj-service";
 import { CharacterAvatar } from "@/component/Avatar";
 import { PaginationTableAsync } from "@/component/PaginationTable";
-import { formatUserRole } from "@/service/user";
 
 interface UserTableProps {
   data: Model.Pagination<User.UserLoginInfo>;
@@ -45,7 +44,7 @@ function UserTable({
       title: "角色",
       dataIndex: "role",
       key: "role",
-      render: (role) => <span>{formatUserRole(role)}</span>,
+      render: (role) => <span>{User.formatUserRole(role)}</span>,
     },
     {
       title: "操作",

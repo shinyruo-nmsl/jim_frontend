@@ -1,9 +1,9 @@
 import { Modal, Form, Input, message } from "antd";
 import { useState } from "react";
+import { User } from "proj-service";
 import { UserOutlined } from "@ant-design/icons";
 import { UserLoginDisplayInfo } from "@/global-type/user";
 import { CharacterAvatar } from "@/component/Avatar";
-import { formatUserRole } from "@/service/user";
 
 interface UserInfoDialogProps extends UserLoginDisplayInfo {
   visible: boolean;
@@ -100,7 +100,7 @@ function UserInfoDialog({
             size="large"
             disabled
             prefix={<UserOutlined />}
-            value={formatUserRole(role)}
+            value={User.formatUserRole(role)}
           />
         </Form.Item>
       </Form>
