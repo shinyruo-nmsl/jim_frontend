@@ -5,7 +5,7 @@ export enum URL {
   UpdateUserDisplayInfo = "/user/updateUserDisplayInfo",
 }
 
-export type Role = "admin" | "member" | "ordinary" | "visitor";
+export type Role = "admin" | "superMember" | "member" | "ordinary" | "visitor";
 
 export type UserLoginInfo = {
   userId: string;
@@ -15,7 +15,7 @@ export type UserLoginInfo = {
   avatar?: string;
 };
 
-export const UserRoles: Role[] = ["admin", "member", "ordinary"];
+export const UserRoles: Role[] = ["admin", "superMember", "member", "ordinary"];
 
 export const UserRoleOptions: Model.Opiton<Role>[] = UserRoles.map((role) => ({
   label: formatUserRole(role),
@@ -28,6 +28,8 @@ export function formatUserRole(role: Role) {
       return "管理员";
     case "member":
       return "会员";
+    case "superMember":
+      return "超级会员";
     case "ordinary":
       return "普通用户";
     default:
