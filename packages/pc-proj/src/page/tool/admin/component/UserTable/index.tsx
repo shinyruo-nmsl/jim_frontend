@@ -28,6 +28,11 @@ function UserTable({
       key: "userId",
     },
     {
+      title: "用户账号",
+      dataIndex: "account",
+      key: "account",
+    },
+    {
       title: "用户头像",
       dataIndex: "avatar",
       key: "avatar",

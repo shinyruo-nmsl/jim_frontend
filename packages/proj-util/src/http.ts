@@ -66,7 +66,7 @@ export class AuthToken<C extends StorageCore> {
   }
 
   setToken(token: string) {
-    this.storage.set(this.tokenKey, token, 24 * 60 * 60);
+    this.storage.set(this.tokenKey, token, 24 * 60 * 60 * 7);
   }
 
   remove() {
