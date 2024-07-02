@@ -1,13 +1,14 @@
 import { Button, Form, Input, Select } from "antd";
 import { Model } from "proj-type";
+import { User } from "proj-service";
 
 import "./index.less";
 
-type SearchType = "userId" | "userName" | "account";
+type SearchType = "userId" | "userName" | "account" | "role";
 
 export interface SearchBarQuery {
   type: SearchType;
-  value: string;
+  value: string | User.Role;
 }
 
 interface SearchBarProps {
@@ -24,11 +25,13 @@ const formatSearchType = (type: SearchType) => {
       return "用户昵称";
     case "account":
       return "用户账号";
+    case "role":
+      return "用户角色";
   }
 };
 
 const searchTypeOptions: Model.Opiton<SearchType>[] = (
-  ["userId", "userName", "account"] as SearchType[]
+  ["userId", "userName", "account", "role"] as SearchType[]
 ).map((type) => ({
   label: formatSearchType(type),
   value: type,
@@ -39,6 +42,11 @@ function SearchBar({
   onChange,
   onClickConfirmButton,
 }: SearchBarProps) {
+  const userRoleOptions = [
+    { label: "全部", value: "" },
+    ...User.UserRoleOptions,
+  ];
+
   return (
     <div className="admin-search-bar">
       <Form layout="inline">
@@ -57,10 +65,27 @@ function SearchBar({
         </Form.Item>
 
         <Form.Item label="搜索值">
-          <Input
-            value={query.value}
-            onChange={(e) => onChange({ ...query, value: e.target.value })}
-          />
+          {query.type === "role" ? (
+            <Select
+              style={{ width: 200 }}
+              value={query.value as User.Role}
+              onChange={(value) => onChange({ type: query.type, value })}
+            >
+              {userRoleOptions.map(({ label, value }) => (
+                <Select.Option key={value} value={value}>
+                  {label}
+                </Select.Option>
+              ))}
+            </Select>
+          ) : (
+            <Input
+              style={{ width: 200 }}
+              value={query.value}
+              onChange={(e) =>
+                onChange({ type: query.type, value: e.target.value })
+              }
+            />
+          )}
         </Form.Item>
 
         <Form.Item>
