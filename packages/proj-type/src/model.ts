@@ -3,7 +3,7 @@ export type PaginationQuery = {
   pageNo: number;
 };
 
-export interface Pagination<T> extends PaginationQuery {
+export interface Pagination<T> {
   data: T[];
   total: number;
 }

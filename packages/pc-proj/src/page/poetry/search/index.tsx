@@ -1,28 +1,21 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Input, Button, message } from "antd";
 import { PaginationTableAsync } from "@/component/PaginationTable";
-import {
-  fetchGetPoetriesByAuthorAndKeyWords,
-  splitPoetryContentByKeyWords,
-  PoetryPagination,
-} from "./service";
+import { Poetry } from "proj-service";
+import { fetchGetPoetriesByAuthorAndKeyWords } from "./service";
 
 import "./index.less";
 
 function PoetrySearch() {
-  const [keyword1, setKeyword1] = useState("");
-  const [keyword2, setKeyword2] = useState("");
-  const [author, setAuthor] = useState("");
-
-  const [pageNo, setPageNo] = useState(0);
-  const [limit, setLimit] = useState(5);
-
-  const [poetryPagination, setPoetryPagination] = useState<PoetryPagination>({
-    total: 0,
-    data: [],
-    limit: 5,
-    pageNo: 0,
-  });
+  const {
+    query,
+    changeQuery,
+    limit,
+    pageNo,
+    poetryPagination,
+    search,
+    changePage,
+  } = Poetry.usePoetry(fetchGetPoetriesByAuthorAndKeyWords);
 
   const tableColumns = [
     {
@@ -41,10 +34,10 @@ function PoetrySearch() {
       key: "content",
       render: useCallback(
         (text: string) => {
-          const fragments = splitPoetryContentByKeyWords(
+          const fragments = Poetry.splitPoetryContentByKeyWords(
             text,
-            keyword1,
-            keyword2
+            query.keyword1,
+            query.keyword2
           );
           return (
             <div className="poetry-content">
@@ -52,7 +45,9 @@ function PoetrySearch() {
                 <span
                   key={index}
                   className={
-                    [keyword1, keyword2].includes(frag) ? "keyword" : ""
+                    [query.keyword1, query.keyword2].includes(frag)
+                      ? "keyword"
+                      : ""
                   }
                 >
                   {frag}
@@ -69,32 +64,15 @@ function PoetrySearch() {
   ];
 
   const handleChangeTable = async (no: number, size: number) => {
-    setPageNo(no);
-    setLimit(size);
-    const data = await fetchGetPoetriesByAuthorAndKeyWords({
-      pageNo: no,
-      limit: size,
-      keyword1,
-      keyword2,
-      author,
-    });
-    setPoetryPagination(data);
+    changePage(no, size);
   };
 
   const handleClickSearchButton = async () => {
-    if (!author && !keyword1 && !keyword2) {
-      message.error("请输入搜索信息~");
-      return;
+    try {
+      await search();
+    } catch (e: any) {
+      message.error(e.message);
     }
-    setPageNo(0);
-    const data = await fetchGetPoetriesByAuthorAndKeyWords({
-      pageNo: 0,
-      limit,
-      keyword1,
-      keyword2,
-      author,
-    });
-    setPoetryPagination(data);
   };
 
   return (
@@ -104,27 +82,27 @@ function PoetrySearch() {
           <span>作者：</span>
           <Input
             placeholder="请输入作者"
-            value={author}
+            value={query.author}
             maxLength={20}
-            onChange={(e) => setAuthor(e.target.value)}
+            onChange={(e) => changeQuery("author", e.target.value)}
           ></Input>
         </div>
         <div className="keyword">
           <span>关键词1：</span>
           <Input
             placeholder="请输入关键词"
-            value={keyword1}
+            value={query.keyword1}
             maxLength={20}
-            onChange={(e) => setKeyword1(e.target.value)}
+            onChange={(e) => changeQuery("keyword1", e.target.value)}
           ></Input>
         </div>
         <div className="keyword">
           <span>关键词2：</span>
           <Input
             placeholder="请输入关键词"
-            value={keyword2}
+            value={query.keyword2}
             maxLength={20}
-            onChange={(e) => setKeyword2(e.target.value)}
+            onChange={(e) => changeQuery("keyword2", e.target.value)}
           ></Input>
         </div>
         <Button onClick={handleClickSearchButton}>搜索</Button>

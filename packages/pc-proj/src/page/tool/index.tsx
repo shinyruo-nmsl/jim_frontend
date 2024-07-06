@@ -1,4 +1,5 @@
-import AIChat from "./ai";
+import AIChat from "./chatgpt";
+import AIImage from "./aiImage";
 import Admin from "./admin";
 
-export { AIChat, Admin };
+export { AIChat, AIImage, Admin };

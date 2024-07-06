@@ -26,6 +26,7 @@ function UserTable({
       title: "用户ID",
       dataIndex: "userId",
       key: "userId",
+      width: 400,
     },
     {
       title: "用户账号",
@@ -65,7 +66,11 @@ function UserTable({
 
   return (
     <PaginationTableAsync
-      tableProps={{ columns: tableColumns, rowKey: (row) => row.userId }}
+      tableProps={{
+        columns: tableColumns,
+        rowKey: (row) => row.userId,
+        scroll: { y: 500 },
+      }}
       paginationData={data}
       pageNo={pageNo}
       limit={limit}

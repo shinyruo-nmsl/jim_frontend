@@ -22,14 +22,12 @@ function Admin() {
   });
 
   const [pageNo, setPageNo] = useState(0);
-  const [limit, setLimit] = useState(20);
+  const [limit, setLimit] = useState(10);
   const [userRecords, setUserRecords] = useState<
     Model.Pagination<User.UserLoginInfo>
   >({
     total: 0,
     data: [] as User.UserLoginInfo[],
-    limit: 20,
-    pageNo: 0,
   });
 
   const [selectIndex, setSelectIndex] = useState(-1);

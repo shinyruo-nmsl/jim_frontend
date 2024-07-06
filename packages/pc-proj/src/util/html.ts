@@ -33,3 +33,25 @@ function getCodeTemplate(code: string, style: CSSProperties = {}) {
 
   return `<div class="hljs" style='${styleStr}'><code>${code}</code></div>`;
 }
+
+export function awaitAllImgsLoaded(parent: HTMLElement, callback: () => void) {
+  const imgs = parent.querySelectorAll("img");
+  let loadedCount = 0;
+
+  imgs.forEach((img) => {
+    if (img.complete) {
+      loadedCount++;
+    } else {
+      img.addEventListener("load", () => {
+        loadedCount++;
+        if (loadedCount === imgs.length) {
+          callback();
+        }
+      });
+    }
+  });
+
+  if (loadedCount === imgs.length) {
+    callback();
+  }
+}

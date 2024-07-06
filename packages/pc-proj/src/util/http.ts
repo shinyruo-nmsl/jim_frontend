@@ -64,19 +64,19 @@ export function createEventSourceStream<
   return stream;
 }
 
-export async function createFetchStream<
-  P extends Record<string, string | number>,
->(url: string, query: P, headers = {}) {
-  const response = await fetch(
-    `${import.meta.env.VITE_APP_BASE_API}${url}${Http.buildUrlQuery(query)}`,
-    {
-      method: "get",
-      headers: {
-        "Content-Type": "text/event-stream",
-        ...Http.appendToken(headers, AuthToken),
-      },
-    }
-  );
+export async function createFetchStream<D extends Record<string, any>>(
+  url: string,
+  data: D,
+  headers = {}
+) {
+  const response = await fetch(`${import.meta.env.VITE_APP_BASE_API}${url}`, {
+    method: "post",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+      ...Http.appendToken(headers, AuthToken),
+    },
+  });
 
   if (response.status > 200) {
     Http.handleResponse({

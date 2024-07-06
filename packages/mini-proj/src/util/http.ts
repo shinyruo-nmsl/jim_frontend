@@ -26,13 +26,13 @@ export async function request<T>(config: RequestConfig) {
 
 export async function createMiniStreamm<
   V = string,
-  P extends Record<string, string | number> = {},
->(url: string, query: P, headers = {}) {
+  D extends Record<string, any> = {},
+>(url: string, data: D, headers = {}) {
   const requestTask = Taro.request({
-    method: "GET",
-    url: `${process.env.TARO_APP_BASE_API}${url}${Http.buildUrlQuery(query)}`,
+    method: "POST",
+    url: `${process.env.TARO_APP_BASE_API}${url}`,
+    data,
     header: {
-      "Content-Type": "text/event-stream",
       ...Http.appendToken(headers, AuthToken),
     },
     enableChunked: true,

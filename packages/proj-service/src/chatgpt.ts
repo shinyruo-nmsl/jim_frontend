@@ -26,7 +26,7 @@ export function useMessageStore(userId: string, store: Store.Storage) {
     // 超过50条就删除
     store.set(
       key,
-      JSON.stringify(historyMessages.current.slice(0, 50)),
+      JSON.stringify(historyMessages.current.slice(-50)),
       60 * 60 * 24 * 7
     );
   };
@@ -53,7 +53,7 @@ export function useChatGPT(userId: string, store: Store.Storage) {
   );
 
   const chat = async (
-    api: (messages: Message[]) => Promise<AsyncIterableIterator<string>>
+    streamApi: (messages: Message[]) => Promise<AsyncIterableIterator<string>>
   ) => {
     setPrompt("");
 
@@ -62,13 +62,11 @@ export function useChatGPT(userId: string, store: Store.Storage) {
       { role: "user" as ChatRole, content: prompt },
     ];
 
-    const lastFourUserMessages: Message[] = newMessages
-      .filter((msg) => msg.role === "user")
-      .slice(-4);
+    const lastFourUserMessages: Message[] = newMessages.slice(-4);
 
     setMessages(newMessages);
 
-    const stream = await api(lastFourUserMessages);
+    const stream = await streamApi(lastFourUserMessages);
     setMessages((messages: Message[]) => [
       ...messages,
       { role: "assistant", content: "" },
