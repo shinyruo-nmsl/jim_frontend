@@ -1,6 +1,6 @@
 import { AppstoreOutlined, MailOutlined } from "@ant-design/icons";
 import { SubRoute } from "@/global-type/router";
-import { AIChat, AIImage, Admin } from "@/page/tool";
+import { AIChat, AIGNImage, AIPSImage, Admin } from "@/page/tool";
 
 const subRouter: SubRoute = {
   path: "tool",
@@ -16,11 +16,18 @@ const subRouter: SubRoute = {
       element: <AIChat />,
     },
     {
-      path: "aiImage",
-      label: "AI图像",
-      key: "aiImage",
+      path: "aiGNImage",
+      label: "AI生成图像",
+      key: "aiGNImage",
       icon: <AppstoreOutlined />,
-      element: <AIImage />,
+      element: <AIGNImage />,
+    },
+    {
+      path: "aiPSImage",
+      label: "AI解析图像",
+      key: "aiPSImage",
+      icon: <AppstoreOutlined />,
+      element: <AIPSImage />,
     },
     {
       path: "admin",

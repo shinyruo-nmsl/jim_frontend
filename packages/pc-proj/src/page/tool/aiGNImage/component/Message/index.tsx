@@ -1,10 +1,11 @@
-import { AIImage } from "proj-service";
+import { Image, Spin } from "antd";
+import { AIGNImage } from "proj-service";
 
 import { CharacterAvatar, UserAvatar } from "@/component/Avatar";
 
 import "./index.less";
 
-function UserMessageBox({ message }: { message: AIImage.UserMessage }) {
+function UserMessageBox({ message }: { message: AIGNImage.UserMessage }) {
   return (
     <div className="ai-image-message user">
       <div className="dialog">{message.content}</div>
@@ -13,13 +14,21 @@ function UserMessageBox({ message }: { message: AIImage.UserMessage }) {
   );
 }
 
-function AIImageMessageBox({ message }: { message: AIImage.AIMessage }) {
+function AIImageMessageBox({ message }: { message: AIGNImage.AIMessage }) {
   return (
     <div className="ai-image-message assistant">
       <CharacterAvatar characterName="A" />
       <div className="dialog">
         {Array.isArray(message.content) ? (
-          message.content.map((item, index) => <img key={index} src={item} />)
+          message.content.length > 0 ? (
+            <Image.PreviewGroup>
+              {message.content.map((url) => (
+                <Image key={url} src={url} width={200} />
+              ))}
+            </Image.PreviewGroup>
+          ) : (
+            <Spin />
+          )
         ) : (
           <div>{message.content}</div>
         )}
@@ -28,7 +37,7 @@ function AIImageMessageBox({ message }: { message: AIImage.AIMessage }) {
   );
 }
 
-function MessageBox({ message }: { message: AIImage.Message }) {
+function MessageBox({ message }: { message: AIGNImage.Message }) {
   if (message.type === "ai") return <AIImageMessageBox message={message} />;
   return <UserMessageBox message={message} />;
 }

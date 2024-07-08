@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState, KeyboardEvent } from "react";
 import { Divider, Input, message } from "antd";
-import { AIImage } from "proj-service";
+import { AIGNImage } from "proj-service";
 import StorageUtil from "@/util/storage";
 import { useUserLoginInfo } from "@/context/user";
 
@@ -10,10 +10,10 @@ import { fetchGetAIImages } from "./service";
 import "./index.less";
 import { awaitAllImgsLoaded } from "@/util/html";
 
-function AIImagePage() {
+function AIGNImagePage() {
   const { userId } = useUserLoginInfo();
 
-  const { messages, prompt, setPrompt, getImages } = AIImage.useAIImage(
+  const { messages, prompt, setPrompt, getImages } = AIGNImage.useAIImage(
     userId,
     StorageUtil
   );
@@ -85,4 +85,4 @@ function AIImagePage() {
   );
 }
 
-export default AIImagePage;
+export default AIGNImagePage;

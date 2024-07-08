@@ -65,14 +65,21 @@ export function useAIImage(userId: string, store: Store.Storage) {
     api: (prompt: Prompt) => Promise<{ images: string[] }>
   ) => {
     const userMessage: UserMessage = { type: "user", content: prompt.prompt };
-    setMessages((prev) => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage, { type: "ai", content: [] }]);
     setPrompt({ prompt: "", count: prompt.count });
 
-    const { images } = await api(prompt);
-    const aiMessage: AIMessage = { type: "ai", content: images };
-    setMessages((prev) => [...prev, aiMessage]);
-
-    saveImages2LocalStore([userMessage, aiMessage]);
+    try {
+      const { images } = await api(prompt);
+      const aiMessage: AIMessage = { type: "ai", content: images };
+      setMessages((prev) => [...prev.slice(0, prev.length - 1), aiMessage]);
+      saveImages2LocalStore([userMessage, aiMessage]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev.slice(0, prev.length - 1),
+        { type: "ai", content: "抱歉，图片生成失败" },
+      ]);
+      throw err;
+    }
   };
 
   return {
