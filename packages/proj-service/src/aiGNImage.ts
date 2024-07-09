@@ -22,40 +22,43 @@ export enum URL {
   GetImages = "/ai/images",
 }
 
-export function useImageStore(userId: string, store: Store.Storage) {
-  const key = `__${userId}_ai_image_key__`;
+export function useGNImageStore(userId: string, store: Store.Storage) {
+  const key = `__${userId}_ai_gn_image_key__`;
 
-  const getHistoryImages = () => {
+  const getHistoryMessages = () => {
     const str = store.get(key);
-    const historyImages = str ? (JSON.parse(str) as Message[]) : [];
-    return historyImages;
+    const historyMessages = str ? (JSON.parse(str) as Message[]) : [];
+    return historyMessages;
   };
-  const historyImages = useRef(getHistoryImages());
+  const historyMessages = useRef(getHistoryMessages());
 
-  const saveImages = (imgs: Message[]) => {
-    historyImages.current.push(...imgs);
+  const saveMessages = (msgs: Message[]) => {
+    historyMessages.current.push(...msgs);
     // 超过50条就删除
     store.set(
       key,
-      JSON.stringify(historyImages.current.slice(-50)),
+      JSON.stringify(historyMessages.current.slice(-50)),
       60 * 60 * 24 * 7
     );
   };
 
   return {
-    historyImages: historyImages.current,
-    saveImages2LocalStore(imgs: Message[]) {
-      setTimeout(() => saveImages(imgs), 500);
+    historyMessages: historyMessages.current,
+    saveMessages2LocalStore(msgs: Message[]) {
+      setTimeout(() => saveMessages(msgs), 500);
     },
   };
 }
 
 export function useAIImage(userId: string, store: Store.Storage) {
-  const { historyImages, saveImages2LocalStore } = useImageStore(userId, store);
+  const { historyMessages, saveMessages2LocalStore } = useGNImageStore(
+    userId,
+    store
+  );
 
   const [messages, setMessages] = useState<Message[]>(
-    historyImages.length > 0
-      ? [...historyImages]
+    historyMessages.length > 0
+      ? [...historyMessages]
       : [{ type: "ai", content: "我是您的文生图助手，欢迎提问👏🏻" }]
   );
 
@@ -72,7 +75,7 @@ export function useAIImage(userId: string, store: Store.Storage) {
       const { images } = await api(prompt);
       const aiMessage: AIMessage = { type: "ai", content: images };
       setMessages((prev) => [...prev.slice(0, prev.length - 1), aiMessage]);
-      saveImages2LocalStore([userMessage, aiMessage]);
+      saveMessages2LocalStore([userMessage, aiMessage]);
     } catch (err) {
       setMessages((prev) => [
         ...prev.slice(0, prev.length - 1),

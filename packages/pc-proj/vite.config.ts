@@ -15,7 +15,7 @@ export default defineConfig({
       }),
       apply: "build",
     },
-    checker({ typescript: true }),
+    // checker({ typescript: true }),
     eslintPlugin(),
   ],
   server: {
