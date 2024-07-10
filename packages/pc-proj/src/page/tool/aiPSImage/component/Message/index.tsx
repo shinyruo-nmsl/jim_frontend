@@ -28,7 +28,7 @@ function AIMessageBox({ content }: { content: string }) {
     <div className="w-full flex items-start gap-5">
       <CharacterAvatar characterName="A" />
       <div
-        className="w-fit max-w-[800px] bg-[azure] border border-solid border-[blue] rounded-[5px] p-[12px] text-sm break-all"
+        className="w-fit max-w-[800px] bg-[azure] border border-solid border-[blue] rounded-[5px] p-[12px] text-[12px]/[16px] break-all"
         dangerouslySetInnerHTML={{ __html: html }}
       ></div>
     </div>

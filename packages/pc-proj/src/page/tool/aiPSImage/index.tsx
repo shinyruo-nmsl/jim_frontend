@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "antd";
 
 import { AIPSImage } from "proj-service";
 import { fetchGetAIParseMessage } from "./service";
@@ -11,8 +12,10 @@ import MessageBox from "./component/Message";
 function AIPSImagePage() {
   const { userId } = useUserLoginInfo();
 
-  const { prompt, setPrompt, messages, setMessages, chat } =
-    AIPSImage.usePSAIImage(userId, StorageUtil);
+  const { prompt, setPrompt, messages, chat } = AIPSImage.usePSAIImage(
+    userId,
+    StorageUtil
+  );
 
   const [formDialogVisible, setFormDialogVisible] = useState(false);
 
@@ -32,10 +35,22 @@ function AIPSImagePage() {
         ))}
       </div>
 
+      <div className="box-border w-full h-[80px] p-[24px] flex-none">
+        <Button
+          type="primary"
+          className="w-full h-full text-white rounded-[5px]"
+          onClick={() => setFormDialogVisible(true)}
+        >
+          提问
+        </Button>
+      </div>
+
       <FormDialog
         visible={formDialogVisible}
-        imgUrl={""}
-        decrption={""}
+        imgUrl={prompt.imgUrl}
+        description={prompt.description}
+        onChangeForm={(prompt) => setPrompt(prompt)}
+        onComfirm={submitForm}
         onCancel={() => setFormDialogVisible(false)}
       />
     </div>

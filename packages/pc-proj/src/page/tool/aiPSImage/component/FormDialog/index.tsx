@@ -1,19 +1,44 @@
-import { Modal, Form, Upload, Button, Input } from "antd";
+import { Modal, Form, Upload, Button, Input, message, UploadFile } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
 interface FormDialogProps {
   visible: boolean;
   imgUrl: string;
-  decrption: string;
+  description: string;
+  onChangeForm: (prompt: { imgUrl: string; description: string }) => void;
+  onComfirm: () => void;
   onCancel: () => void;
 }
 
-function FormDialog({ visible, imgUrl, decrption, onCancel }: FormDialogProps) {
+function FormDialog({
+  visible,
+  imgUrl,
+  description,
+  onChangeForm,
+  onComfirm,
+  onCancel,
+}: FormDialogProps) {
+  const handleBeforeUpload = async (file: File) => {
+    if (file.size > 1024 * 1024 * 10) {
+      message.warning("文件太大啦~");
+      return false;
+    }
+  };
+
+  const handleUpload = async (uploadFile: UploadFile) => {
+    const file = uploadFile.originFileObj!;
+
+    if (uploadFile.status === "uploading") {
+      const url = URL.createObjectURL(file);
+      onChangeForm({ imgUrl: url, description });
+    }
+  };
+
   return (
     <Modal
       title="添加图片和描述"
       open={visible}
-      onOk={() => {}}
+      onOk={onComfirm}
       onCancel={onCancel}
     >
       <Form
@@ -33,7 +58,9 @@ function FormDialog({ visible, imgUrl, decrption, onCancel }: FormDialogProps) {
 
             <Upload
               accept="image/png, image/jpeg"
+              beforeUpload={handleBeforeUpload}
               customRequest={() => {}}
+              onChange={({ file }) => handleUpload(file)}
               itemRender={() => <></>}
             >
               <Button size="small" icon={<UploadOutlined />}>
@@ -48,8 +75,10 @@ function FormDialog({ visible, imgUrl, decrption, onCancel }: FormDialogProps) {
             className="w-80 h-80"
             maxLength={100}
             placeholder="请输入图片描述"
-            value={decrption}
-            onChange={() => {}}
+            value={description}
+            onChange={(e) => {
+              onChangeForm({ imgUrl, description: e.target.value });
+            }}
           />
         </Form.Item>
       </Form>
