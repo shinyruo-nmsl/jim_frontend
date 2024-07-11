@@ -1,5 +1,5 @@
 import Taro from "@tarojs/taro";
-import { Http, Tool } from "proj-util";
+import { Http, Tool, File } from "proj-util";
 
 import StorageUtil from "./storage";
 
@@ -42,7 +42,7 @@ export async function createMiniStreamm<
 
   requestTask.onChunkReceived((res) => {
     p.resolve({
-      value: Http.arrayBuffer2String(res.data) as V,
+      value: File.arrayBuffer2String(res.data) as V,
       done: false,
     });
   });
