@@ -1,3 +1,5 @@
+import { Spin } from "antd";
+
 import { ChatGPT } from "proj-service";
 
 import { CharacterAvatar, UserAvatar } from "@/component/Avatar";
@@ -21,12 +23,19 @@ function UserMessageBox({ content }: { content: string }) {
 }
 
 function GPTMessageBox({ content }: { content: string }) {
-  const html = markdown.render(content);
-
   return (
     <div className="chat-message assistant">
       <CharacterAvatar characterName="A" />
-      <div className="dialog" dangerouslySetInnerHTML={{ __html: html }}></div>
+      {content.length > 0 ? (
+        <div
+          className="w-fit max-w-[800px] bg-[azure] border border-solid border-[blue] rounded-[5px] p-[12px] text-[12px]/[16px] break-all"
+          dangerouslySetInnerHTML={{ __html: markdown.render(content) }}
+        ></div>
+      ) : (
+        <div className="w-fit max-w-[800px] bg-[azure] border border-solid border-[blue] rounded-[5px] p-[12px] text-[12px]/[16px] break-all">
+          <Spin />
+        </div>
+      )}
     </div>
   );
 }
