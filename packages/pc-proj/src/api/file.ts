@@ -1,3 +1,4 @@
+import { File } from "proj-util";
 import { request } from "@/util/http";
 
 export function fetchUploadBase64Image(params: {
@@ -6,7 +7,7 @@ export function fetchUploadBase64Image(params: {
 }) {
   return request<{ url: string }>({
     method: "post",
-    url: "file/uploadBase64Img",
+    url: File.URL.UPLOAD_BASE64_IMAGE,
     data: { ...params },
   });
 }

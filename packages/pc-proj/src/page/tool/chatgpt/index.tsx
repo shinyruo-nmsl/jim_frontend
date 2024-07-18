@@ -8,6 +8,7 @@ import MessageBox from "./component/Message";
 import "./index.less";
 import { useUserLoginInfo } from "@/context/user";
 import StorageUtil from "@/util/storage";
+import { convertImgFile2Base64 } from "@/util/file";
 
 function ChatGPTPage() {
   const { userId } = useUserLoginInfo();
@@ -55,7 +56,20 @@ function ChatGPTPage() {
           value={prompt}
           disabled={isPending}
           maxLength={600}
-          onChange={(e) => setPrompt(e.target.value)}
+          onPaste={async (e) => {
+            const file = e.clipboardData.items[0].getAsFile();
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                setPrompt(e.target?.result as string);
+              };
+              const base64 = await convertImgFile2Base64(file);
+              console.log(base64);
+            }
+          }}
+          onChange={(e) => {
+            setPrompt(e.target.value);
+          }}
           onPressEnter={(e) => handleEnterEditInput(e)}
           placeholder="请输入问题"
           style={{ height: 120, resize: "none" }}

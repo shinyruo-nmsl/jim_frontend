@@ -71,22 +71,22 @@ export function usePSAIImage(userId: string, store: Store.Storage) {
     setMessages((prev) => [...prev, userMessage, { type: "ai", content: "" }]);
     setPrompt({ imgUrl: "", description: "" });
 
-    // const stream = await streamApi(prompt);
-    // let gptMessage4Store = "";
-    // for await (const chunk of stream) {
-    //   setMessages((messages: Message[]) => {
-    //     const gptMessage = messages[messages.length - 1] as AIMessage;
-    //     return [
-    //       ...messages.slice(0, messages.length - 1),
-    //       { ...gptMessage, content: gptMessage.content + chunk },
-    //     ];
-    //   });
-    //   gptMessage4Store = gptMessage4Store + chunk;
-    // }
-    // saveMessages2LocalStore([
-    //   userMessage,
-    //   { type: "ai", content: gptMessage4Store },
-    // ]);
+    const stream = await streamApi(prompt);
+    let gptMessage4Store = "";
+    for await (const chunk of stream) {
+      setMessages((messages: Message[]) => {
+        const gptMessage = messages[messages.length - 1] as AIMessage;
+        return [
+          ...messages.slice(0, messages.length - 1),
+          { ...gptMessage, content: gptMessage.content + chunk },
+        ];
+      });
+      gptMessage4Store = gptMessage4Store + chunk;
+    }
+    saveMessages2LocalStore([
+      userMessage,
+      { type: "ai", content: gptMessage4Store },
+    ]);
   };
 
   return {

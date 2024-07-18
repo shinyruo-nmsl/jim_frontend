@@ -20,6 +20,7 @@ function AIPSImagePage() {
   const [formDialogVisible, setFormDialogVisible] = useState(false);
 
   const submitForm = async () => {
+    setFormDialogVisible(false);
     try {
       await chat(fetchGetAIParseMessage);
     } catch (err: any) {

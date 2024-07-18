@@ -1,5 +1,7 @@
 import { Modal, Form, Upload, Button, Input, message, UploadFile } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { convertImgFile2Base64 } from "@/util/file";
+import { fetchUploadBase64Image } from "@/api/file";
 
 interface FormDialogProps {
   visible: boolean;
@@ -29,7 +31,8 @@ function FormDialog({
     const file = uploadFile.originFileObj!;
 
     if (uploadFile.status === "uploading") {
-      const url = URL.createObjectURL(file);
+      const base64 = await convertImgFile2Base64(file);
+      const { url } = await fetchUploadBase64Image({ base64Img: base64 });
       onChangeForm({ imgUrl: url, description });
     }
   };
