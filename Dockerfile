@@ -20,3 +20,4 @@ RUN mkdir /app
 
 COPY --from=0 /app/packages/pc-proj/dist /app
 COPY nginx.conf /etc/nginx/nginx.conf
+RUN mkdir -p /etc/nginx/ssl
