@@ -14,6 +14,7 @@ export const UserLoginInfoContext = createContext<User.UserLoginInfo>({
   role: "visitor",
   userId: "",
   account: "",
+  platform: "pc",
 });
 
 export const UserLoginDispatchContext = createContext<UserLoginDispatch | null>(
@@ -26,6 +27,7 @@ export function UserLoginProvider({ children }: { children: ReactElement }) {
     role: "visitor",
     userId: "",
     account: "",
+    platform: "pc",
   });
 
   const refresh = async () => {

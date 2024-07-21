@@ -9,6 +9,7 @@ const userInitLoginInfo: User.UserLoginInfo = {
   role: "visitor",
   userId: "",
   account: "",
+  platform: "mini",
 };
 
 export const UserLoginInfoContext =
