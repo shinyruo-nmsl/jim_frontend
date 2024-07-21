@@ -2,9 +2,17 @@ import Taro from "@tarojs/taro";
 import { User } from "proj-service";
 import { fetchGetUserLoginInfo } from "@/api/user";
 import StorageUtil from "@/util/storage";
+import { login } from "./login";
 
 export async function getUserLoginInfo(): Promise<User.UserLoginInfo> {
-  const user = await fetchGetUserLoginInfo();
+  let user: User.UserLoginInfo;
+  //用户信息可能会因为token过期而获取失败，所以需要重新登录
+  try {
+    user = await fetchGetUserLoginInfo();
+  } catch {
+    await login();
+    return getUserLoginInfo();
+  }
 
   const cache = StorageUtil.get(`__user_display_info__${user.account}`);
   if (cache) {
