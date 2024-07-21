@@ -4,7 +4,7 @@ import { User } from "proj-service";
 
 import "./index.less";
 
-type SearchType = "userId" | "userName" | "account" | "role" | 'platform';
+type SearchType = "userId" | "userName" | "account" | "role" | "platform";
 
 export interface SearchBarQuery {
   type: SearchType;
@@ -51,7 +51,7 @@ function SearchBar({
 
   const platformOptions = [
     { label: "全部", value: "" },
-    ...User.PlatformOptions
+    ...User.PlatformOptions,
   ];
 
   return (
@@ -84,7 +84,7 @@ function SearchBar({
                 </Select.Option>
               ))}
             </Select>
-          ) : query.type === 'platform' ? (
+          ) : query.type === "platform" ? (
             <Select
               style={{ width: 200 }}
               value={query.value as User.Platform}
@@ -100,8 +100,11 @@ function SearchBar({
             <Input
               style={{ width: 200 }}
               value={query.value}
-              onChange={(e) => onChange({ type: query.type, value: e.target.value })}
+              onChange={(e) =>
+                onChange({ type: query.type, value: e.target.value })
+              }
             />
+          )}
         </Form.Item>
 
         <Form.Item>

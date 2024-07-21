@@ -59,7 +59,7 @@ export function usePSAIImage(userId: string, store: Store.Storage) {
   const [messages, setMessages] = useState<Message[]>(
     historyMessages.length > 0
       ? [...historyMessages]
-      : [{ type: "ai", content: "我是您的图像解析助手，欢迎提问👏🏻" }]
+      : [{ type: "ai", content: "我是您的图像解析助手，欢迎提问" }]
   );
 
   const [prompt, setPrompt] = useState<Prompt>({ imgUrl: "", description: "" });

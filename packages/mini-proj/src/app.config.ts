@@ -1,5 +1,5 @@
 export default defineAppConfig({
-  pages: ["pages/aiImgParse/index", "pages/chatgpt/index", "pages/home/index"],
+  pages: ["pages/chatgpt/index", "pages/aiImgParse/index", "pages/home/index"],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#fff",

@@ -75,6 +75,10 @@ export default defineConfig({
       },
       width: {
         fit: "fit-content",
+        ...Array.from({ length: 1000 }).reduce((acc, _, i) => {
+          acc[`calc-100vw-minus-${i}`] = `calc(100vw - ${i}px)`;
+          return acc;
+        }, {}),
       },
       lineHeight: {
         ...Array.from({ length: 1000 }).reduce((acc, _, i) => {

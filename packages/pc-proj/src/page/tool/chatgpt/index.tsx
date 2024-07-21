@@ -8,7 +8,7 @@ import MessageBox from "./component/Message";
 import "./index.less";
 import { useUserLoginInfo } from "@/context/user";
 import StorageUtil from "@/util/storage";
-import { convertImgFile2Base64 } from "@/util/file";
+import { File } from "proj-util";
 
 function ChatGPTPage() {
   const { userId } = useUserLoginInfo();
@@ -63,7 +63,7 @@ function ChatGPTPage() {
               reader.onload = (e) => {
                 setPrompt(e.target?.result as string);
               };
-              const base64 = await convertImgFile2Base64(file);
+              const base64 = await File.convertImgFile2Base64(file);
               console.log(base64);
             }
           }}
