@@ -9,7 +9,7 @@ function Home() {
   const { userName, avatar } = useUserLoginInfo();
 
   return (
-    <View className="home-page">
+    <View className="w-[10px]">
       <View className="user">
         <AtAvatar circle image={avatar}></AtAvatar>
         <Text>{userName}</Text>

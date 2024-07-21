@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: "AI助手",
+  navigationBarTitleText: "聊天机器人",
 };

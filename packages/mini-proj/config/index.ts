@@ -11,7 +11,15 @@ const config = {
   },
   sourceRoot: "src",
   outputRoot: "dist",
-  plugins: [[path.resolve(__dirname, "plugin/index")]],
+  plugins: [
+    [
+      "@dcasia/mini-program-tailwind-webpack-plugin/dist/taro",
+      {
+        enableRpx: true,
+        enableDebugLog: true,
+      },
+    ],
+  ],
   defineConstants: {},
   copy: {
     patterns: [],

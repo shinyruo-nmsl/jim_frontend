@@ -4,7 +4,7 @@ import { User } from "proj-service";
 
 import "./index.less";
 
-type SearchType = "userId" | "userName" | "account" | "role";
+type SearchType = "userId" | "userName" | "account" | "role" | 'platform';
 
 export interface SearchBarQuery {
   type: SearchType;
@@ -27,11 +27,13 @@ const formatSearchType = (type: SearchType) => {
       return "用户账号";
     case "role":
       return "用户角色";
+    case "platform":
+      return "平台";
   }
 };
 
 const searchTypeOptions: Model.Opiton<SearchType>[] = (
-  ["userId", "userName", "account", "role"] as SearchType[]
+  ["userId", "userName", "account", "role", "platform"] as SearchType[]
 ).map((type) => ({
   label: formatSearchType(type),
   value: type,
@@ -45,6 +47,11 @@ function SearchBar({
   const userRoleOptions = [
     { label: "全部", value: "" },
     ...User.UserRoleOptions,
+  ];
+
+  const platformOptions = [
+    { label: "全部", value: "" },
+    ...User.PlatformOptions
   ];
 
   return (
@@ -69,9 +76,21 @@ function SearchBar({
             <Select
               style={{ width: 200 }}
               value={query.value as User.Role}
-              onChange={(value) => onChange({ type: query.type, value })}
+              onChange={(value) => onChange({ type: "role", value })}
             >
               {userRoleOptions.map(({ label, value }) => (
+                <Select.Option key={value} value={value}>
+                  {label}
+                </Select.Option>
+              ))}
+            </Select>
+          ) : query.type === 'platform' ? (
+            <Select
+              style={{ width: 200 }}
+              value={query.value as User.Platform}
+              onChange={(value) => onChange({ type: "platform", value })}
+            >
+              {platformOptions.map(({ label, value }) => (
                 <Select.Option key={value} value={value}>
                   {label}
                 </Select.Option>
@@ -81,11 +100,8 @@ function SearchBar({
             <Input
               style={{ width: 200 }}
               value={query.value}
-              onChange={(e) =>
-                onChange({ type: query.type, value: e.target.value })
-              }
+              onChange={(e) => onChange({ type: query.type, value: e.target.value })}
             />
-          )}
         </Form.Item>
 
         <Form.Item>

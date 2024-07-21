@@ -1,7 +1,6 @@
 import Taro from "@tarojs/taro";
 import { User } from "proj-service";
 import { fetchGetUserLoginInfo } from "@/api/user";
-
 import StorageUtil from "@/util/storage";
 
 export async function getUserLoginInfo(): Promise<User.UserLoginInfo> {

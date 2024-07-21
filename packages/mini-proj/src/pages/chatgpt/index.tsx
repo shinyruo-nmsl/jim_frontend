@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
-import { View, Textarea, ScrollView } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import { View, Textarea, ScrollView, Button } from "@tarojs/components";
 import { ChatGPT } from "proj-service";
 
 import { useUserLoginInfo } from "@/context/user";
@@ -9,8 +8,6 @@ import StorageUtil from "@/util/storage";
 
 import { fetchPostPromotMessage } from "./service";
 import MessageBox from "./component/Message";
-
-import "./index.scss";
 
 function ChatGPTPage() {
   const { userId } = useUserLoginInfo();
@@ -55,8 +52,12 @@ function ChatGPTPage() {
   }, [messages]);
 
   return (
-    <View className="chat-gpt-page">
-      <ScrollView className="chat-gpt-main" scrollY scrollTop={scrollTop}>
+    <View className="h-100vh">
+      <ScrollView
+        className="chat-gpt-main h-calc-100vh-minus-96 box-border mb-24"
+        scrollY
+        scrollTop={scrollTop}
+      >
         <View className="messages">
           {messages.map((message, index) => (
             <MessageBox key={index} message={message} />
@@ -64,19 +65,21 @@ function ChatGPTPage() {
         </View>
       </ScrollView>
 
-      <View className="bottom">
+      <View className="position: fixed left-0 bottom-0 w-full box-border p-20 flex items-center bg-grey">
         <Textarea
+          className="min-h-60 round-5 box-border bg-white"
           autoHeight
           value={prompt}
           onInput={(e) => setPrompt(e.detail.value)}
           onConfirm={handleConfirmPrompt}
         />
-        <AtIcon
-          value="message"
-          size="20"
-          color="#5fc7c8"
+        <Button
+          type="primary"
+          className="w-90 h-40 text-white rounded-md text-28 leading-40 ml-20 whitespace-nowrap m-auto flex items-center justify-center"
           onClick={handleConfirmPrompt}
-        ></AtIcon>
+        >
+          send
+        </Button>
       </View>
     </View>
   );
