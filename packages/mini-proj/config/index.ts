@@ -26,6 +26,7 @@ const config = {
     options: {},
   },
   framework: "react",
+  //https://github.com/NervJS/taro/issues/12553
   compiler: {
     type: "webpack5",
     prebundle: {

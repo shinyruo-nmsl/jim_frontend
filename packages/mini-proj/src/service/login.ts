@@ -6,6 +6,10 @@ export function hasLogin() {
   return !!AuthToken.token;
 }
 
+export function logout() {
+  AuthToken.remove();
+}
+
 export async function login() {
   if (hasLogin()) {
     return;

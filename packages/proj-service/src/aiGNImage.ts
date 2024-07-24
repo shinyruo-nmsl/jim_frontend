@@ -1,6 +1,10 @@
 import { useRef, useState } from "react";
 import { Store } from "proj-util";
 
+export enum URL {
+  GetImages = "/ai/images",
+}
+
 export interface Prompt {
   prompt: string;
   count: number;
@@ -17,10 +21,6 @@ export interface AIMessage {
 }
 
 export type Message = UserMessage | AIMessage;
-
-export enum URL {
-  GetImages = "/ai/images",
-}
 
 export function useGNImageStore(userId: string, store: Store.Storage) {
   const key = `__${userId}_ai_gn_image_key__`;

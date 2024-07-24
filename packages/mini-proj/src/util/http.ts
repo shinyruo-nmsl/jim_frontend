@@ -47,12 +47,16 @@ export async function createMiniStreamm<
     });
   });
 
-  requestTask.then(() => {
-    p.resolve({
-      value: "",
-      done: true,
+  requestTask
+    .then(() => {
+      p.resolve({
+        value: "",
+        done: true,
+      });
+    })
+    .catch((err) => {
+      p.reject(err);
     });
-  });
 
   const stream = {
     async next() {
