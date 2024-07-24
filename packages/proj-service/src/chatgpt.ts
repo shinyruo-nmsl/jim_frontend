@@ -66,26 +66,36 @@ export function useChatGPT(userId: string, store: Store.Storage) {
 
     setMessages(newMessages);
 
-    const stream = await streamApi(lastFourUserMessages);
-    setMessages((messages: Message[]) => [
-      ...messages,
-      { role: "assistant", content: "" },
-    ]);
-    let gptMessage4Store = "";
-    for await (const chunk of stream) {
-      setMessages((messages: Message[]) => {
-        const gptMessage = messages[messages.length - 1];
-        return [
-          ...messages.slice(0, messages.length - 1),
-          { ...gptMessage, content: gptMessage.content + chunk },
-        ];
-      });
-      gptMessage4Store = gptMessage4Store + chunk;
+    try {
+      const stream = await streamApi(lastFourUserMessages);
+      setMessages((messages: Message[]) => [
+        ...messages,
+        { role: "assistant", content: "" },
+      ]);
+      let gptMessage4Store = "";
+      for await (const chunk of stream) {
+        setMessages((messages: Message[]) => {
+          const gptMessage = messages[messages.length - 1];
+          return [
+            ...messages.slice(0, messages.length - 1),
+            { ...gptMessage, content: gptMessage.content + chunk },
+          ];
+        });
+        gptMessage4Store = gptMessage4Store + chunk;
+      }
+      saveMessages2LocalStore([
+        { role: "user", content: prompt },
+        { role: "assistant", content: gptMessage4Store },
+      ]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev.slice(0, prev.length - 1),
+        {
+          role: "assistant",
+          content: err.message || "抱歉，回复失败",
+        },
+      ]);
     }
-    saveMessages2LocalStore([
-      { role: "user", content: prompt },
-      { role: "assistant", content: gptMessage4Store },
-    ]);
   };
 
   return {

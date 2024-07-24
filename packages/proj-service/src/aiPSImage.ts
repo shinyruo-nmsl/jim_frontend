@@ -1,6 +1,10 @@
 import { useRef, useState } from "react";
 import { Store } from "proj-util";
 
+export enum URL {
+  ParseImage = "/ai/parseImageContent",
+}
+
 export interface Prompt {
   imgUrl: string;
   description: string;
@@ -17,10 +21,6 @@ export interface AIMessage {
 }
 
 export type Message = UserMessage | AIMessage;
-
-export enum URL {
-  ParseImage = "/ai/parseImageContent",
-}
 
 export function usePSImageStore(userId: string, store: Store.Storage) {
   const key = `__${userId}_ai_ps_image_key__`;
@@ -71,22 +71,32 @@ export function usePSAIImage(userId: string, store: Store.Storage) {
     setMessages((prev) => [...prev, userMessage, { type: "ai", content: "" }]);
     setPrompt({ imgUrl: "", description: "" });
 
-    const stream = await streamApi(prompt);
-    let gptMessage4Store = "";
-    for await (const chunk of stream) {
-      setMessages((messages: Message[]) => {
-        const gptMessage = messages[messages.length - 1] as AIMessage;
-        return [
-          ...messages.slice(0, messages.length - 1),
-          { ...gptMessage, content: gptMessage.content + chunk },
-        ];
-      });
-      gptMessage4Store = gptMessage4Store + chunk;
+    try {
+      const stream = await streamApi(prompt);
+      let gptMessage4Store = "";
+      for await (const chunk of stream) {
+        setMessages((messages: Message[]) => {
+          const gptMessage = messages[messages.length - 1] as AIMessage;
+          return [
+            ...messages.slice(0, messages.length - 1),
+            { ...gptMessage, content: gptMessage.content + chunk },
+          ];
+        });
+        gptMessage4Store = gptMessage4Store + chunk;
+      }
+      saveMessages2LocalStore([
+        userMessage,
+        { type: "ai", content: gptMessage4Store },
+      ]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev.slice(0, prev.length - 1),
+        {
+          type: "ai",
+          content: err.message || "抱歉，回复失败",
+        },
+      ]);
     }
-    saveMessages2LocalStore([
-      userMessage,
-      { type: "ai", content: gptMessage4Store },
-    ]);
   };
 
   return {

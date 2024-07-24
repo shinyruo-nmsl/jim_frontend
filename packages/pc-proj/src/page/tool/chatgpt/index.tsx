@@ -58,13 +58,9 @@ function ChatGPTPage() {
           maxLength={600}
           onPaste={async (e) => {
             const file = e.clipboardData.items[0].getAsFile();
-            if (file) {
-              const reader = new FileReader();
-              reader.onload = (e) => {
-                setPrompt(e.target?.result as string);
-              };
+            console.log(e, file);
+            if (file && file.type.includes("image")) {
               const base64 = await File.convertImgFile2Base64(file);
-              console.log(base64);
             }
           }}
           onChange={(e) => {
