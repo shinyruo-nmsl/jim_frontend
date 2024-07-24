@@ -1,5 +1,5 @@
-import { useCallback } from "react";
-import { Input, Button, message } from "antd";
+import { useCallback, useState } from "react";
+import { Input, Button, message, Spin } from "antd";
 import { PaginationTableAsync } from "@/component/PaginationTable";
 import { Poetry } from "proj-service";
 import { fetchGetPoetriesByAuthorAndKeyWords } from "./service";
@@ -16,6 +16,8 @@ function PoetrySearch() {
     search,
     changePage,
   } = Poetry.usePoetry(fetchGetPoetriesByAuthorAndKeyWords);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const tableColumns = [
     {
@@ -69,14 +71,18 @@ function PoetrySearch() {
 
   const handleClickSearchButton = async () => {
     try {
+      setIsLoading(true);
       await search();
     } catch (e: any) {
       message.error(e.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="poetry-search">
+      <Spin spinning={isLoading} fullscreen></Spin>
       <div className="search">
         <div className="author">
           <span>作者：</span>
