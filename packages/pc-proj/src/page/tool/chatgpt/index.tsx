@@ -8,7 +8,6 @@ import MessageBox from "./component/Message";
 import "./index.less";
 import { useUserLoginInfo } from "@/context/user";
 import StorageUtil from "@/util/storage";
-import { File } from "proj-util";
 
 function ChatGPTPage() {
   const { userId } = useUserLoginInfo();
