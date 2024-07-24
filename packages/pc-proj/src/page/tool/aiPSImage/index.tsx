@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Button } from "antd";
 
 import { AIPSImage } from "proj-service";
 import { fetchGetAIParseMessage } from "./service";
 import { useUserLoginInfo } from "@/context/user";
 import StorageUtil from "@/util/storage";
+import { ImageTextArea } from "@/component/Input";
 
 import FormDialog from "./component/FormDialog";
 import MessageBox from "./component/Message";
@@ -19,12 +19,28 @@ function AIPSImagePage() {
 
   const [formDialogVisible, setFormDialogVisible] = useState(false);
 
+  const [tmpUrl, setTmpUrl] = useState("");
+
+  const [isPending, setIsPending] = useState(false);
+
   const submitForm = async () => {
     setFormDialogVisible(false);
     try {
       await chat(fetchGetAIParseMessage);
     } catch (err: any) {
       console.error(err.message);
+    }
+  };
+
+  const handlePressEnter = async () => {
+    if (prompt.imgUrl.length < 1 || isPending) return;
+    setIsPending(true);
+    try {
+      await chat(fetchGetAIParseMessage);
+    } catch (err: any) {
+      console.error(err.message);
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -37,13 +53,21 @@ function AIPSImagePage() {
       </div>
 
       <div className="box-border w-full h-[80px] p-[24px] flex-none">
-        <Button
-          type="primary"
-          className="w-full h-full text-white rounded-[5px]"
-          onClick={() => setFormDialogVisible(true)}
-        >
-          提问
-        </Button>
+        <ImageTextArea
+          value={prompt.description}
+          multiple={false}
+          textareaProps={{
+            placeholder: "Please input the image url",
+            maxLength: 1000,
+            disabled: isPending,
+          }}
+          onPressEnter={handlePressEnter}
+          onChange={(value) => setPrompt({ ...prompt, description: value })}
+          onPasteImg={(base64) => setTmpUrl(base64[0])}
+          onUploadImg={(base64) => setTmpUrl(base64[0])}
+        />
+
+        {tmpUrl && <img src={tmpUrl} alt="" />}
       </div>
 
       <FormDialog
