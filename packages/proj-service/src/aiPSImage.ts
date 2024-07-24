@@ -88,7 +88,7 @@ export function usePSAIImage(userId: string, store: Store.Storage) {
         userMessage,
         { type: "ai", content: gptMessage4Store },
       ]);
-    } catch (err) {
+    } catch (err: any) {
       setMessages((prev) => [
         ...prev.slice(0, prev.length - 1),
         {

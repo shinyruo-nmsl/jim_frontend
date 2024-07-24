@@ -87,7 +87,7 @@ export function useChatGPT(userId: string, store: Store.Storage) {
         { role: "user", content: prompt },
         { role: "assistant", content: gptMessage4Store },
       ]);
-    } catch (err) {
+    } catch (err: any) {
       setMessages((prev) => [
         ...prev.slice(0, prev.length - 1),
         {
