@@ -6,7 +6,6 @@ import { useUserLoginInfo } from "@/context/user";
 import StorageUtil from "@/util/storage";
 import { ImageTextArea } from "@/component/Input";
 
-import FormDialog from "./component/FormDialog";
 import MessageBox from "./component/Message";
 
 function AIPSImagePage() {
@@ -17,20 +16,8 @@ function AIPSImagePage() {
     StorageUtil
   );
 
-  const [formDialogVisible, setFormDialogVisible] = useState(false);
-
   const [tmpUrl, setTmpUrl] = useState("");
-
   const [isPending, setIsPending] = useState(false);
-
-  const submitForm = async () => {
-    setFormDialogVisible(false);
-    try {
-      await chat(fetchGetAIParseMessage);
-    } catch (err: any) {
-      console.error(err.message);
-    }
-  };
 
   const handlePressEnter = async () => {
     if (prompt.imgUrl.length < 1 || isPending) return;
@@ -69,15 +56,6 @@ function AIPSImagePage() {
 
         {tmpUrl && <img src={tmpUrl} alt="" />}
       </div>
-
-      <FormDialog
-        visible={formDialogVisible}
-        imgUrl={prompt.imgUrl}
-        description={prompt.description}
-        onChangeForm={(prompt) => setPrompt(prompt)}
-        onComfirm={submitForm}
-        onCancel={() => setFormDialogVisible(false)}
-      />
     </div>
   );
 }

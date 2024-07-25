@@ -10,10 +10,7 @@ import {
 } from "@tarojs/components";
 import { AIPSImage } from "proj-service";
 import StorageUtil from "@/util/storage";
-import {
-  chooseAndUploadImage,
-  uploadImageFromTempPath,
-} from "@/service/device";
+import { uploadImageFromTempPath } from "@/service/device";
 import { useUserLoginInfo } from "@/context/user";
 import { fetchGetAIParseMessage } from "./service";
 import MessageBox from "./component/Message";

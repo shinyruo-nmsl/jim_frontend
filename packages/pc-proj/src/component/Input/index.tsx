@@ -1,6 +1,7 @@
 import { ChangeEvent, ClipboardEvent, KeyboardEvent } from "react";
 import { Input } from "antd";
 import { File } from "proj-util";
+import UPLOAD_SVG from "@/assets/upload.svg";
 
 interface ImageInputProps {
   value: string;
@@ -50,13 +51,21 @@ export function ImageTextArea({
   };
 
   return (
-    <div className="flex items-center gap-5">
-      <input
-        type="file"
-        accept="image/*"
-        multiple={multiple}
-        onChange={handleUpload}
-      />
+    <div className="flex flex-col items-end gap-1">
+      <div className="flex justify-end">
+        <label htmlFor="upload" className="cursor-pointer w-[30px] h-[30px]">
+          <img src={UPLOAD_SVG} alt="upload" className="w-full h-full" />
+          <input
+            className="hidden"
+            type="file"
+            id="upload"
+            accept="image/*"
+            multiple={multiple}
+            onChange={handleUpload}
+          />
+        </label>
+      </div>
+
       <TextArea
         value={value}
         onChange={(e) => onChange(e.target.value)}
