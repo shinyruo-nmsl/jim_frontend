@@ -17,3 +17,14 @@ export async function convertImgFile2Base64(imgFile: File): Promise<string> {
     reader.onload = (e) => resolve(e.target!.result as string);
   });
 }
+
+export function base64ToBuffer(base64: string) {
+  const byteString = atob(base64.split(",")[1]);
+  const buffer = new ArrayBuffer(byteString.length);
+  const uintArray = new Uint8Array(buffer);
+  for (let i = 0; i < byteString.length; i++) {
+    uintArray[i] = byteString.charCodeAt(i);
+  }
+
+  return buffer;
+}
