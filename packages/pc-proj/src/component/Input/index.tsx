@@ -1,22 +1,26 @@
 import { ChangeEvent, ClipboardEvent, KeyboardEvent } from "react";
 import { Input, Image } from "antd";
 import { CloseCircleFilled } from "@ant-design/icons";
-import { File } from "proj-util";
+import { File as FileUtil } from "proj-util";
 import UPLOAD_SVG from "@/assets/upload.svg";
 
+export interface InputImg {
+  file: File;
+  base64: string;
+}
 interface ImageInputProps {
   value: string;
-  imgUrl: string;
+  img: InputImg | null;
   textareaProps?: Partial<Parameters<typeof Input.TextArea>[0]>;
   onChange: (value: string) => void;
   onPressEnter: (value: string) => void;
-  onUploadImg: (base64: string) => void;
-  onRemoveImg: (base64: string) => void;
+  onUploadImg: (img: InputImg) => void;
+  onRemoveImg: (img: InputImg) => void;
 }
 
 export function ImageTextArea({
   value,
-  imgUrl,
+  img,
   textareaProps = {},
   onChange,
   onPressEnter,
@@ -28,8 +32,8 @@ export function ImageTextArea({
   const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files?.[0]) return;
-    const base64 = await File.convertImgFile2Base64(files[0]);
-    onUploadImg(base64);
+    const base64 = await FileUtil.convertImgFile2Base64(files[0]);
+    onUploadImg({ file: files[0], base64 });
   };
 
   const handlePressEnter = async (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -44,8 +48,8 @@ export function ImageTextArea({
       .map((item) => item.getAsFile())
       .filter((f) => f && f.type.includes("image"));
     if (!files?.[0]) return;
-    const base64 = await File.convertImgFile2Base64(files[0]);
-    onUploadImg(base64);
+    const base64 = await FileUtil.convertImgFile2Base64(files[0]);
+    onUploadImg({ file: files[0], base64 });
   };
 
   return (
@@ -61,21 +65,21 @@ export function ImageTextArea({
       />
 
       <div className="flex-none w-[100px] h-[100px]">
-        {imgUrl && (
+        {img && (
           <div className="relative w-full h-full flex justify-center items-center ">
             <CloseCircleFilled
               className="absolute z-10  right-0 top-0 translate-x-1/2 -translate-y-1/2 text-gray-500 bg-white rounded-full"
-              onClick={() => onRemoveImg(imgUrl)}
+              onClick={() => onRemoveImg(img)}
             />
             <Image
-              src={imgUrl}
+              src={img.base64}
               alt="img"
               className="max-w-[100px] max-h-[100px] h-auto w-auto"
             />
           </div>
         )}
 
-        {!imgUrl && (
+        {!img && (
           <label htmlFor="upload" className="cursor-pointer w-full h-full">
             <img src={UPLOAD_SVG} alt="upload" className="w-full h-full" />
             <input

@@ -1,12 +1,12 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { message } from "antd";
 import { AIPSImage } from "proj-service";
-import { fetchGetAIParseMessage } from "./service";
 import { useUserLoginInfo } from "@/context/user";
 import StorageUtil from "@/util/storage";
-import { ImageTextArea } from "@/component/Input";
+import { ImageTextArea, InputImg } from "@/component/Input";
+import { fetchUploadImgFile } from "@/api/file";
 import MessageBox from "./component/Message";
-import { fetchUploadBase64Image } from "@/api/file";
+import { fetchGetAIParseMessage } from "./service";
 
 function AIPSImagePage() {
   const { userId } = useUserLoginInfo();
@@ -16,16 +16,19 @@ function AIPSImagePage() {
     StorageUtil
   );
 
-  const [tmpUrl, setTmpUrl] = useState("");
+  const [tempImg, setTempImg] = useState<InputImg | null>(null);
   const [isPending, setIsPending] = useState(false);
   const messagesRef = useRef<HTMLDivElement>(null);
 
   const handlePressEnter = async () => {
-    if (!tmpUrl || isPending) return;
+    if (!tempImg || !prompt.description || isPending) return;
 
     try {
-      const { url } = await fetchUploadBase64Image({ base64Img: tmpUrl });
+      const { url } = await fetchUploadImgFile({
+        imgFile: tempImg.file,
+      });
       setPrompt({ ...prompt, imgUrl: url });
+      setTempImg(null);
     } catch (err: any) {
       message.error(err.message);
     }
@@ -71,7 +74,7 @@ function AIPSImagePage() {
       <div className="box-border w-full h-fit p-[24px] flex-none">
         <ImageTextArea
           value={prompt.description}
-          imgUrl={tmpUrl}
+          img={tempImg}
           textareaProps={{
             placeholder: "使用图片时，复制图片到此处，或者点击上传",
             maxLength: 1000,
@@ -79,8 +82,8 @@ function AIPSImagePage() {
           }}
           onPressEnter={handlePressEnter}
           onChange={(value) => setPrompt({ ...prompt, description: value })}
-          onUploadImg={(base64) => setTmpUrl(base64)}
-          onRemoveImg={() => setTmpUrl("")}
+          onUploadImg={(img) => setTempImg(img)}
+          onRemoveImg={() => setTempImg(null)}
         />
       </div>
     </div>

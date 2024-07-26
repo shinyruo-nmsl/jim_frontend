@@ -1,5 +1,6 @@
 export enum URL {
   UPLOAD_BASE64_IMAGE = "/file/uploadBase64Img",
+  UPLOAD_IMG_FILE = "/file/uploadImgFile",
 }
 
 export function arrayBuffer2String(buffer: ArrayBuffer) {
@@ -18,13 +19,16 @@ export async function convertImgFile2Base64(imgFile: File): Promise<string> {
   });
 }
 
-export function base64ToBuffer(base64: string) {
-  const byteString = atob(base64.split(",")[1]);
-  const buffer = new ArrayBuffer(byteString.length);
-  const uintArray = new Uint8Array(buffer);
-  for (let i = 0; i < byteString.length; i++) {
-    uintArray[i] = byteString.charCodeAt(i);
+export function base64ToFile(base64: string, filename: string): File {
+  const arr = base64.split(",");
+  const mime = arr[0].match(/:(.*?);/)![1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
   }
 
-  return buffer;
+  return new File([u8arr], filename, { type: mime });
 }

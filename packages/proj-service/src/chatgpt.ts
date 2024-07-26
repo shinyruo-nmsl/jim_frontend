@@ -74,14 +74,17 @@ export function useChatGPT(userId: string, store: Store.Storage) {
       ]);
       let gptMessage4Store = "";
       for await (const chunk of stream) {
-        setMessages((messages: Message[]) => {
-          const gptMessage = messages[messages.length - 1];
-          return [
-            ...messages.slice(0, messages.length - 1),
-            { ...gptMessage, content: gptMessage.content + chunk },
-          ];
-        });
-        gptMessage4Store = gptMessage4Store + chunk;
+        for (const char of chunk.split("")) {
+          await new Promise((resolve) => setTimeout(resolve, 0));
+          setMessages((messages: Message[]) => {
+            const gptMessage = messages[messages.length - 1];
+            return [
+              ...messages.slice(0, messages.length - 1),
+              { ...gptMessage, content: gptMessage.content + char },
+            ];
+          });
+          gptMessage4Store = gptMessage4Store + char;
+        }
       }
       saveMessages2LocalStore([
         { role: "user", content: prompt },
