@@ -75,17 +75,14 @@ export function usePSAIImage(userId: string, store: Store.Storage) {
       const stream = await streamApi(prompt);
       let gptMessage4Store = "";
       for await (const chunk of stream) {
-        for (const char of chunk.split("")) {
-          await new Promise((resolve) => setTimeout(resolve, 0));
-          setMessages((messages: Message[]) => {
-            const gptMessage = messages[messages.length - 1];
-            return [
-              ...messages.slice(0, messages.length - 1),
-              { ...gptMessage, content: gptMessage.content + char },
-            ] as AIMessage[];
-          });
-          gptMessage4Store = gptMessage4Store + char;
-        }
+        setMessages((messages: Message[]) => {
+          const gptMessage = messages[messages.length - 1] as AIMessage;
+          return [
+            ...messages.slice(0, messages.length - 1),
+            { ...gptMessage, content: gptMessage.content + chunk },
+          ];
+        });
+        gptMessage4Store = gptMessage4Store + chunk;
       }
       saveMessages2LocalStore([
         userMessage,

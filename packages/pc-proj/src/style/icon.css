@@ -1,0 +1,29 @@
+i[class^="icon-"],
+i[class*="icon-"] {
+  display: inline-block;
+  position: relative;
+}
+
+i {
+  width: 1em;
+  height: 1em;
+}
+
+i[class^="icon-"]::before,
+i[class*="icon-"]::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: currentColor;
+}
+
+i.icon-copy::before {
+  mask: url("../assets/copy.svg") no-repeat center / contain;
+  -webkit-mask: url("../assets/copy.svg") no-repeat center / contain;
+}
+
+i.icon-ok::before {
+  mask: url("../assets/ok.svg") no-repeat center / contain;
+  -webkit-mask: url("../assets/ok.svg") no-repeat center / contain;
+}

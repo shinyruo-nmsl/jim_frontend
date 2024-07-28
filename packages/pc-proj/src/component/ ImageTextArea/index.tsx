@@ -18,7 +18,7 @@ interface ImageInputProps {
   onRemoveImg: (img: InputImg) => void;
 }
 
-export function ImageTextArea({
+function ImageTextArea({
   value,
   img,
   textareaProps = {},
@@ -96,3 +96,5 @@ export function ImageTextArea({
     </div>
   );
 }
+
+export default ImageTextArea;

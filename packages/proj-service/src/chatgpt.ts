@@ -60,31 +60,25 @@ export function useChatGPT(userId: string, store: Store.Storage) {
     const newMessages = [
       ...messages,
       { role: "user" as ChatRole, content: prompt },
+      { role: "assistant" as ChatRole, content: "" },
     ];
 
-    const lastFourUserMessages: Message[] = newMessages.slice(-4);
-
+    const lastFourUserMessages: Message[] = newMessages.slice(-5, -1);
     setMessages(newMessages);
 
     try {
       const stream = await streamApi(lastFourUserMessages);
-      setMessages((messages: Message[]) => [
-        ...messages,
-        { role: "assistant", content: "" },
-      ]);
+
       let gptMessage4Store = "";
       for await (const chunk of stream) {
-        for (const char of chunk.split("")) {
-          await new Promise((resolve) => setTimeout(resolve, 0));
-          setMessages((messages: Message[]) => {
-            const gptMessage = messages[messages.length - 1];
-            return [
-              ...messages.slice(0, messages.length - 1),
-              { ...gptMessage, content: gptMessage.content + char },
-            ];
-          });
-          gptMessage4Store = gptMessage4Store + char;
-        }
+        setMessages((messages: Message[]) => {
+          const gptMessage = messages[messages.length - 1];
+          return [
+            ...messages.slice(0, messages.length - 1),
+            { ...gptMessage, content: gptMessage.content + chunk },
+          ];
+        });
+        gptMessage4Store = gptMessage4Store + chunk;
       }
       saveMessages2LocalStore([
         { role: "user", content: prompt },

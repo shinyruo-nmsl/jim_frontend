@@ -6,26 +6,31 @@
   ],
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "uuid": "^10.0.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shinyruo-nmsl/jim_frontend.git"
   },
   "devDependencies": {
-    "lerna": "^8.1.3",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
+    "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
+    "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "typescript": "^5.2.2",
+    "lerna": "^8.1.3",
     "less": "^4.2.0",
-    "sass": "^1.77.4",
+    "postcss": "^8.4.40",
     "prettier": "^3.2.5",
-    "eslint-plugin-prettier": "^5.1.3"
+    "sass": "^1.77.4",
+    "tailwindcss": "^3.4.7",
+    "typescript": "^5.2.2"
   }
 }

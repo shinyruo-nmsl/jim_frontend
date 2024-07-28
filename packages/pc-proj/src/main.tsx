@@ -5,6 +5,7 @@ import Router from "./router";
 import { UserLoginProvider } from "./context/user";
 
 import "./index.css";
+import "@/style/icon.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -1,10 +1,7 @@
-import { defineConfig } from "windicss/helpers";
+/** @type {import('tailwindcss').Config} */
 
-export default defineConfig({
-  prefixer: false,
-  extract: {
-    exclude: ["node_modules", ".git", "dist"],
-  },
+module.exports = {
+  content: ["./public/index.html", "./src/**/*.{html,js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontSize: {
@@ -89,6 +86,6 @@ export default defineConfig({
     },
   },
   corePlugins: {
-    container: false,
+    preflight: false,
   },
-});
+};

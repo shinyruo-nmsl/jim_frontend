@@ -8,7 +8,7 @@ import MessageBox from "./component/Message";
 import { fetchGetAIImages } from "./service";
 
 import "./index.less";
-import { awaitAllImgsLoaded } from "@/util/html";
+import { awaitAllChildrenImgsLoaded } from "@/util/html";
 
 function AIGNImagePage() {
   const { userId } = useUserLoginInfo();
@@ -51,13 +51,16 @@ function AIGNImagePage() {
     } else {
       const last = messagesRef.current?.lastElementChild as HTMLElement;
       if (last) {
-        awaitAllImgsLoaded(last, scorll2Bottom);
+        awaitAllChildrenImgsLoaded(last, scorll2Bottom);
       }
     }
   }, [messages]);
 
   useLayoutEffect(() => {
-    awaitAllImgsLoaded(messagesRef.current as HTMLElement, scorll2Bottom);
+    awaitAllChildrenImgsLoaded(
+      messagesRef.current as HTMLElement,
+      scorll2Bottom
+    );
   }, []);
 
   return (

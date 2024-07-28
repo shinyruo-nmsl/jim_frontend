@@ -1,4 +1,5 @@
 import path from "path";
+import { UnifiedWebpackPluginV5 } from "weapp-tailwindcss/webpack";
 
 const config = {
   projectName: "myApp",
@@ -11,15 +12,7 @@ const config = {
   },
   sourceRoot: "src",
   outputRoot: "dist",
-  plugins: [
-    [
-      "@dcasia/mini-program-tailwind-webpack-plugin/dist/taro",
-      {
-        enableRpx: true,
-        enableDebugLog: true,
-      },
-    ],
-  ],
+  plugins: [],
   defineConstants: {},
   copy: {
     patterns: [],
@@ -59,6 +52,22 @@ const config = {
           generateScopedName: "[name]__[local]___[hash:base64:5]",
         },
       },
+    },
+    webpackChain(chain, webpack) {
+      // 复制这块区域到你的配置代码中 region start
+      chain.merge({
+        plugin: {
+          install: {
+            plugin: UnifiedWebpackPluginV5,
+            args: [
+              {
+                appType: "taro",
+              },
+            ],
+          },
+        },
+      });
+      // region end
     },
   },
   h5: {

@@ -27,4 +27,7 @@ export default defineConfig({
     },
     extensions: [".js", ".json", ".ts", ".tsx", ".jsx"],
   },
+  build: {
+    assetsInlineLimit: 0, // 设置为 0 禁用内联
+  },
 });

@@ -57,7 +57,7 @@ function GPTMessageBox({ content }: { content: string }) {
         image={OPENAI_IMG}
       ></AtAvatar>
 
-      <View className="relative overflow-hidden ml-10 w-fit h-fit mt-10  max-w-500 rounded-12 p-12 pt-24 pr-24 text-24 leading-28 bg-azure border-1 border-blue border-solid">
+      <View className="relative overflow-hidden ml-10 w-fit h-fit mt-10  max-w-[500px] rounded-12 p-12 pt-24 pr-24 text-24 leading-28 bg-azure border-1 border-blue border-solid">
         {isLoading ? (
           <AtActivityIndicator size={24} mode="normal" content="思考中..." />
         ) : (

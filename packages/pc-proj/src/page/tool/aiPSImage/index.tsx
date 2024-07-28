@@ -3,7 +3,7 @@ import { message } from "antd";
 import { AIPSImage } from "proj-service";
 import { useUserLoginInfo } from "@/context/user";
 import StorageUtil from "@/util/storage";
-import { ImageTextArea, InputImg } from "@/component/Input";
+import ImageTextArea, { InputImg } from "@/component/ ImageTextArea";
 import { fetchUploadImgFile } from "@/api/file";
 import MessageBox from "./component/Message";
 import { fetchGetAIParseMessage } from "./service";

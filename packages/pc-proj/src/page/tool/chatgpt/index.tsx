@@ -8,6 +8,17 @@ import MessageBox from "./component/Message";
 import "./index.less";
 import { useUserLoginInfo } from "@/context/user";
 import StorageUtil from "@/util/storage";
+import COPY_SVG from "@/assets/copy.svg";
+
+function SvgIcon({ name, prefix = "icon", color = "#333", ...props }) {
+  const symbolId = `#${prefix}-${name}`;
+
+  return (
+    <svg {...props} aria-hidden="true">
+      <use href={symbolId} fill={color} />
+    </svg>
+  );
+}
 
 function ChatGPTPage() {
   const { userId } = useUserLoginInfo();

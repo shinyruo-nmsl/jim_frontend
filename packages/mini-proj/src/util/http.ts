@@ -63,7 +63,6 @@ export async function createMiniStreamm<
       const { value, done } = await p.promise;
       if (!done) {
         p = Tool.createPromiseResolvers<IteratorResult<V>, Event>();
-        console.log("next", value);
         return { value, done };
       }
       return { value, done } as IteratorReturnResult<V>;
