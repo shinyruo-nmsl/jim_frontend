@@ -13,12 +13,11 @@ import SearchBar, { SearchBarQuery } from "./component/SearchBar";
 import UserTable from "./component/UserTable";
 import EditDialog from "./component/EditDialog";
 
-import "./index.less";
-
 function Admin() {
   const [searchQuery, setSearchQuery] = useState<SearchBarQuery>({
-    type: "userId",
-    value: "",
+    searchTerm: "",
+    role: "",
+    platform: "",
   });
 
   const [pageNo, setPageNo] = useState(0);
@@ -105,10 +104,10 @@ function Admin() {
   }, []);
 
   return (
-    <div className="admin-page">
+    <div className="w-full box-border p-24">
       <SearchBar
         query={searchQuery}
-        onChange={setSearchQuery}
+        onChaneQuery={setSearchQuery}
         onClickConfirmButton={handleClickSearchButton}
       />
       <UserTable

@@ -26,7 +26,6 @@ function UserTable({
       title: "用户ID",
       dataIndex: "userId",
       key: "userId",
-      width: 400,
     },
     {
       title: "用户账号",
@@ -45,6 +44,12 @@ function UserTable({
       title: "用户昵称",
       dataIndex: "userName",
       key: "userName",
+    },
+    {
+      title: "平台",
+      dataIndex: "platform",
+      key: "platform",
+      render: (platform) => <span>{User.formatPlatform(platform)}</span>,
     },
     {
       title: "角色",

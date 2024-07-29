@@ -2,14 +2,13 @@ import { Model } from "proj-type";
 import { User } from "proj-service";
 import { request } from "@/util/http";
 
-export interface UsersQuery<
-  T = "userId" | "userName" | "account" | "role" | "platform",
-> extends Model.PaginationQuery {
-  type: T;
-  value: T extends "role" ? User.Role : string;
+export interface SearchBarQuery extends Model.PaginationQuery {
+  searchTerm?: string;
+  role?: User.Role | "";
+  platform?: User.Platform | "";
 }
 
-export function fetchSearchUserLoginInfo(query: UsersQuery) {
+export function fetchSearchUserLoginInfo(query: SearchBarQuery) {
   return request<Model.Pagination<User.UserLoginInfo>>({
     method: "get",
     url: "/admin/searchUserLoginInfo",
