@@ -20,11 +20,11 @@
     "url": "https://github.com/shinyruo-nmsl/jim_frontend/issues"
   },
   "dependencies": {
-    "react-router-dom": "^6.23.0",
     "axios": "^1.6.8",
     "antd": "^5.17.0",
+    "highlight.js": "^11.9.0",
     "markdown-it": "^14.1.0",
-    "highlight.js": "^11.9.0"
+    "react-router-dom": "^6.23.0"
   },
   "devDependencies": {
     "@types/qs": "^6.9.15",

@@ -6,9 +6,10 @@ import Login from "@/page/login";
 import { SubRoute } from "@/global-type/router";
 import PoetryRouter from "./poetry";
 import ToolRouter from "./tool";
+import AIRouter from "./ai";
 
 class Router {
-  static readonly subRouters = [PoetryRouter, ToolRouter];
+  static readonly subRouters = [PoetryRouter, ToolRouter, AIRouter];
   static readonly router = createBrowserRouter([
     {
       path: "/login",

@@ -116,3 +116,15 @@ export function awaitAllChildrenImgsLoaded(
     callback();
   }
 }
+
+export function downloadFileFromBlob(blob: Blob, fileName: string) {
+  const a = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  console.log("url:", url);
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.dispatchEvent(new MouseEvent("click"));
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}

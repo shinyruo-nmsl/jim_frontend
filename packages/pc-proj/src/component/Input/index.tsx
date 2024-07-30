@@ -18,7 +18,7 @@ interface ImageInputProps {
   onRemoveImg: (img: InputImg) => void;
 }
 
-function ImageTextArea({
+export function ImageTextArea({
   value,
   img,
   textareaProps = {},
@@ -32,7 +32,7 @@ function ImageTextArea({
   const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files?.[0]) return;
-    const base64 = await FileUtil.convertImgFile2Base64(files[0]);
+    const base64 = await FileUtil.imgFile2Base64(files[0]);
     onUploadImg({ file: files[0], base64 });
   };
 
@@ -48,7 +48,7 @@ function ImageTextArea({
       .map((item) => item.getAsFile())
       .filter((f) => f && f.type.includes("image"));
     if (!files?.[0]) return;
-    const base64 = await FileUtil.convertImgFile2Base64(files[0]);
+    const base64 = await FileUtil.imgFile2Base64(files[0]);
     onUploadImg({ file: files[0], base64 });
   };
 
@@ -96,5 +96,3 @@ function ImageTextArea({
     </div>
   );
 }
-
-export default ImageTextArea;
