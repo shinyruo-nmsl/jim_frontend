@@ -23,6 +23,13 @@
   "scripts": {
     "test": "node ./__tests__/web-common.test.js"
   },
+  "dependencies": {
+    "highlight.js": "^11.9.0",
+    "markdown-it": "^14.1.0"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.1"
+  },
   "bugs": {
     "url": "https://github.com/shinyruo-nmsl/jim_frontend/issues"
   }

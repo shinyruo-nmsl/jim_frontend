@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { Http, Tool } from "proj-util";
-import { HttpMethod } from "../type/http";
+import { HttpMethod } from "@web/type/http";
 import StorageUtil from "./storage";
 
 export const AuthToken = new Http.AuthToken(StorageUtil);

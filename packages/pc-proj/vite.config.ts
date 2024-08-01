@@ -24,6 +24,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
+      "@web": resolve(__dirname, "../web-common/src"),
     },
     extensions: [".js", ".json", ".ts", ".tsx", ".jsx"],
   },

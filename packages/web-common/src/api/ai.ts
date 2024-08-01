@@ -1,5 +1,6 @@
-import { createFetchStream, request } from "../util/http";
 import { AITextGener, AIImgParser, AIImgGener } from "proj-service";
+import { createFetchStream, request } from "@web/util/http";
+
 
 export function fetchPostPromotMessage(messages: AITextGener.Message[]) {
   return createFetchStream(AITextGener.URL.GetGPTContent, {

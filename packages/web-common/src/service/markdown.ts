@@ -1,6 +1,6 @@
 import MarkDown from "markdown-it";
 import hljs from "highlight.js";
-import { htmlEncode } from "../util/html";
+import { htmlEncode } from "@web/util/html";
 import "highlight.js/styles/atom-one-dark-reasonable.css";
 
 export function createMarkdown() {

@@ -1,5 +1,5 @@
 import { File } from "proj-util";
-import { request } from "../util/http";
+import { request } from "@web/util/http";
 
 export function fetchUploadBase64Image(params: {
   base64Img: string;

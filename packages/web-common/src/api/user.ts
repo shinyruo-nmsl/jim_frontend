@@ -1,6 +1,6 @@
 import { User } from "proj-service";
-import { request } from "../util/http";
-import { UserLoginDisplayInfo } from "../type/user";
+import { request } from "@web/util/http";
+import { UserLoginDisplayInfo } from "@web/type/user";
 
 export async function fetchGetUserLoginInfo() {
   return request<User.UserLoginInfo>({

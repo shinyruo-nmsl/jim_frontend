@@ -6,18 +6,18 @@
   ],
   "scripts": {
     "dev:pc": "npm run dev --workspace=packages/pc-proj",
-    "build:pc": "npm run build --workspace=packages/pc-proj"
-  },
-  "dependencies": {
-    "pptxgenjs": "^3.12.0",
-    "pptxtojson": "^0.1.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "uuid": "^10.0.0"
+    "build:pc": "npm run build --workspace=packages/pc-proj",
+    "dev:mini": "npm run dev:weapp --workspace=packages/mini-proj",
+    "build:mini": "npm run build:weapp --workspace=packages/mini-proj"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shinyruo-nmsl/jim_frontend.git"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",

@@ -6,9 +6,12 @@ import {
   ReactElement,
 } from "react";
 import { User } from "proj-service";
-import { UserLoginDispatch, UserLoginDisplayInfo } from "../type/user";
-import { fetchGetUserLoginInfo, fetchUpdateUserDisplayInfo } from "../api/user";
-import { exitLogin } from "../service/login";
+import { UserLoginDispatch, UserLoginDisplayInfo } from "@web/type/user";
+import {
+  fetchGetUserLoginInfo,
+  fetchUpdateUserDisplayInfo,
+} from "@web/api/user";
+import { exitLogin } from "@web/service/login";
 
 export const UserLoginInfoContext = createContext<User.UserLoginInfo>({
   role: "visitor",

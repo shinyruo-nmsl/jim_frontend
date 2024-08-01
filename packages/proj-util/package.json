@@ -20,6 +20,10 @@
     "type": "git",
     "url": "git+https://github.com/shinyruo-nmsl/jim_frontend.git"
   },
+  "dependencies": {    
+    "pptxgenjs": "^3.12.0",
+    "pptxtojson": "^0.1.8"
+  },
   "scripts": {
     "test": "node ./__tests__/proj-util.test.js"
   },

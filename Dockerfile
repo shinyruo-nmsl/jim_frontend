@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install --workspace=packages/pc-proj --legacy-peer-deps
+RUN npm install --legacy-peer-deps
 
 RUN npm run build:pc
 

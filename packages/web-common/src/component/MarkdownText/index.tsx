@@ -3,8 +3,8 @@ import {
   copyText,
   htmlDecode,
   convertUpper2UnderLineCssKey,
-} from "../../util/html";
-import { createMarkdown } from "../../service/markdown";
+} from "@web/util/html";
+import { createMarkdown } from "@web/service/markdown";
 
 const markdown = createMarkdown();
 
@@ -64,7 +64,6 @@ function MarkdownText({
     const ref = markdownRef.current;
     if (ref) {
       const hljs = ref.querySelectorAll(".hljs") as NodeListOf<HTMLElement>;
-      console.log(hljs);
       hljs.forEach((hl) => {
         const copySvg = hl.querySelector("i.icon-copy") as HTMLElement;
         const okSvg = hl.querySelector("i.icon-ok") as HTMLElement;

@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
-import { useUserLoginInfo } from "../context/user";
-import { AuthToken } from "../util/http";
+import { useUserLoginInfo } from "@web/context/user";
+import { AuthToken } from "@web/util/http";
 
 export function exitLogin() {
   AuthToken.remove();
