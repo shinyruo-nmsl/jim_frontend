@@ -2,7 +2,6 @@ import { ChangeEvent, ClipboardEvent, KeyboardEvent } from "react";
 import { Input, Image } from "antd";
 import { CloseCircleFilled } from "@ant-design/icons";
 import { File as FileUtil } from "proj-util";
-import UPLOAD_SVG from "@/assets/upload.svg";
 
 export interface InputImg {
   file: File;
@@ -81,7 +80,7 @@ export function ImageTextArea({
 
         {!img && (
           <label htmlFor="upload" className="cursor-pointer w-full h-full">
-            <img src={UPLOAD_SVG} alt="upload" className="w-full h-full" />
+            <i className="icon-upload w-full h-full" />
             <input
               className="hidden"
               type="file"

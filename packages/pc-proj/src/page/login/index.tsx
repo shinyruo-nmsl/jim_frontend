@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { Button, Form, Input, Tabs, message } from "antd";
-import { navigate2Pre } from "@/util/navigate";
-import { useUserLoginDispatch } from "@/context/user";
+import { WebUtil, WebContext } from "web-common";
 
 import { login, regist } from "./service";
 
 import "./index.less";
+
+const {
+  User: { useUserLoginDispatch },
+} = WebContext;
+
+const {
+  Navigate: { navigate2Pre },
+} = WebUtil;
 
 function Login() {
   const loginDispatch = useUserLoginDispatch();

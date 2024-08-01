@@ -1,9 +1,11 @@
 import { Modal, Form, Input, message } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { User } from "proj-service";
-import { UserOutlined } from "@ant-design/icons";
-import { UserLoginDisplayInfo } from "@/global-type/user";
+import { WebType } from "web-common";
 import { CharacterAvatar } from "@/component/Avatar";
+
+type UserLoginDisplayInfo = WebType.User.UserLoginDisplayInfo;
 
 interface UserInfoDialogProps extends UserLoginDisplayInfo {
   visible: boolean;

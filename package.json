@@ -4,6 +4,10 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "dev:pc": "npm run dev --workspace=packages/pc-proj",
+    "build:pc": "npm run build --workspace=packages/pc-proj"
+  },
   "dependencies": {
     "pptxgenjs": "^3.12.0",
     "pptxtojson": "^0.1.8",

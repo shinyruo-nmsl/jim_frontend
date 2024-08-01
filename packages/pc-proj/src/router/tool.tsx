@@ -1,6 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
+import React from "react";
 import { AppstoreOutlined, MailOutlined } from "@ant-design/icons";
-import { SubRoute } from "@/global-type/router";
-import { AIChat, AIGNImage, AIPSImage, Admin } from "@/page/tool";
+import { WebType } from "web-common";
+
+type SubRoute = WebType.Router.SubRoute;
+
+const Admin = React.lazy(() => import("@/page/tool/admin"));
 
 const subRouter: SubRoute = {
   path: "tool",
@@ -8,27 +13,6 @@ const subRouter: SubRoute = {
   key: "tool",
   icon: <MailOutlined />,
   children: [
-    {
-      path: "chatgpt",
-      label: "ChatGPT",
-      key: "chatgpt",
-      icon: <AppstoreOutlined />,
-      element: <AIChat />,
-    },
-    {
-      path: "aiGNImage",
-      label: "AI生成图像",
-      key: "aiGNImage",
-      icon: <AppstoreOutlined />,
-      element: <AIGNImage />,
-    },
-    {
-      path: "aiPSImage",
-      label: "AI解析图像",
-      key: "aiPSImage",
-      icon: <AppstoreOutlined />,
-      element: <AIPSImage />,
-    },
     {
       path: "admin",
       label: "管理员",

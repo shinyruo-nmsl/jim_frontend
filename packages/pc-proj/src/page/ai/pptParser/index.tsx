@@ -1,14 +1,18 @@
 import { File } from "proj-util";
-import { createFetchStream } from "@/util/http";
-import { ChatGPT } from "proj-service";
+import { AITextGener } from "proj-service";
+import { WebUtil } from "web-common";
 
-function PPTParser() {
-  const testPPT = async (e) => {
+const {
+  Http: { createFetchStream },
+} = WebUtil;
+
+function PPTParserPage() {
+  const testPPT = async (e: any) => {
     const files = e.target.files;
     if (!files?.[0]) return;
     const ppt = await File.pptFile2Json(files[0]);
 
-    const stream = await createFetchStream(ChatGPT.URL.GetGPTContent, {
+    const stream = await createFetchStream(AITextGener.URL.GetGPTContent, {
       messages: [
         {
           role: "user",
@@ -30,4 +34,4 @@ function PPTParser() {
   );
 }
 
-export default PPTParser;
+export default PPTParserPage;

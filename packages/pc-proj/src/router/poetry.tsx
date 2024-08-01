@@ -1,6 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
+import React from "react";
 import { AppstoreOutlined, MailOutlined } from "@ant-design/icons";
-import { SubRoute } from "@/global-type/router";
-import { PoetrySearch } from "@/page/poetry";
+import { WebType } from "web-common";
+
+type SubRoute = WebType.Router.SubRoute;
+
+const PoetrySearch = React.lazy(() => import("@/page/poetry/search"));
 
 const subRouter: SubRoute = {
   path: "poetry",

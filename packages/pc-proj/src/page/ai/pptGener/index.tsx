@@ -1,14 +1,20 @@
-import { PPT } from "proj-util";
-import { AIPSImage } from "proj-service";
-import { createFetchStream } from "@/util/http";
-import ImageTextArea, { InputImg } from "@/component/TextArea";
-import { fetchUploadImgFile } from "@/api/file";
 import { useState } from "react";
-import { downloadFileFromBlob } from "@/util/html";
-import { extractOuterJson } from "proj-util/src/tool";
+import { PPT, Tool } from "proj-util";
+import { AIImgParser } from "proj-service";
+import { WebUtil, WebApi } from "web-common";
+import ImageTextArea, { InputImg } from "@/component/TextArea";
 
-function PPTGener() {
-  const prompt: AIPSImage.Prompt = {
+const {
+  File: { fetchUploadImgFile },
+} = WebApi;
+
+const {
+  Http: { createFetchStream },
+  Html: { downloadFileFromBlob },
+} = WebUtil;
+
+function PPTGenerPage() {
+  const prompt: AIImgParser.Prompt = {
     description:
       "请根据图片描述和下面TypeScript类型定义，生成一个类型为 PPTSource 的对象，并且只输出这个对象：```interface TableCell { text?: string; } type TableRow = TableCell[]; type TableElement = { type: 'table'; content: TableRow[]; }; type ShapeElement = { type: 'shape'; content: string; }; type TextElement = { type: 'text'; content: string; }; type SildeElement = TableElement | ShapeElement | TextElement; type PPTSlide = { elements: SildeElement[]; }; type PPTSource = { slides: PPTSlide[]; }```",
     imgUrl: "",
@@ -24,7 +30,7 @@ function PPTGener() {
     const { url } = await fetchUploadImgFile({
       imgFile: tempImg.file,
     });
-    const stream = await createFetchStream(AIPSImage.URL.ParseImage, {
+    const stream = await createFetchStream(AIImgParser.URL.ParseImage, {
       message: {
         description: prompt.description,
         imgUrl: url,
@@ -39,10 +45,12 @@ function PPTGener() {
     console.log("result:", result.trim());
     console.log(
       "JSON.parse(result.trim()):",
-      JSON.parse(extractOuterJson(result.trim()))
+      JSON.parse(Tool.extractOuterJson(result.trim()))
     );
 
-    const ppt = await PPT.genPPT(JSON.parse(extractOuterJson(result.trim())));
+    const ppt = await PPT.genPPT(
+      JSON.parse(Tool.extractOuterJson(result.trim()))
+    );
 
     console.log("ppt:", ppt);
 
@@ -73,4 +81,4 @@ function PPTGener() {
   );
 }
 
-export default PPTGener;
+export default PPTGenerPage;

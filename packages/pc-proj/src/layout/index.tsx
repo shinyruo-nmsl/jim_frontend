@@ -1,16 +1,19 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { MenuProps, message } from "antd";
-import { useState } from "react";
-
+import { Suspense, useState } from "react";
+import { WebType, WebContext } from "web-common";
 import Router from "@/router";
-import { UserLoginDisplayInfo } from "@/global-type/user";
-import { useUserLoginInfo, useUserLoginDispatch } from "@/context/user";
-
 import Menu from "./Menu";
 import Bar from "./Bar";
 import UserInfoDialog from "./UserInfoDialog";
 
 import "./layout.less";
+
+const {
+  User: { useUserLoginInfo, useUserLoginDispatch },
+} = WebContext;
+
+type UserLoginDisplayInfo = WebType.User.UserLoginDisplayInfo;
 
 export default function Layout() {
   const userInfo = useUserLoginInfo();
@@ -80,7 +83,9 @@ export default function Layout() {
           />
         )}
         <div className="content">
-          <Outlet />
+          <Suspense fallback={<></>}>
+            <Outlet />
+          </Suspense>
         </div>
       </div>
     </div>

@@ -1,5 +1,9 @@
 export default defineAppConfig({
-  pages: ["pages/chatgpt/index", "pages/aiImgParse/index", "pages/home/index"],
+  pages: [
+    "pages/aiTextGener/index",
+    "pages/aiImgParser/index",
+    "pages/home/index",
+  ],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#fff",
@@ -12,13 +16,13 @@ export default defineAppConfig({
     backgroundColor: "#e6f8fe",
     list: [
       {
-        pagePath: "pages/chatgpt/index",
+        pagePath: "pages/aiTextGener/index",
         text: "聊天机器人",
         iconPath: "./assets/ai-assistant.png",
         selectedIconPath: "./assets/ai-assistant-active.png",
       },
       {
-        pagePath: "pages/aiImgParse/index",
+        pagePath: "pages/aiImgParser/index",
         text: "图像分析",
         iconPath: "./assets/camera.png",
         selectedIconPath: "./assets/camera-active.png",

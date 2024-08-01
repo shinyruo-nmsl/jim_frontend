@@ -1,6 +1,7 @@
 import { Menu as _Menu, MenuProps as _MenuProps } from "antd";
+import { WebType } from "web-common";
 
-import { SubRoute } from "@/global-type/router";
+type SubRoute = WebType.Router.SubRoute;
 
 interface MenuProps {
   keys: string[];

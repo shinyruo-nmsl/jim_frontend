@@ -3,3 +3,4 @@ export * as Store from "./storage";
 export * as Http from "./http";
 export * as File from "./file";
 export * as PPT from "./ppt";
+export * as AI from "./ai";

@@ -94,23 +94,30 @@ function zipElement(element: Element): Record<string, any> | undefined {
 interface TableCell {
   text?: string;
 }
+
 type TableRow = TableCell[];
+
 type TableElement = {
   type: "table";
   content: TableRow[];
 };
+
 type ShapeElement = {
   type: "shape";
   content: string;
 };
+
 type TextElement = {
   type: "text";
   content: string;
 };
+
 type SildeElement = TableElement | ShapeElement | TextElement;
+
 type PPTSlide = {
   elements: SildeElement[];
 };
+
 type PPTSource = {
   slides: PPTSlide[];
 };

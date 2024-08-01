@@ -4,15 +4,13 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install --legacy-peer-deps
+RUN npm install --workspace=packages/pc-proj --legacy-peer-deps
+
+RUN npm run build:pc
 
 WORKDIR /app/packages/pc-proj
 
 COPY packages/pc-proj ./
-
-RUN npm install
-
-RUN npm run build
 
 FROM --platform=linux/amd64 nginx:latest
 

@@ -1,15 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 import { User } from "proj-service";
-
+import { WebType } from "web-common";
 import App from "@/App";
 import Login from "@/page/login";
-import { SubRoute } from "@/global-type/router";
 import PoetryRouter from "./poetry";
 import ToolRouter from "./tool";
 import AIRouter from "./ai";
 
+type SubRoute = WebType.Router.SubRoute;
+
 class Router {
-  static readonly subRouters = [PoetryRouter, ToolRouter, AIRouter];
+  static readonly subRouters = [AIRouter, PoetryRouter, ToolRouter];
   static readonly router = createBrowserRouter([
     {
       path: "/login",

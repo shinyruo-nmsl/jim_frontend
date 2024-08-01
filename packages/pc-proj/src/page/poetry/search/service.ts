@@ -1,5 +1,9 @@
-import { request } from "@/util/http";
 import { Poetry } from "proj-service";
+import { WebUtil } from "web-common";
+
+const {
+  Http: { request },
+} = WebUtil;
 
 export function fetchGetPoetriesByAuthorAndKeyWords(
   query: Poetry.AuthorAndKeyWordsPaginationQuery
