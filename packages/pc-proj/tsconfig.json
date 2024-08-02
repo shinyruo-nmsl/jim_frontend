@@ -23,7 +23,8 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"] // @将映射到src目录
+      "@/*": ["src/*"], // @将映射到src目录
+      "@web/*": ["../web-common/src/*"] // @将映射到src目录
     }
   },
   "include": ["src"],
