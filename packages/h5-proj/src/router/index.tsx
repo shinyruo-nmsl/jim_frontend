@@ -8,6 +8,8 @@ import AIRouter from "./ai";
 
 type SubRoute = WebType.Router.SubRoute;
 
+const isProd = import.meta.env.MODE === "production";
+
 const {
   Router: { Router },
 } = WebService;
@@ -34,7 +36,8 @@ const H5Router = new Router(
     },
     ...subRouters,
   ],
-  subRouters
+  subRouters,
+  { basename: isProd ? "/h5/" : "/" }
 );
 
 export default H5Router;

@@ -13,9 +13,10 @@ export class Router {
 
   constructor(
     readonly routers: RouteObject[],
-    readonly subRouters: SubRoute[]
+    readonly subRouters: SubRoute[],
+    opts: { basename?: string } = {}
   ) {
-    this.router = createBrowserRouter(this.routers);
+    this.router = createBrowserRouter(this.routers, opts);
   }
 
   private _getMenuRoutes(

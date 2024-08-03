@@ -5,6 +5,8 @@ import PoetryRouter from "./poetry";
 import ToolRouter from "./tool";
 import AIRouter from "./ai";
 
+const isProd = import.meta.env.MODE === "production";
+
 const {
   Router: { Router },
 } = WebService;
@@ -23,7 +25,8 @@ const PCRouter = new Router(
       children: subRouters,
     },
   ],
-  subRouters
+  subRouters,
+  { basename: isProd ? "/pc/" : "/" }
 );
 
 export default PCRouter;
