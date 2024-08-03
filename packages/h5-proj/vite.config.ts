@@ -5,8 +5,11 @@ import legacy from "@vitejs/plugin-legacy";
 import checker from "vite-plugin-checker";
 import eslintPlugin from "vite-plugin-eslint";
 
+const isProd = process.env.NODE_ENV === "production";
+
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: isProd ? "/h5/" : "/",
   plugins: [
     react(),
     {
