@@ -22,8 +22,8 @@ COPY packages/h5-proj ./
 
 FROM --platform=linux/amd64 nginx:latest
 
-RUN mkdir /app
-COPY --from=0 /app/packages/pc-proj/dist /app
+RUN mkdir /app-pc
+COPY --from=0 /app/packages/pc-proj/dist /app-pc
 
 RUN mkdir /app-h5
 COPY --from=0 /app/packages/h5-proj/dist /app-h5
