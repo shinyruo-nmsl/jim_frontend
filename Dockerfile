@@ -22,11 +22,11 @@ COPY packages/h5-proj ./
 
 FROM --platform=linux/amd64 nginx:latest
 
-RUN mkdir /app-pc
-COPY --from=0 /app/packages/pc-proj/dist /app-pc
+WORKDIR  /pc
+COPY /app/packages/pc-proj/dist ./
 
-RUN mkdir /app-h5
-COPY --from=0 /app/packages/h5-proj/dist /app-h5
+WORKDIR  /h5
+COPY /app/packages/h5-proj/dist ./
 
 
 COPY nginx.conf /etc/nginx/nginx.conf
