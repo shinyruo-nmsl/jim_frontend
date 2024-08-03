@@ -1,30 +1,34 @@
-import { useState } from "react";
 import { Button, Form, Input, Tabs, message } from "antd";
-import { WebUtil, WebContext } from "web-common";
-
-import { login, regist } from "./service";
+import { WebUtil, WebService } from "web-common";
 
 import "./index.less";
-
-const {
-  User: { useUserLoginDispatch },
-} = WebContext;
 
 const {
   Navigate: { navigate2Pre },
 } = WebUtil;
 
-function Login() {
-  const loginDispatch = useUserLoginDispatch();
+const {
+  Login: { useLogin },
+} = WebService;
 
-  const tabs = ["登录", "注册"];
-  const [curTabIndex, setCurTabIndex] = useState(0);
+function LoginPage() {
+  const {
+    loginName,
+    setLoginName,
+    loginPassword,
+    setLoginPassword,
+    login,
 
-  const [loginName, setLoginName] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+    registName,
+    setRegistName,
+    registPassword,
+    setRegistPassword,
+    regist,
 
-  const [registName, setRegistName] = useState("");
-  const [registPassword, setRegistPassword] = useState("");
+    tabs,
+    curTabIndex,
+    setCurTabIndex,
+  } = useLogin();
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -38,9 +42,8 @@ function Login() {
       return;
     }
     try {
-      await login({ account: loginName, password: loginPassword });
+      await login();
       messageApi.success("登录成功~");
-      await loginDispatch({ type: "refresh" });
       navigate2Pre();
     } catch (err: any) {
       messageApi.error(err.message);
@@ -48,16 +51,8 @@ function Login() {
   };
 
   const hanndleClickRegistComfirmButton = async () => {
-    if (!registName) {
-      message.error("用户名为空~");
-      return;
-    }
-    if (!registPassword) {
-      message.error("密码为空~");
-      return;
-    }
     try {
-      await regist({ account: registName, password: registPassword });
+      await regist();
       messageApi.success("注册成功");
       setCurTabIndex(0);
     } catch (err: any) {
@@ -163,4 +158,4 @@ function BaseForm({
   );
 }
 
-export default Login;
+export default LoginPage;

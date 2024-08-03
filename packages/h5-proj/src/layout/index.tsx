@@ -1,9 +1,10 @@
-import { NavBar, SideBar } from "antd-mobile";
-import { MoreOutline } from "antd-mobile-icons";
+import { NavBar, SideBar, Dialog } from "antd-mobile";
+import { MoreOutline, ExclamationCircleFill } from "antd-mobile-icons";
 import Router from "@/router";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { WebContext, WebService } from "web-common";
+import { Http } from "proj-util";
 
 const {
   User: { useUserLoginInfo },
@@ -28,6 +29,34 @@ function Layout() {
   );
 
   const title = curRouteTrace[curRouteTrace.length - 1]?.label;
+
+  useEffect(() => {
+    const handler = () => {
+      Dialog.alert({
+        header: (
+          <ExclamationCircleFill
+            style={{
+              fontSize: 64,
+              color: "var(--adm-color-warning)",
+            }}
+          />
+        ),
+        content: (
+          <>
+            <div>使用此功能需要登录</div>
+          </>
+        ),
+        onConfirm: () => {
+          navigate("/login");
+        },
+      });
+    };
+
+    Http.HttpEventEmitter.registHandler("code_401", handler);
+
+    return () => Http.HttpEventEmitter.removeHandler("code_401", handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex flex-col w-[100vw] h-[100vh]">

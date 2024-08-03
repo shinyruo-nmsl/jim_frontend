@@ -9,12 +9,14 @@ import { User } from "proj-service";
 import { SubRoute } from "@web/type/router";
 
 export class Router {
+  readonly router: ReturnType<typeof createBrowserRouter>;
+
   constructor(
     readonly routers: RouteObject[],
     readonly subRouters: SubRoute[]
-  ) {}
-
-  readonly router = createBrowserRouter(this.routers);
+  ) {
+    this.router = createBrowserRouter(this.routers);
+  }
 
   private _getMenuRoutes(
     _children: SubRoute[],
