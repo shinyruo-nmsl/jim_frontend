@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Model } from "proj-type";
 
+export enum URL {
+  GET_POETRIES_BY_AUTHOR_AND_KEYWORDS = "/poetry/getPoetriesByAuthorAndKeywords",
+}
+
 export interface AuthorAndKeyWordsQuery {
   keyword1: string;
   keyword2: string;
@@ -10,12 +14,14 @@ export interface AuthorAndKeyWordsQuery {
 export type AuthorAndKeyWordsPaginationQuery = AuthorAndKeyWordsQuery &
   Model.PaginationQuery;
 
-export type PoetryPagination = Model.Pagination<{
+export type PoetryData = {
   id: number;
   title: string;
   author: string;
   content: string;
-}>;
+};
+
+export type PoetryPagination = Model.Pagination<PoetryData>;
 
 export function usePoetry(
   searchApi: (
@@ -36,6 +42,8 @@ export function usePoetry(
     data: [],
   });
 
+  const hasMore = poetryPagination.total > (pageNo + 1) * limit;
+
   const changeQuery = (key: keyof AuthorAndKeyWordsQuery, value: string) => {
     setQuery({ ...query, [key]: value });
   };
@@ -46,11 +54,12 @@ export function usePoetry(
     }
     setPageNo(0);
     const data = await searchApi({
-      pageNo,
+      pageNo: 0,
       limit,
       ...query,
     });
     setPoetryPagination(data);
+    return data;
   };
 
   const changePage = async (no: number, size: number) => {
@@ -62,6 +71,7 @@ export function usePoetry(
       ...query,
     });
     setPoetryPagination(data);
+    return data;
   };
 
   return {
@@ -70,6 +80,7 @@ export function usePoetry(
     limit,
     pageNo,
     poetryPagination,
+    hasMore,
     search,
     changePage,
   };

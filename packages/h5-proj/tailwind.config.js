@@ -82,6 +82,10 @@ export default {
           return acc;
         }, {}),
       },
+      zIndex: {
+        prioty: 9999,
+        modal: 9998,
+      },
     },
   },
   plugins: [],

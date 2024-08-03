@@ -1,12 +1,6 @@
 import { CSSProperties, useEffect, useRef, useState } from "react";
-import {
-  copyText,
-  htmlDecode,
-  convertUpper2UnderLineCssKey,
-} from "@web/util/html";
+import { copyText, htmlDecode } from "@web/util/html";
 import { createMarkdown } from "@web/service/markdown";
-
-const markdown = createMarkdown();
 
 function MarkdownText({
   content,
@@ -17,7 +11,9 @@ function MarkdownText({
   hlStyle?: CSSProperties;
   iconStyle?: CSSProperties;
 }) {
-  const markdownRef = useRef<HTMLDivElement>(null);
+  const markdownDomRef = useRef<HTMLDivElement>(null);
+
+  const markdownRef = useRef(createMarkdown({ hlStyle, iconStyle }));
 
   const [showCopy, setShowCopy] = useState(true);
 
@@ -30,7 +26,7 @@ function MarkdownText({
   };
 
   useEffect(() => {
-    const ref = markdownRef.current;
+    const ref = markdownDomRef.current;
     let callback: (e: Event) => void;
     if (ref) {
       callback = (e: Event) => {
@@ -60,31 +56,6 @@ function MarkdownText({
     };
   }, []);
 
-  useEffect(() => {
-    const ref = markdownRef.current;
-    if (ref) {
-      const hljs = ref.querySelectorAll(".hljs") as NodeListOf<HTMLElement>;
-      hljs.forEach((hl) => {
-        const copySvg = hl.querySelector("i.icon-copy") as HTMLElement;
-        const okSvg = hl.querySelector("i.icon-ok") as HTMLElement;
-        const hlStyleStr = Object.keys(hlStyle).reduce(
-          (acc, k) =>
-            `${acc}${convertUpper2UnderLineCssKey(k)}: ${hlStyle[k as keyof CSSProperties]}; `,
-          ""
-        );
-        const iconStyleStr = Object.keys(iconStyle).reduce(
-          (acc, k) =>
-            `${acc}${convertUpper2UnderLineCssKey(k)}: ${iconStyle[k as keyof CSSProperties]}; `,
-          ""
-        );
-        copySvg.style.cssText = `position: absolute; ${iconStyleStr}`;
-        okSvg.style.cssText = `position: absolute; display: none; ${iconStyleStr}`;
-        hl.style.cssText = `position: relative; ${hlStyleStr}`;
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className="relative">
       <div
@@ -95,9 +66,11 @@ function MarkdownText({
         {!showCopy && <i className="icon-ok text-red w-[20px] h-[20px]"></i>}
       </div>
       <div
-        ref={markdownRef}
+        ref={markdownDomRef}
         className="w-fit max-w-[800px] bg-[azure] border border-solid border-[blue] rounded-[5px] p-[12px] text-[12px]/[16px] break-all"
-        dangerouslySetInnerHTML={{ __html: markdown.render(content) }}
+        dangerouslySetInnerHTML={{
+          __html: markdownRef.current.render(content),
+        }}
       ></div>
     </div>
   );

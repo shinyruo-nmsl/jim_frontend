@@ -1,12 +1,8 @@
-import { useNavigate } from "react-router";
-import { useEffect } from "react";
-
-import { Http } from "proj-util";
-
+import Layout from "./layout";
 import "./App.css";
 
 function App() {
-  return <div>h5</div>;
+  return <Layout />;
 }
 
 export default App;

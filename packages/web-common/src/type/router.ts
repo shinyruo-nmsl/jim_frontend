@@ -2,6 +2,7 @@ import { NonIndexRouteObject } from "react-router-dom";
 import { User } from "proj-service";
 
 type _SubRoute = {
+  path: string;
   label: string;
   key: string;
   show?: boolean;

@@ -8,7 +8,9 @@
     "dev:pc": "npm run dev --workspace=packages/pc-proj",
     "build:pc": "npm run build --workspace=packages/pc-proj",
     "dev:mini": "npm run dev:weapp --workspace=packages/mini-proj",
-    "build:mini": "npm run build:weapp --workspace=packages/mini-proj"
+    "build:mini": "npm run build:weapp --workspace=packages/mini-proj",
+    "dev:h5": "npm run dev --workspace=packages/h5-proj",
+    "build:h5": "npm run build --workspace=packages/h5-proj"
   },
   "repository": {
     "type": "git",

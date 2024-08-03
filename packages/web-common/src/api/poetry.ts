@@ -1,16 +1,12 @@
 import { Poetry } from "proj-service";
-import { WebUtil } from "web-common";
-
-const {
-  Http: { request },
-} = WebUtil;
+import { request } from "@web/util/http";
 
 export function fetchGetPoetriesByAuthorAndKeyWords(
   query: Poetry.AuthorAndKeyWordsPaginationQuery
 ) {
   return request<Poetry.PoetryPagination>({
     method: "get",
-    url: "/poetry/getPoetriesByAuthorAndKeyWords",
+    url: Poetry.URL.GET_POETRIES_BY_AUTHOR_AND_KEYWORDS,
     params: { ...query },
   });
 }

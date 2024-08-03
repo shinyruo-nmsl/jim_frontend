@@ -1,7 +1,7 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { MenuProps, message } from "antd";
 import { Suspense, useState } from "react";
-import { WebType, WebContext } from "web-common";
+import { WebType, WebContext, WebService } from "web-common";
 import Router from "@/router";
 import Menu from "./Menu";
 import Bar from "./Bar";
@@ -13,6 +13,10 @@ const {
   User: { useUserLoginInfo, useUserLoginDispatch },
 } = WebContext;
 
+const {
+  Router: { useUserRouter },
+} = WebService;
+
 type UserLoginDisplayInfo = WebType.User.UserLoginDisplayInfo;
 
 export default function Layout() {
@@ -20,20 +24,11 @@ export default function Layout() {
   const loginDispatch = useUserLoginDispatch();
 
   // 菜单功能
-  const menuItems = Router.getMenuRoutes(userInfo.role);
-  const { pathname } = useLocation();
-  const naigate = useNavigate();
-
-  const [trace, setTrace] = useState(
-    Router.search(pathname.split("/").filter(Boolean), "path")
-  );
-  const keys = trace.map((r) => r.key);
-  const labels = trace.map((r) => r.label);
+  const { menuItems, curRouteTrace, navigateSubRoute, navigate } =
+    useUserRouter(Router, userInfo.role);
 
   const handleClickMenu: MenuProps["onClick"] = (e) => {
-    const trace = Router.search(e.keyPath.reverse(), "key");
-    setTrace(trace);
-    naigate(`/${trace.map((r) => r.path).join("/")}`);
+    navigateSubRoute(e.keyPath.reverse());
   };
 
   // layout-bar功能
@@ -62,14 +57,18 @@ export default function Layout() {
     <div className="layout-page">
       <div className="aside">
         <div className="logo">{/* <AppleOutlined /> */}</div>
-        <Menu keys={keys} menuItems={menuItems} onClickMenu={handleClickMenu} />
+        <Menu
+          keys={curRouteTrace.map((item) => item.key)}
+          menuItems={menuItems}
+          onClickMenu={handleClickMenu}
+        />
       </div>
       <div className="main">
         <Bar
-          routerTrace={labels}
+          routerTrace={curRouteTrace.map((item) => item.label)}
           userInfo={userInfo}
           onClickChangeUserInfoMenu={() => setUserInfoDialogVisible(true)}
-          onClick2LoginMenu={() => naigate("/login")}
+          onClick2LoginMenu={() => navigate("/login")}
           onClickExitLoginMenu={hanleClickExitLoginMenu}
         />
         {userInfoDialogVisible && (
