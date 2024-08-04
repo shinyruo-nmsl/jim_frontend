@@ -24,6 +24,10 @@ const PCRouter = new Router(
       element: <App />,
       children: subRouters,
     },
+    {
+      path: "*",
+      element: <App />,
+    },
   ],
   subRouters,
   { basename: isProd ? "/pc/" : "/" }
