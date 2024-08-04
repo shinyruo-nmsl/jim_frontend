@@ -59,7 +59,7 @@ function Layout() {
   }, []);
 
   return (
-    <div className="flex flex-col w-[100vw] h-[100vh]">
+    <div className="flex flex-col w-full h-full">
       <NavBar
         className="w-full flex-none"
         right={right}
@@ -80,6 +80,7 @@ function Layout() {
           className="fixed right-0 top-0 h-full w-[40%] z-prioty"
           activeKey={curRouteTrace.map((item) => item.path).join("/")}
           onChange={(key) => {
+            setSideBarVisible(false);
             navigateSubRoute(key.split("/"), "path");
           }}
         >

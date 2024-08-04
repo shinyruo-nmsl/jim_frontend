@@ -8,11 +8,11 @@ import AIRouter from "./ai";
 
 type SubRoute = WebType.Router.SubRoute;
 
-const isProd = import.meta.env.MODE === "production";
-
 const {
   Router: { Router },
 } = WebService;
+
+const isProd = import.meta.env.MODE === "production";
 
 const subRouters: SubRoute[] = [
   {

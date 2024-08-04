@@ -8,7 +8,6 @@ import {
   Chart,
   Diagram,
 } from "pptxtojson";
-import pptxgen from "pptxgenjs";
 import { extractContentFromRichHtmlText as t } from "./tool";
 
 export type PPTJson = Awaited<ReturnType<typeof parse>>;
@@ -123,6 +122,7 @@ type PPTSource = {
 };
 
 export async function genPPT(source: PPTSource) {
+  const pptxgen = (await import("pptxgenjs")).default;
   const pres = new pptxgen();
   source.slides.forEach((slideSource) => {
     genSlide(pres, slideSource);
@@ -130,14 +130,14 @@ export async function genPPT(source: PPTSource) {
   return pres.write() as Promise<Blob>;
 }
 
-function genSlide(pres: pptxgen, slideSource: PPTSlide) {
+function genSlide(pres: any, slideSource: PPTSlide) {
   const slide = pres.addSlide();
   slideSource.elements.forEach((element) => {
     genElement(slide, element);
   });
 }
 
-function genElement(slide: pptxgen.Slide, element: SildeElement) {
+function genElement(slide: any, element: SildeElement) {
   switch (element.type) {
     case "shape":
       return slide.addText(element.content, { shape: "rect" });
