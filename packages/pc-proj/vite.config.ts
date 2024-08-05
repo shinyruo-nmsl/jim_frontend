@@ -54,6 +54,9 @@ export default defineConfig({
           if (id.includes("highlight.js")) {
             return "highlight";
           }
+          if (id.includes("markdown-it")) {
+            return "markdown-it";
+          }
           if (id.includes("pptxgenjs")) {
             return "pptxgenjs";
           }
