@@ -1,4 +1,4 @@
-import { File } from "proj-util";
+import { pptFile2Json } from "proj-util/src/ppt";
 import { AITextGener } from "proj-service";
 import { WebUtil } from "web-common";
 
@@ -10,7 +10,7 @@ function PPTParserPage() {
   const testPPT = async (e: any) => {
     const files = e.target.files;
     if (!files?.[0]) return;
-    const ppt = await File.pptFile2Json(files[0]);
+    const ppt = await pptFile2Json(files[0]);
 
     const stream = await createFetchStream(AITextGener.URL.GetGPTContent, {
       messages: [

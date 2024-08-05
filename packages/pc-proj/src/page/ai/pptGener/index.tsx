@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { PPT, Tool } from "proj-util";
+import { Tool } from "proj-util";
+import { genPPT } from "proj-util/src/ppt";
 import { AIImgParser } from "proj-service";
 import { WebUtil, WebApi } from "web-common";
 import ImageTextArea, { InputImg } from "@/component/TextArea";
@@ -48,9 +49,7 @@ function PPTGenerPage() {
       JSON.parse(Tool.extractOuterJson(result.trim()))
     );
 
-    const ppt = await PPT.genPPT(
-      JSON.parse(Tool.extractOuterJson(result.trim()))
-    );
+    const ppt = await genPPT(JSON.parse(Tool.extractOuterJson(result.trim())));
 
     console.log("ppt:", ppt);
 

@@ -39,6 +39,18 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          if (
+            id.includes("vite/preload-helper") ||
+            id.includes("vite/modulepreload-polyfill")
+          ) {
+            return "preloadHelper";
+          }
+          if (id.includes("plugin-vue:export-helper")) {
+            return "exportHelper";
+          }
+          if (id.includes("commonjsHelpers.js")) {
+            return "commonjsHelper";
+          }
           if (id.includes("highlight.js")) {
             return "highlight";
           }
