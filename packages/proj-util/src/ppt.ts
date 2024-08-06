@@ -8,7 +8,11 @@ import {
   Chart,
   Diagram,
 } from "pptxtojson";
-import { extractContentFromRichHtmlText as t } from "./tool";
+import pptxgen from "pptxgenjs";
+import {
+  extractContentFromRichHtmlText as t,
+  createPromiseResolvers,
+} from "./tool";
 
 export type PPTJson = Awaited<ReturnType<typeof parse>>;
 
@@ -122,7 +126,6 @@ type PPTSource = {
 };
 
 export async function genPPT(source: PPTSource) {
-  const pptxgen = (await import("pptxgenjs")).default;
   const pres = new pptxgen();
   source.slides.forEach((slideSource) => {
     genSlide(pres, slideSource);
@@ -146,4 +149,16 @@ function genElement(slide: any, element: SildeElement) {
     case "table":
       return slide.addTable(element.content);
   }
+}
+
+export async function pptFile2Json(pptFile: File) {
+  const { promise, resolve } = createPromiseResolvers();
+  const reader = new FileReader();
+  reader.readAsArrayBuffer(pptFile);
+  reader.onload = async (e) => {
+    const pptJson = await parse(e.target!.result as ArrayBuffer);
+    resolve(zipPPTJson(pptJson));
+  };
+
+  return promise;
 }

@@ -1,7 +1,3 @@
-import { parse } from "pptxtojson";
-import { createPromiseResolvers } from "./tool";
-import { zipPPTJson } from "./ppt";
-
 export enum URL {
   UPLOAD_BASE64_IMAGE = "/file/uploadBase64Img",
   UPLOAD_IMG_FILE = "/file/uploadImgFile",
@@ -35,16 +31,4 @@ export function base64ToFile(base64: string, filename: string): File {
   }
 
   return new File([u8arr], filename, { type: mime });
-}
-
-export async function pptFile2Json(pptFile: File) {
-  const { promise, resolve } = createPromiseResolvers();
-  const reader = new FileReader();
-  reader.readAsArrayBuffer(pptFile);
-  reader.onload = async (e) => {
-    const pptJson = await parse(e.target!.result as ArrayBuffer);
-    resolve(zipPPTJson(pptJson));
-  };
-
-  return promise;
 }

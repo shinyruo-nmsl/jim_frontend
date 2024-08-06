@@ -1,10 +1,12 @@
 import { CSSProperties } from "react";
 import MarkDown from "markdown-it";
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark-reasonable.css";
 import { convertUpper2UnderLineCssKey, htmlEncode } from "@web/util/html";
 
 let markdown: MarkDown;
 
-export async function createMarkdown({
+export function createMarkdown({
   hlStyle = {},
   iconStyle = {},
 }: {
@@ -14,11 +16,6 @@ export async function createMarkdown({
   if (markdown) {
     return markdown;
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, hljs] = await Promise.all([
-    (await import("highlight.js/styles/atom-one-dark-reasonable.css")).default,
-    (await import("highlight.js")).default,
-  ]);
 
   markdown = MarkDown({
     highlight: function (str: string, lang: string) {
