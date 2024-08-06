@@ -10,7 +10,9 @@
     "dev:mini": "npm run dev:weapp --workspace=packages/mini-proj",
     "build:mini": "npm run build:weapp --workspace=packages/mini-proj",
     "dev:h5": "npm run dev --workspace=packages/h5-proj",
-    "build:h5": "npm run build --workspace=packages/h5-proj"
+    "build:h5": "npm run build --workspace=packages/h5-proj",
+    "dev:test": "npm run dev --workspace=packages/test-proj",
+    "build:test": "npm run build --workspace=packages/test-proj"
   },
   "repository": {
     "type": "git",
