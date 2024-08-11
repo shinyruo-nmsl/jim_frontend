@@ -3,7 +3,8 @@
 const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig = {
-  basePath: isProd ? "/ssr/" : "/",
+  basePath: isProd ? "/ssr" : "/",
+  assetPrefix: isProd ? "/ssr" : "/",
 };
 
 export default nextConfig;
