@@ -1,0 +1,17 @@
+FROM --platform=linux/amd64 node:latest
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm install --legacy-peer-deps
+
+RUN npm run build:ssr
+
+WORKDIR /app/packages/ssr-proj
+
+COPY packages/ssr-proj ./
+
+EXPOSE 3000
+
+CMD [ "npm", "run", "start"  ]
