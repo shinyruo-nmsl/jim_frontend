@@ -12,6 +12,7 @@ WORKDIR /app/packages/ssr-proj
 
 COPY packages/ssr-proj ./
 
+
 EXPOSE 3000
 
-CMD [ "npm", "run", "start"  ]
+CMD [ "npm", "run", "start" ]
