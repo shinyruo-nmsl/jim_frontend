@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "ssr"]
   pull_request:
-    branches: ["main"]
+    branches: ["main", "ssr"]
 
 jobs:
   build:
@@ -23,12 +23,27 @@ jobs:
           registry: registry.cn-hangzhou.aliyuncs.com
           username: ${{ secrets.ALI_HUB_USR_NAME }}
           password: ${{ secrets.ALI_HUB_PASSWORD }}
+      - name: Determine Dockerfile
+        id: vars
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "DOCKERFILE=Dockerfile" >> $GITHUB_ENV
+            echo "TAG=poetry_frontend" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/ssr" ]]; then
+            echo "DOCKERFILE=Dockerfile.ssr" >> $GITHUB_ENV
+            echo "TAG=jim_ssr" >> $GITHUB_ENV
+          else
+            echo "Unsupported branch"
+            exit 1
+          fi
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: ${{ env.DOCKERFILE }}
           push: true
-          tags: registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest
+          tags: registry.cn-hangzhou.aliyuncs.com/jim_hub/${{ env.TAG }}:latest
+
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -36,10 +51,21 @@ jobs:
           username: ${{ secrets.ALIYUN_USER_NAME }}
           password: ${{ secrets.ALIYUN_PASSWORD }}
           script: |
-            docker stop poetry_frotend
-            docker rm poetry_frotend
-            docker pull registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest 
-            docker run -d -p 80:80 -p 443:443 --name poetry_frotend \
-              -v /usr/local/nginx/ssl/www.jimvivenbridge.fun.key:/etc/nginx/ssl/www.jimvivenbridge.fun.key \
-              -v /usr/local/nginx/ssl/www.jimvivenbridge.fun.pem:/etc/nginx/ssl/www.jimvivenbridge.fun.pem \
-              registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest
+            if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+              docker stop poetry_frotend
+              docker rm poetry_frotend
+              docker pull registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest 
+              docker run -d -p 80:80 -p 443:443 --name poetry_frotend \
+                -v /usr/local/nginx/ssl/www.jimvivenbridge.fun.key:/etc/nginx/ssl/www.jimvivenbridge.fun.key \
+                -v /usr/local/nginx/ssl/www.jimvivenbridge.fun.pem:/etc/nginx/ssl/www.jimvivenbridge.fun.pem \
+                registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest
+            elif [[ "${{ github.ref }}" == "refs/heads/ssr" ]]; then
+              docker stop jim_ssr
+              docker rm jim_ssr
+              docker pull registry.cn-hangzhou.aliyuncs.com/jim_hub/jim_ssr:latest 
+              docker run -d -p 3000:3000 --name jim_ssr \
+                registry.cn-hangzhou.aliyuncs.com/jim_hub/jim_ssr:latest
+            else
+              echo "Unsupported branch"
+              exit 1
+            fi

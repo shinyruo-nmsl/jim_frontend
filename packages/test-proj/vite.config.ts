@@ -1,33 +1,34 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import legacy from "@vitejs/plugin-legacy";
-import checker from "vite-plugin-checker";
 import eslintPlugin from "vite-plugin-eslint";
-import { visualizer } from "rollup-plugin-visualizer";
-
-const isProd = process.env.NODE_ENV === "production";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: isProd ? "./" : "/",
   plugins: [
-    react(),
-    visualizer({
-      open: true,
+    // swc.vite({
+    //   jsc: {
+    //     parser: {
+    //       syntax: "typescript",
+    //       decorators: true,
+    //     },
+    //     transform: {
+    //       decoratorMetadata: true,
+    //       decoratorVersion: "2022-03",
+    //       react: {
+    //         runtime: "automatic",
+    //       },
+    //     },
+    //   },
+    // }),
+    react({
+      tsDecorators: true,
     }),
-    {
-      ...legacy({
-        targets: ["defaults", "not IE 11"],
-      }),
-      apply: "build",
-    },
-    // checker({ typescript: true }),
     eslintPlugin(),
   ],
+  // esbuild: { target: "es2022" },
   server: {
     port: 8888,
-    host: "0.0.0.0",
   },
   resolve: {
     alias: {
@@ -40,11 +41,23 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes("markdown-it")) {
-            return "markdown-it";
+          if (
+            id.includes("vite/preload-helper") ||
+            id.includes("vite/modulepreload-polyfill")
+          ) {
+            return "preloadHelper";
+          }
+          if (id.includes("plugin-vue:export-helper")) {
+            return "exportHelper";
+          }
+          if (id.includes("commonjsHelpers.js")) {
+            return "commonjsHelper";
           }
           if (id.includes("highlight.js")) {
             return "highlight";
+          }
+          if (id.includes("markdown-it")) {
+            return "markdown-it";
           }
           if (id.includes("pptxgenjs")) {
             return "pptxgenjs";
@@ -62,11 +75,9 @@ export default defineConfig({
       compress: {
         drop_console: true, // 删除所有console语句
         pure_funcs: ["console.log"], // 删除console.log语句
+        unused: true,
       },
     },
     assetsInlineLimit: 0, // 设置为 0 禁用内联
-
-    minify: false, // 禁用压缩
-    sourcemap: true, // 生成 source map 文件，便于调试
   },
 });

@@ -11,6 +11,9 @@
     "build:mini": "npm run build:weapp --workspace=packages/mini-proj",
     "dev:h5": "npm run dev --workspace=packages/h5-proj",
     "build:h5": "npm run build --workspace=packages/h5-proj",
+    "dev:ssr": "npm run dev --workspace=packages/ssr-proj",
+    "build:ssr": "npm run build --workspace=packages/ssr-proj",
+    "start:ssr": "npm run start --workspace=packages/ssr-proj",
     "dev:test": "npm run dev --workspace=packages/test-proj",
     "build:test": "npm run build --workspace=packages/test-proj"
   },
@@ -19,8 +22,15 @@
     "url": "git+https://github.com/shinyruo-nmsl/jim_frontend.git"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
     "eslint-plugin-prettier": "^5.1.3",
     "lerna": "^8.1.3",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "unplugin-swc": "^1.5.1",
+    "vite-plugin-babel": "^1.2.0"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.18.6"
   }
 }
