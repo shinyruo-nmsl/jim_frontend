@@ -14,9 +14,9 @@ class IOC {
     Shuriken,
   };
 
-  static get<T extends MemberKey>(
+  static get<T extends MemberKey, R = undefined>(
     key: T
-  ): InferInstanceType<(typeof IOC.members)[T]> {
+  ): R extends undefined ? InferInstanceType<(typeof IOC.members)[T]> : R {
     return IOC.container.get(key);
   }
 
@@ -29,5 +29,11 @@ class IOC {
 }
 
 IOC.init();
+
+
+const a = IOC.get('Ninja');
+
+
+
 
 export default IOC;
