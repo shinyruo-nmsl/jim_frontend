@@ -16,12 +16,9 @@ export default defineConfig({
     visualizer({
       open: true,
     }),
-    {
-      ...legacy({
-        targets: ["defaults", "not IE 11"],
-      }),
-      apply: "build",
-    },
+    legacy({
+      targets: ["defaults", "not IE 11"],
+    }),
     // checker({ typescript: true }),
     eslintPlugin(),
   ],
