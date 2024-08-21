@@ -1,13 +1,7 @@
-import { WebUtil, WebService } from "web-common";
+import { navigate2Pre } from "@web/util/navigate";
+import { useLogin } from "@web/service/login";
 import { Tabs, Form, Button, Input, Toast } from "antd-mobile";
 
-const {
-  Navigate: { navigate2Pre },
-} = WebUtil;
-
-const {
-  Login: { useLogin },
-} = WebService;
 
 function LoginPage() {
   const {

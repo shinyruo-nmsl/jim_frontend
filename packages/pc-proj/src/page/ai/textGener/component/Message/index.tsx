@@ -1,10 +1,9 @@
 import { Spin } from "antd";
 import { AITextGener } from "proj-service";
-import { WebComponent } from "web-common";
+import { MarkdownText } from "@web/component";
 import { CharacterAvatar, UserAvatar } from "@/component/Avatar";
 import "./index.less";
 
-const { MarkdownText } = WebComponent;
 
 function UserMessageBox({ content }: { content: string }) {
   return (

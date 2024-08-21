@@ -1,9 +1,8 @@
 import { Spin } from "antd";
 import { AIImgParser } from "proj-service";
-import { WebComponent } from "web-common";
+import { MarkdownText } from "@web/component";
 import { CharacterAvatar, UserAvatar } from "@/component/Avatar";
 
-const { MarkdownText } = WebComponent;
 
 export function UserMessageBox({ content }: { content: AIImgParser.Prompt }) {
   return (

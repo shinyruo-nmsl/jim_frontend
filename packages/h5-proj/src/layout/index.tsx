@@ -3,16 +3,11 @@ import { MoreOutline, ExclamationCircleFill } from "antd-mobile-icons";
 import Router from "@/router";
 import { Suspense, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { WebContext, WebService } from "web-common";
-import { Http } from "proj-util";
+import { useUserLoginInfo } from "@web/context/user";
+import { useUserRouter } from "@web/service/router";
+import { HttpEventEmitter } from "@util/http";
 
-const {
-  User: { useUserLoginInfo },
-} = WebContext;
 
-const {
-  Router: { useUserRouter },
-} = WebService;
 
 function Layout() {
   const userInfo = useUserLoginInfo();
@@ -52,9 +47,9 @@ function Layout() {
       });
     };
 
-    Http.HttpEventEmitter.registHandler("code_401", handler);
+    HttpEventEmitter.registHandler("code_401", handler);
 
-    return () => Http.HttpEventEmitter.removeHandler("code_401", handler);
+    return () => HttpEventEmitter.removeHandler("code_401", handler);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -33,6 +33,9 @@ export default defineConfig({
     alias: {
       "@": resolve(__dirname, "src"),
       "@web": resolve(__dirname, "../web-common/src"),
+      "@util": resolve(__dirname, "../proj-util/src"),
+      "@type": resolve(__dirname, "../proj-type/src"),
+      "@service": resolve(__dirname, "../proj-service/src"),
     },
     extensions: [".js", ".json", ".ts", ".tsx", ".jsx"],
   },

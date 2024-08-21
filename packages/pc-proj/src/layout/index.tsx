@@ -1,7 +1,9 @@
 import { Outlet } from "react-router-dom";
 import { MenuProps, message } from "antd";
 import { Suspense, useState } from "react";
-import { WebType, WebContext, WebService } from "web-common";
+import { WebType } from "web-common";
+import { useUserLoginInfo, useUserLoginDispatch } from "@web/context/user";
+import { useUserRouter } from "@web/service/router";
 import Router from "@/router";
 import Menu from "./Menu";
 import Bar from "./Bar";
@@ -9,13 +11,7 @@ import UserInfoDialog from "./UserInfoDialog";
 
 import "./layout.less";
 
-const {
-  User: { useUserLoginInfo, useUserLoginDispatch },
-} = WebContext;
 
-const {
-  Router: { useUserRouter },
-} = WebService;
 
 type UserLoginDisplayInfo = WebType.User.UserLoginDisplayInfo;
 

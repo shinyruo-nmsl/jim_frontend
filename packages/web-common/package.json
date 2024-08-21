@@ -35,5 +35,7 @@
   "bugs": {
     "url": "https://github.com/shinyruo-nmsl/jim_frontend/issues"
   },
-  "sideEffects": false
+  "sideEffects": {
+    "*.css": true
+  }
 }
