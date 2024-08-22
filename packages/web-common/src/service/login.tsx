@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useUserLoginDispatch, useUserLoginInfo } from "@web/context/user";
 import { AuthToken } from "@web/util/http";
-import { fetchLogin } from "@web/api/login";
+import { fetchLogin, fetchRegist } from "@web/api/login";
 
 export function exitLogin() {
   AuthToken.remove();
@@ -57,7 +57,7 @@ export function useLogin() {
       throw new Error("密码为空~");
     }
     try {
-      await fetchLogin({ account: registName, password: registPassword });
+      await fetchRegist({ account: registName, password: registPassword });
       setCurTabIndex(0);
     } catch (err: any) {
       throw new Error(err.message);
