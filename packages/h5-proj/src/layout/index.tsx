@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom";
 import { useUserLoginInfo } from "@web/context/user";
 import { useUserRouter } from "@web/service/router";
 import { HttpEventEmitter } from "@util/http";
+import Modal from "@/component/Modal";
 
 
 
@@ -70,7 +71,7 @@ function Layout() {
           <Outlet />
         </Suspense>
       </div>
-      {sideBarVisible && (
+      <Modal visible={sideBarVisible} onClickMask={() => setSideBarVisible(false)}>
         <SideBar
           className="fixed right-0 top-0 h-full w-[40%] z-prioty"
           activeKey={curRouteTrace.map((item) => item.path).join("/")}
@@ -83,7 +84,8 @@ function Layout() {
             <SideBar.Item key={item.paths.join("/")} title={item.label} />
           ))}
         </SideBar>
-      )}
+      </Modal>
+
     </div>
   );
 }
