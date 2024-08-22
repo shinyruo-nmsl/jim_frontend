@@ -42,6 +42,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          console.log(id);
           if (
             id.includes("vite/preload-helper") ||
             id.includes("vite/modulepreload-polyfill")
@@ -65,6 +66,9 @@ export default defineConfig({
           }
           if (id.includes("pptxtojson")) {
             return "pptxtojson";
+          }
+          if (id.includes("antd")) {
+            return "antd";
           }
           if (id.includes("node_modules")) {
             return "vendor";

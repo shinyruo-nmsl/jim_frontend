@@ -1,10 +1,6 @@
 import { Model } from "proj-type";
 import { User } from "proj-service";
-import { WebUtil } from "web-common";
-
-const {
-  Http: { request },
-} = WebUtil;
+import { request } from "@web/util/http";
 
 export interface SearchBarQuery extends Model.PaginationQuery {
   searchTerm?: string;

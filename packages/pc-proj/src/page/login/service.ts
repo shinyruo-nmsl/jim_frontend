@@ -1,8 +1,4 @@
-import { WebUtil } from "web-common";
-
-const {
-  Http: { AuthToken, request },
-} = WebUtil;
+import { AuthToken, request } from "@web/util/http";
 
 export type LoginParam = {
   account: string;

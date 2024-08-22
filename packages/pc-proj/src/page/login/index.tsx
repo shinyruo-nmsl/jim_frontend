@@ -1,15 +1,10 @@
 import { Button, Form, Input, Tabs, message } from "antd";
-import { WebUtil, WebService } from "web-common";
+import { navigate2Pre } from "@web/util/navigate";
+import { useLogin } from "@web/service/login";
 
 import "./index.less";
 
-const {
-  Navigate: { navigate2Pre },
-} = WebUtil;
 
-const {
-  Login: { useLogin },
-} = WebService;
 
 function LoginPage() {
   const {

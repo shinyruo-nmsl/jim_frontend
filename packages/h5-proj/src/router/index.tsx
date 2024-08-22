@@ -9,8 +9,6 @@ import AIRouter from "./ai";
 type SubRoute = WebType.Router.SubRoute;
 
 
-const isProd = import.meta.env.MODE === "production";
-
 const subRouters: SubRoute[] = [
   {
     path: "home",
@@ -34,7 +32,7 @@ const H5Router = new Router(
     ...subRouters,
   ],
   subRouters,
-  { basename: isProd ? "/h5/" : "/" }
+  { basename: import.meta.env.VITE_APP_ROUTER_BASE }
 );
 
 export default H5Router;
