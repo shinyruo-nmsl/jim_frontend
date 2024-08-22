@@ -1,22 +1,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { message } from "antd";
 import { AIImgParser } from "proj-service";
-import { WebContext, WebApi, WebUtil } from "web-common";
+import { fetchUploadImgFile } from "@web/api/file";
+import { fetchGetAIParseMessage } from "@web/api/ai";
+import { useUserLoginInfo } from "@web/context/user";
+import StorageUtil from "@web/util/storage";
 import ImageTextArea, { InputImg } from "@/component/TextArea";
 import MessageBox from "./component/Message";
 
-const {
-  File: { fetchUploadImgFile },
-  AI: { fetchGetAIParseMessage },
-} = WebApi;
-
-const {
-  User: { useUserLoginInfo },
-} = WebContext;
-
-const {
-  Storage: { default: StorageUtil },
-} = WebUtil;
 
 function ImgParserPage() {
   const { userId } = useUserLoginInfo();

@@ -29,6 +29,9 @@ export default defineConfig({
     alias: {
       "@": resolve(__dirname, "src"),
       "@web": resolve(__dirname, "../web-common/src"),
+      "@util": resolve(__dirname, "../proj-util/src"),
+      "@type": resolve(__dirname, "../proj-type/src"),
+      "@service": resolve(__dirname, "../proj-service/src"),
     },
     extensions: [".js", ".json", ".ts", ".tsx", ".jsx"],
   },
@@ -36,6 +39,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          console.log(id);
           if (
             id.includes("vite/preload-helper") ||
             id.includes("vite/modulepreload-polyfill")
@@ -59,6 +63,9 @@ export default defineConfig({
           }
           if (id.includes("pptxtojson")) {
             return "pptxtojson";
+          }
+          if (id.includes("antd")) {
+            return "antd";
           }
           if (id.includes("node_modules")) {
             return "vendor";

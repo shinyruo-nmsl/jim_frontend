@@ -1,15 +1,11 @@
-import { WebService } from "web-common";
+import { Router } from "@web/service/router";
 import App from "@/App";
 import Login from "@/page/login";
 import PoetryRouter from "./poetry";
 import ToolRouter from "./tool";
 import AIRouter from "./ai";
 
-const isProd = import.meta.env.MODE === "production";
 
-const {
-  Router: { Router },
-} = WebService;
 
 const subRouters = [AIRouter, PoetryRouter, ToolRouter];
 
@@ -30,7 +26,7 @@ const PCRouter = new Router(
     },
   ],
   subRouters,
-  { basename: isProd ? "/pc/" : "/" }
+  { basename: import.meta.env.VITE_APP_ROUTER_BASE }
 );
 
 export default PCRouter;

@@ -1,12 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
-import { WebContext } from "web-common";
+import { UserLoginProvider } from "@web/context/user";
 import Router from "@/router";
 
-const {
-  User: { UserLoginProvider },
-} = WebContext;
 
 import "./index.css";
 

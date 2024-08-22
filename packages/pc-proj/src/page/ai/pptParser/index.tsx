@@ -1,10 +1,7 @@
-import { pptFile2Json } from "proj-util/src/ppt";
+import { pptFile2Json } from "@util/ppt";
 import { AITextGener } from "proj-service";
-import { WebUtil } from "web-common";
+import { createFetchStream } from "@web/util/http";
 
-const {
-  Http: { createFetchStream },
-} = WebUtil;
 
 function PPTParserPage() {
   const testPPT = async (e: any) => {

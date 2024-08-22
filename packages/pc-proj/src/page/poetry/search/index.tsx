@@ -1,12 +1,9 @@
 import { useCallback, useState } from "react";
 import { Input, Button, message, Spin } from "antd";
 import { Poetry } from "proj-service";
-import { WebApi } from "web-common";
+import { fetchGetPoetriesByAuthorAndKeyWords } from "@web/api/poetry";
 import { PaginationTableAsync } from "@/component/PaginationTable";
 
-const {
-  Poetry: { fetchGetPoetriesByAuthorAndKeyWords },
-} = WebApi;
 
 import "./index.less";
 

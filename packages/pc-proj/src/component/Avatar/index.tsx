@@ -1,9 +1,6 @@
 import { Avatar, AvatarProps } from "antd";
-import { WebContext } from "web-common";
+import { useUserLoginInfo } from "@web/context/user";
 
-const {
-  User: { useUserLoginInfo },
-} = WebContext;
 
 function UserAvatar(avatarProps: AvatarProps) {
   const { userName, avatar } = useUserLoginInfo();

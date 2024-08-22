@@ -4,7 +4,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@web/*": ["../web-common/src/*"]
+      "@web/*": ["../web-common/src/*"],
+      "@util/*": ["../proj-util/src/*"],
+      "@type/*": ["../proj-type/src/*"],
+      "@service/*": ["../proj-service/src/*"]
     }
   },
   "include": ["src"],

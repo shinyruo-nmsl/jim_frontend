@@ -1,7 +1,7 @@
 import { ChangeEvent, ClipboardEvent, KeyboardEvent } from "react";
 import { Input, Image } from "antd";
 import { CloseCircleFilled } from "@ant-design/icons";
-import { File as FileUtil } from "proj-util";
+import { imgFile2Base64 } from "@util/file";
 
 export interface InputImg {
   file: File;
@@ -31,7 +31,7 @@ export function ImageTextArea({
   const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files?.[0]) return;
-    const base64 = await FileUtil.imgFile2Base64(files[0]);
+    const base64 = await imgFile2Base64(files[0]);
     onUploadImg({ file: files[0], base64 });
   };
 
@@ -47,7 +47,7 @@ export function ImageTextArea({
       .map((item) => item.getAsFile())
       .filter((f) => f && f.type.includes("image"));
     if (!files?.[0]) return;
-    const base64 = await FileUtil.imgFile2Base64(files[0]);
+    const base64 = await imgFile2Base64(files[0]);
     onUploadImg({ file: files[0], base64 });
   };
 

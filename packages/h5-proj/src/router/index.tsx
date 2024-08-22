@@ -1,4 +1,4 @@
-import { WebService } from "web-common";
+import { Router } from "@web/service/router";
 import { Navigate } from "react-router-dom";
 import { WebType } from "web-common";
 import Layout from "@/layout";
@@ -8,11 +8,6 @@ import AIRouter from "./ai";
 
 type SubRoute = WebType.Router.SubRoute;
 
-const {
-  Router: { Router },
-} = WebService;
-
-const isProd = import.meta.env.MODE === "production";
 
 const subRouters: SubRoute[] = [
   {
@@ -37,7 +32,7 @@ const H5Router = new Router(
     ...subRouters,
   ],
   subRouters,
-  { basename: isProd ? "/h5/" : "/" }
+  { basename: import.meta.env.VITE_APP_ROUTER_BASE }
 );
 
 export default H5Router;

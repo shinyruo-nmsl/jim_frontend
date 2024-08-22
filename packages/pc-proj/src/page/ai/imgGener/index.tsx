@@ -1,23 +1,14 @@
 import { useLayoutEffect, useRef, useState, KeyboardEvent } from "react";
 import { Divider, Input, message } from "antd";
 import { AIImgGener } from "proj-service";
-import { WebUtil, WebContext, WebApi } from "web-common";
-
+import StorageUtil from "@web/util/storage";
+import { awaitAllChildrenImgsLoaded } from "@web/util/html";
+import { useUserLoginInfo } from "@web/context/user";
+import { fetchGetAIImages } from "@web/api/ai";
 import MessageBox from "./component/Message";
+
 import "./index.less";
 
-const {
-  Storage: { default: StorageUtil },
-  Html: { awaitAllChildrenImgsLoaded },
-} = WebUtil;
-
-const {
-  User: { useUserLoginInfo },
-} = WebContext;
-
-const {
-  AI: { fetchGetAIImages },
-} = WebApi;
 
 function ImgGenerPage() {
   const { userId } = useUserLoginInfo();

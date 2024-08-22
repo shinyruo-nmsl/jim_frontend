@@ -2,17 +2,11 @@ import { useState } from "react";
 import { Tool } from "proj-util";
 import { genPPT } from "proj-util/src/ppt";
 import { AIImgParser } from "proj-service";
-import { WebUtil, WebApi } from "web-common";
+import { fetchUploadImgFile } from "@web/api/file";
+import { createFetchStream } from "@web/util/http";
+import { downloadFileFromBlob } from "@web/util/html";
 import ImageTextArea, { InputImg } from "@/component/TextArea";
 
-const {
-  File: { fetchUploadImgFile },
-} = WebApi;
-
-const {
-  Http: { createFetchStream },
-  Html: { downloadFileFromBlob },
-} = WebUtil;
 
 function PPTGenerPage() {
   const prompt: AIImgParser.Prompt = {
@@ -71,7 +65,7 @@ function PPTGenerPage() {
             disabled: isPending,
           }}
           onPressEnter={handlePressEnter}
-          onChange={() => {}}
+          onChange={() => { }}
           onUploadImg={(img) => setTempImg(img)}
           onRemoveImg={() => setTempImg(null)}
         />
