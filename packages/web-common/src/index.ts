@@ -4,5 +4,3 @@ export * as WebApi from "./api";
 export * as WebContext from "./context";
 export * as WebType from "./type";
 export * as WebComponent from "./component";
-
-import "./style/icon.css";
