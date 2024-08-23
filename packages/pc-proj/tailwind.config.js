@@ -1,3 +1,3 @@
 /** @type {import('tailwindcss').Config} */
-import Config from "../../tailwind.config";
+import Config from "../../config/tailwind.config";
 export default Config;

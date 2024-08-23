@@ -5,13 +5,17 @@ import { createMarkdown } from "@web/util/markdown";
 
 function MarkdownText({
   content,
+  markdownClassName = '',
   hlStyle = {},
   iconStyle = {},
 }: {
   content: string;
+  markdownClassName?: string;
   hlStyle?: CSSProperties;
   iconStyle?: CSSProperties;
 }) {
+  const _markdownClassName = `w-fit bg-[azure] border border-solid border-[blue] rounded-[5px] p-[12px] text-[12px]/[16px] break-all ${markdownClassName}`;
+
   const markdownDomRef = useRef<HTMLDivElement>(null);
 
   const markdownRef = useRef(createMarkdown({ hlStyle, iconStyle }));
@@ -57,6 +61,8 @@ function MarkdownText({
     };
   }, []);
 
+
+
   return (
     <div className="relative">
       <div
@@ -68,7 +74,7 @@ function MarkdownText({
       </div>
       <div
         ref={markdownDomRef}
-        className="w-fit max-w-[800px] bg-[azure] border border-solid border-[blue] rounded-[5px] p-[12px] text-[12px]/[16px] break-all"
+        className={_markdownClassName}
         dangerouslySetInnerHTML={{
           __html: markdownRef.current.render(content),
         }}

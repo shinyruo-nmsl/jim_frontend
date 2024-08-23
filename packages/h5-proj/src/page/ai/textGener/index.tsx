@@ -4,6 +4,7 @@ import { AITextGener } from "proj-service";
 import StorageUtil from "@web/util/storage";
 import { fetchPostPromotMessage } from "@web/api/ai";
 import { useUserLoginInfo } from "@web/context/user";
+import MessageBox from "./Message";
 
 function AITextGenerPage() {
   const { userId } = useUserLoginInfo();
@@ -37,14 +38,15 @@ function AITextGenerPage() {
   }, [messages]);
 
   return (
-    <div className="ai-chat-page">
-      <div className="message-container" ref={messagesRef}>
+    <div className="h-full flex flex-col">
+      <div className="flex-1 overflow-auto px-5" ref={messagesRef}>
         {messages.map((message, index) => (
           <MessageBox key={index} message={message} />
         ))}
       </div>
-      <div className="edit-container">
+      <div className="flex-none w-full flex items-center justify-center">
         <TextArea
+          className="h-fit border border-solid border-blue bg-white rounded-5 w-350 my-10 px-3 text-5"
           value={prompt}
           disabled={isPending}
           maxLength={600}

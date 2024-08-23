@@ -27,6 +27,7 @@ function AIMessageBox({ content }: { content: string }) {
       {content.length > 0 ? (
         <MarkdownText
           content={content}
+          markdownClassName="max-w-[800px] text-left"
           hlStyle={{
             borderRadius: "5px",
             padding: "10px",

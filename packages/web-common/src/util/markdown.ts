@@ -59,5 +59,5 @@ function getMarkdownCodeTemplate(
     ""
   );
 
-  return `<div class="hljs" style='position: relative; ${hlStyleStr}'><i style='position: absolute; ${iconStyleStr}' class='icon-copy'></i><i style='position: absolute; display: none; ${iconStyleStr}' class='icon-ok'></i><code>${code}</code><div style='display: none;' class='raw-string'>${htmlEncode(rawString)}</div></div>`;
+  return `<div style='position: relative;'><div class="hljs" style='${hlStyleStr}'><i style='position: absolute; ${iconStyleStr}' class='icon-copy'></i><i style='position: absolute; display: none; ${iconStyleStr}' class='icon-ok'></i><code>${code}</code><div style='display: none;' class='raw-string'>${htmlEncode(rawString)}</div></div></div>`;
 }

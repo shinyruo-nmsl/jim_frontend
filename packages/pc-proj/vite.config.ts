@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
-import baseConfig from "../../vite.config";
+import baseConfig from "../../config/vite.config";
 
 const isProd = process.env.NODE_ENV === "production";
 
