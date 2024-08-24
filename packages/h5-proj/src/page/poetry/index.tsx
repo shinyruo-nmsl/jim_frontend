@@ -6,18 +6,16 @@ import {
   Space,
   Tag,
   Empty,
-  Card,
 } from "antd-mobile";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Poetry } from "proj-service";
 import { useState } from "react";
-import { WebApi } from "web-common";
+import { fetchGetPoetriesByAuthorAndKeyWords } from "@web/api/poetry";
+import PoetryCard from "./component/PoetryCard";
 
 import "swiper/css";
 
-const {
-  Poetry: { fetchGetPoetriesByAuthorAndKeyWords },
-} = WebApi;
+
 
 function PoetryPage() {
   const {
@@ -36,6 +34,8 @@ function PoetryPage() {
   const isEmpty = !poetryPagination.data.length;
 
   const [slidesData, setSlidesData] = useState<Poetry.PoetryData[][]>([[]]);
+
+  const flatSlideData = slidesData.flat()
 
   const handleSerach = async () => {
     setSearchPopupVisible(false);
@@ -109,21 +109,9 @@ function PoetryPage() {
               spaceBetween={10}
               onSlideChange={handleSlideChange}
             >
-              {slidesData.map((slideData, index) => (
+              {flatSlideData.map((poetry, index) => (
                 <SwiperSlide className="overflow-auto" key={index}>
-                  {slideData.map((item) => (
-                    <div key={item.id} className="w-full flex flex-col">
-                      <div key={item.id} className="w-full">
-                        <Card className="flex-none" title="标题">
-                          {item.title}
-                        </Card>
-                        <Card className="flex-none" title="作者">
-                          {item.author}
-                        </Card>
-                        <Card title="内容">{item.content}</Card>
-                      </div>
-                    </div>
-                  ))}
+                  <PoetryCard {...poetry} keyword1={query.keyword1} keyword2={query.keyword2} />
                 </SwiperSlide>
               ))}
             </Swiper>

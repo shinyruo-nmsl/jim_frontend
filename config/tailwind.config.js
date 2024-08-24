@@ -14,6 +14,10 @@ export default {
           acc[i] = `${i}px`;
           return acc;
         }, {}),
+        "safe-bottom": "env(safe-area-inset-bottom)",
+        "safe-top": "env(safe-area-inset-top)",
+        "safe-left": "env(safe-area-inset-left)",
+        "safe-right": "env(safe-area-inset-right)",
       },
       colors: {
         red: {

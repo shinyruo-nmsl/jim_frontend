@@ -4,7 +4,7 @@ import { AITextGener } from "proj-service";
 import StorageUtil from "@web/util/storage";
 import { fetchPostPromotMessage } from "@web/api/ai";
 import { useUserLoginInfo } from "@web/context/user";
-import MessageBox from "./Message";
+import MessageBox from "./component/Message";
 
 function AITextGenerPage() {
   const { userId } = useUserLoginInfo();
@@ -44,7 +44,7 @@ function AITextGenerPage() {
           <MessageBox key={index} message={message} />
         ))}
       </div>
-      <div className="flex-none w-full flex items-center justify-center">
+      <div className="flex-none w-full flex items-center justify-center pb-safe-bottom">
         <TextArea
           className="h-fit border border-solid border-blue bg-white rounded-5 w-350 my-10 px-3 text-5"
           value={prompt}
