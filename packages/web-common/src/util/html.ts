@@ -27,9 +27,11 @@ export function copyText(str: string) {
   }
 
   const textArea = document.createElement("textarea");
+  textArea.style.visibility = "hidden";
   textArea.value = str;
   document.body.appendChild(textArea);
   textArea.select();
+  textArea.setSelectionRange(0, 99999); // 对移动设备的兼容
   document.execCommand("copy");
   document.body.removeChild(textArea);
 }

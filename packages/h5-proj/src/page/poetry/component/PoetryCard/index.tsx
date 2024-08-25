@@ -1,67 +1,61 @@
-import { Poetry } from 'proj-service'
+import { copyText } from "@web/util/html";
+import { Poetry } from "proj-service";
+import { useState } from "react";
 
+type PoetryCardProps = Exclude<Poetry.PoetryData, "id"> &
+  Poetry.AuthorAndKeyWordsQuery;
 
-type PoetryCardProps = Exclude<Poetry.PoetryData, 'id'> & Poetry.AuthorAndKeyWordsQuery
+function PoetryCard({
+  title,
+  author,
+  content,
+  keyword1,
+  keyword2,
+}: PoetryCardProps) {
+  const [showCopy, setShowCopy] = useState(true);
 
-function PoetryCard({ title, author, content, keyword1, keyword2 }: PoetryCardProps) {
+  const shownContent = Poetry.fomatPoetryContent(content, keyword1, keyword2);
 
+  const handleCopy = () => {
+    setShowCopy(false);
+    copyText(content);
+    setTimeout(() => {
+      setShowCopy(true);
+    }, 1000);
+  };
 
-    const getSplitContent = () => {
-        const parghs = content.split('。').filter(Boolean)
-        return parghs.reduce((acc: string[][], graph) => {
-            const chunks = Poetry.splitPoetryContentByKeyWords(graph, keyword1, keyword2)
-            const _gragh = chunks.reduce((total: string[][], chunk) => {
-                if (chunk.includes('，')) {
-                    const strs = chunk.split('，')
-                    if (total.length) {
-                        const last = total[total.length - 1]
-                        last.push(`${strs[0]}，`)
-                        return [...total, ...strs.slice(1).map((s, index) => index === strs.length - 2 ? [s] : [`${s}，`])]
-                    } else {
-                        return [...strs.map((s, index) => index === strs.length - 1 ? [s] : [`${s}，`])]
-                    }
-                } else {
-                    if (total.length) {
-                        total[total.length - 1].push(chunk)
-                        return total
-                    } else {
-                        return [...total, [chunk]]
-                    }
+  return (
+    <div className="mx-auto w-[80%] h-[100%] flex flex-col items-center rounded-20 bg-[#E6F7FF] p-20 relative">
+      {showCopy && (
+        <i
+          className="icon-copy absolute right-10 top-10 w-15 h-15"
+          onClick={handleCopy}
+        ></i>
+      )}
+      {!showCopy && (
+        <i className="icon-ok absolute right-10 top-10 w-15 h-15"></i>
+      )}
+      <h3 className="font-bold text-20 leading-32">{title}</h3>
+      <h5 className="font-bold text-14 leading-18 pb-6">{author}</h5>
+
+      <div className="w-full h-full overflow-auto">
+        {shownContent.map((segment, index) => (
+          <div className="text-14 leading-18" key={index}>
+            {segment.map((chunk, index) => (
+              <span
+                className={
+                  [keyword1, keyword2].includes(chunk) ? "bg-yellow" : ""
                 }
-
-
-            }, [])
-            if (_gragh.length > 0) {
-                return acc.concat([..._gragh.slice(0, _gragh.length - 1), [..._gragh[_gragh.length - 1], '。']])
-            }
-            return acc
-
-        }, [])
-    }
-
-    const shownContent = getSplitContent()
-
-
-
-    return <div className='flex flex-col items-center'>
-        <h3>{title}</h3>
-        <h5>{author}</h5>
-
-        <div>
-
-            {
-                shownContent.map((segment, index) => < div key={index}>
-                    {
-                        segment.map((chunk, index) => <span key={index}>{chunk}</span>)
-                    }
-                </div>)
-            }
-
-        </div>
-
+                key={index}
+              >
+                {chunk}
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
-
+  );
 }
 
-
-export default PoetryCard
+export default PoetryCard;

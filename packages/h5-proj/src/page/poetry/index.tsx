@@ -1,12 +1,4 @@
-import {
-  Form,
-  Input,
-  Button,
-  Popup,
-  Space,
-  Tag,
-  Empty,
-} from "antd-mobile";
+import { Form, Input, Button, Popup, Space, Tag, Empty } from "antd-mobile";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Poetry } from "proj-service";
 import { useState } from "react";
@@ -14,8 +6,6 @@ import { fetchGetPoetriesByAuthorAndKeyWords } from "@web/api/poetry";
 import PoetryCard from "./component/PoetryCard";
 
 import "swiper/css";
-
-
 
 function PoetryPage() {
   const {
@@ -31,13 +21,16 @@ function PoetryPage() {
 
   const [searchPopupVisible, setSearchPopupVisible] = useState(false);
 
+  const [shownQuery, setShownQuery] = useState(query);
+
   const isEmpty = !poetryPagination.data.length;
 
   const [slidesData, setSlidesData] = useState<Poetry.PoetryData[][]>([[]]);
 
-  const flatSlideData = slidesData.flat()
+  const flatSlideData = slidesData.flat();
 
   const handleSerach = async () => {
+    setShownQuery(query);
     setSearchPopupVisible(false);
     try {
       const data = await search();
@@ -81,15 +74,21 @@ function PoetryPage() {
       {!isEmpty && (
         <div className="flex-none flex justify-between items-center p-12">
           <Space className="flex-auto flex flex-wrap gap-4">
-            {query.author && <Tag color="#108ee9">{query.author}</Tag>}
-            {query.keyword1 && <Tag color="#108ee9">{query.keyword1}</Tag>}
-            {query.keyword2 && <Tag color="#108ee9">{query.keyword2}</Tag>}
+            {shownQuery.author && (
+              <Tag color="#108ee9">{shownQuery.author}</Tag>
+            )}
+            {shownQuery.keyword1 && (
+              <Tag color="#108ee9">{shownQuery.keyword1}</Tag>
+            )}
+            {shownQuery.keyword2 && (
+              <Tag color="#108ee9">{shownQuery.keyword2}</Tag>
+            )}
           </Space>
           {SearchBtn}
         </div>
       )}
 
-      <div className="flex-auto flex-col overflow-auto relative">
+      <div className="flex-1 overflow-auto flex items-center justify-center  relative">
         {isEmpty && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <Empty
@@ -104,14 +103,18 @@ function PoetryPage() {
         {!isEmpty && (
           <>
             <Swiper
-              className="h-[80%] "
+              className="h-[90%] "
               initialSlide={0}
               spaceBetween={10}
               onSlideChange={handleSlideChange}
             >
               {flatSlideData.map((poetry, index) => (
-                <SwiperSlide className="overflow-auto" key={index}>
-                  <PoetryCard {...poetry} keyword1={query.keyword1} keyword2={query.keyword2} />
+                <SwiperSlide key={index}>
+                  <PoetryCard
+                    {...poetry}
+                    keyword1={query.keyword1}
+                    keyword2={query.keyword2}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>

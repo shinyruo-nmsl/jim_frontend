@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, KeyboardEvent } from "react";
 import { TextArea, Toast } from "antd-mobile";
 import { AITextGener } from "proj-service";
 import StorageUtil from "@web/util/storage";
@@ -17,10 +17,10 @@ function AITextGenerPage() {
   const [isPending, setIsPending] = useState(false);
   const messagesRef = useRef<HTMLDivElement>(null);
 
-
   const handleEnterEditInput = async (
+    e: KeyboardEvent<HTMLTextAreaElement>
   ) => {
-    if (prompt.length < 1 || isPending) return;
+    if (e.keyCode === 229 || prompt.length < 1 || isPending) return;
     setIsPending(true);
     try {
       await chat(fetchPostPromotMessage);
@@ -38,7 +38,7 @@ function AITextGenerPage() {
   }, [messages]);
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col pt-10">
       <div className="flex-1 overflow-auto px-5" ref={messagesRef}>
         {messages.map((message, index) => (
           <MessageBox key={index} message={message} />
@@ -52,6 +52,10 @@ function AITextGenerPage() {
           maxLength={600}
           onChange={(e) => {
             setPrompt(e);
+          }}
+          onFocus={() => {
+            window.scrollTo(0, 0);
+            document.body.scrollTop = 0;
           }}
           onEnterPress={handleEnterEditInput}
           placeholder="请输入问题"

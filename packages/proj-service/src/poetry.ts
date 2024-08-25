@@ -86,6 +86,55 @@ export function usePoetry(
   };
 }
 
+export function fomatPoetryContent(
+  content: string,
+  keyword1: string,
+  keyword2: string
+) {
+  const parghs = content.split("。").filter(Boolean);
+  return parghs.reduce((acc: string[][], graph) => {
+    const chunks = splitPoetryContentByKeyWords(graph, keyword1, keyword2);
+    const _gragh = chunks.reduce((total: string[][], chunk) => {
+      if (chunk.includes("，")) {
+        const strs = chunk.split("，");
+        if (total.length) {
+          const last = total[total.length - 1];
+          last.push(`${strs[0]}，`);
+          return [
+            ...total,
+            ...strs
+              .slice(1)
+              .map((s, index) =>
+                index === strs.length - 2 ? [s] : [`${s}，`]
+              ),
+          ];
+        } else {
+          return [
+            ...strs.map((s, index) =>
+              index === strs.length - 1 ? [s] : [`${s}，`]
+            ),
+          ];
+        }
+      } else {
+        if (total.length) {
+          total[total.length - 1].push(chunk);
+          return total;
+        } else {
+          return [...total, [chunk]];
+        }
+      }
+    }, []);
+
+    if (_gragh.length > 0) {
+      return acc.concat([
+        ..._gragh.slice(0, _gragh.length - 1),
+        [..._gragh[_gragh.length - 1], "。"],
+      ]);
+    }
+    return acc;
+  }, []);
+}
+
 export function splitPoetryContentByKeyWords(
   content: string,
   keyword1: string,

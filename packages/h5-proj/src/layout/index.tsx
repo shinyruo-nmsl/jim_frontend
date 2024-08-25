@@ -8,8 +8,6 @@ import { useUserRouter } from "@web/service/router";
 import { HttpEventEmitter } from "@util/http";
 import Modal from "@/component/Modal";
 
-
-
 function Layout() {
   const userInfo = useUserLoginInfo();
 
@@ -57,7 +55,7 @@ function Layout() {
   return (
     <div className="flex flex-col w-full h-full">
       <NavBar
-        className="w-full flex-none"
+        className="w-full flex-none bg-white font-semibold"
         right={right}
         onBack={() => navigate(-1)}
       >
@@ -71,7 +69,10 @@ function Layout() {
           <Outlet />
         </Suspense>
       </div>
-      <Modal visible={sideBarVisible} onClickMask={() => setSideBarVisible(false)}>
+      <Modal
+        visible={sideBarVisible}
+        onClickMask={() => setSideBarVisible(false)}
+      >
         <SideBar
           className="fixed right-0 top-0 h-full w-[40%] z-prioty"
           activeKey={curRouteTrace.map((item) => item.path).join("/")}
@@ -85,7 +86,6 @@ function Layout() {
           ))}
         </SideBar>
       </Modal>
-
     </div>
   );
 }

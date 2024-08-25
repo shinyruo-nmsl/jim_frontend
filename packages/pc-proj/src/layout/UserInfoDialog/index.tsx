@@ -1,9 +1,10 @@
-import { Modal, Form, Input, message } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Modal, Form, Input, message, UploadFile, Upload, Button } from "antd";
+import { UserOutlined, UploadOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { User } from "proj-service";
 import { WebType } from "web-common";
 import { CharacterAvatar } from "@/component/Avatar";
+import { fetchUploadImgFile } from "@web/api/file";
 
 type UserLoginDisplayInfo = WebType.User.UserLoginDisplayInfo;
 
@@ -22,32 +23,32 @@ function UserInfoDialog({
   onCloseModal,
 }: UserInfoDialogProps) {
   const [_userName, setUserName] = useState(userName);
-  // const [_avatar, setAvatar] = useState(avatar);
+  const [_avatar, setAvatar] = useState(avatar);
 
-  // const handleBeforeUploadAvatar = async (file: File) => {
-  //   if (file.size > 1024 * 1024 * 10) {
-  //     message.warning("文件太大啦~");
-  //     return false;
-  //   }
+  const handleBeforeUploadAvatar = async (file: File) => {
+    if (file.size > 1024 * 1024 * 10) {
+      message.warning("文件太大啦~");
+      return false;
+    }
 
-  //   return true;
-  // };
+    return true;
+  };
 
-  // const handleUploadAvatar = async (uploadFile: UploadFile) => {
-  //   const file = uploadFile.originFileObj!;
+  const handleUploadAvatar = async (uploadFile: UploadFile) => {
+    const file = uploadFile.originFileObj!;
 
-  //   if (uploadFile.status === "uploading") {
-  //     const url = URL.createObjectURL(file);
-  //     setAvatar(url);
-  //   }
-  // };
+    if (uploadFile.status === "uploading") {
+      const { url } = await fetchUploadImgFile({ imgFile: file });
+      setAvatar(url);
+    }
+  };
 
   const handleClickConfirmButton = () => {
     if (!_userName) {
       message.error("昵称为空~");
       return;
     }
-    onConfirm({ userName: _userName, avatar, role });
+    onConfirm({ userName: _userName, avatar: _avatar, role });
   };
 
   return (
@@ -72,10 +73,10 @@ function UserInfoDialog({
           >
             <CharacterAvatar
               characterName={_userName}
-              avatar={avatar}
+              avatar={_avatar}
               size={50}
             />
-            {/* <Upload
+            <Upload
               accept="image/png, image/jpeg"
               beforeUpload={handleBeforeUploadAvatar}
               customRequest={() => {}}
@@ -85,7 +86,7 @@ function UserInfoDialog({
               <Button size="small" icon={<UploadOutlined />}>
                 点击上传
               </Button>
-            </Upload> */}
+            </Upload>
           </div>
         </Form.Item>
         <Form.Item label="用户昵称">

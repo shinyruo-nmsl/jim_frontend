@@ -2,20 +2,19 @@ import { CSSProperties, useEffect, useRef, useState } from "react";
 import { copyText, htmlDecode } from "@web/util/html";
 import { createMarkdown } from "@web/util/markdown";
 
-
 function MarkdownText({
   content,
-  markdownClassName = '',
+  copyClassName = "",
+  markdownClassName = "",
   hlStyle = {},
   iconStyle = {},
 }: {
   content: string;
+  copyClassName?: string;
   markdownClassName?: string;
   hlStyle?: CSSProperties;
   iconStyle?: CSSProperties;
 }) {
-  const _markdownClassName = `w-fit bg-[azure] border border-solid border-[blue] rounded-[5px] p-[12px] text-[12px]/[16px] break-all ${markdownClassName}`;
-
   const markdownDomRef = useRef<HTMLDivElement>(null);
 
   const markdownRef = useRef(createMarkdown({ hlStyle, iconStyle }));
@@ -61,12 +60,10 @@ function MarkdownText({
     };
   }, []);
 
-
-
   return (
     <div className="relative">
       <div
-        className="absolute right-[1px] top-[1px] px-[10px] py-[5px] rounded-[5px] bg-gray-300 bg-opacity-40 flex items-center justify-center cursor-pointer"
+        className={`absolute right-[1px] top-[1px] px-[10px] py-[5px] rounded-[5px] bg-gray-300 bg-opacity-40 flex items-center justify-center cursor-pointer ${copyClassName}`}
         onClick={handleCopy}
       >
         {showCopy && <i className="icon-copy text-white w-[20px] h-[20px]"></i>}
@@ -74,7 +71,7 @@ function MarkdownText({
       </div>
       <div
         ref={markdownDomRef}
-        className={_markdownClassName}
+        className={`w-fit bg-[azure] border border-solid border-[blue] rounded-[5px] p-[12px] text-[12px]/[16px] break-all ${markdownClassName}`}
         dangerouslySetInnerHTML={{
           __html: markdownRef.current.render(content),
         }}

@@ -44,9 +44,10 @@ body {
   -ms-user-select: none;
   user-select: none;
   /* https://blog.opendigerati.com/the-eccentric-ways-of-ios-safari-with-the-keyboard-b5aa3f34228d */
-  position: fixed;
   height: 100%;
   overflow: hidden;
+  position: fixed;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 input,
@@ -93,7 +94,7 @@ input[type="search"]::-webkit-search-results-decoration {
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
   margin: 0 auto;
-  height: 100vh;
+  height: 100%;
   width: 100vmin;
   text-align: center;
 }

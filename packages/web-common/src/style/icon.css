@@ -1,7 +1,7 @@
 i[class^="icon-"],
 i[class*="icon-"] {
   display: inline-block;
-  position: relative;
+  /* position: relative; */
 }
 
 i {
@@ -31,4 +31,14 @@ i.icon-ok::before {
 i.icon-upload::before {
   mask: url("../assets/upload.svg") no-repeat center / contain;
   -webkit-mask: url("../assets/upload.svg") no-repeat center / contain;
+}
+
+i.icon-upload-mini::before {
+  mask: url("../assets/upload-mini.svg") no-repeat center / contain;
+  -webkit-mask: url("../assets/upload-mini.svg") no-repeat center / contain;
+}
+
+i.icon-close::before {
+  mask: url("../assets/close.svg") no-repeat center / contain;
+  -webkit-mask: url("../assets/close.svg") no-repeat center / contain;
 }
