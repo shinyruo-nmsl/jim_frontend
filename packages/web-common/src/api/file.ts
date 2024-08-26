@@ -27,3 +27,19 @@ export async function fetchUploadImgFile(params: { imgFile: File }) {
     },
   });
 }
+
+export async function fetchUploadMarkdownFile(params: { mdFile: File }) {
+  const { mdFile } = params;
+  const formData = new FormData();
+  formData.append("file", mdFile);
+
+  return request<{ url: string }>({
+    method: "post",
+    url: File.URL.UPLOAD_MARKDOWN_FILE,
+    data: formData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Accept: "*/*",
+    },
+  });
+}

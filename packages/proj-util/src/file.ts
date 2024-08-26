@@ -1,6 +1,7 @@
 export enum URL {
   UPLOAD_BASE64_IMAGE = "/file/uploadBase64Img",
   UPLOAD_IMG_FILE = "/file/uploadImgFile",
+  UPLOAD_MARKDOWN_FILE = "/file/uploadMarkdownFile",
 }
 
 export function arrayBuffer2String(buffer: ArrayBuffer) {

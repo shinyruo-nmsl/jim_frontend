@@ -6,6 +6,7 @@ import { WebType } from "web-common";
 type SubRoute = WebType.Router.SubRoute;
 
 const Admin = React.lazy(() => import("@/page/tool/admin"));
+const Blog = React.lazy(() => import("@/page/tool/blog"));
 
 const subRouter: SubRoute = {
   path: "tool",
@@ -20,6 +21,14 @@ const subRouter: SubRoute = {
       auths: ["admin"],
       icon: <AppstoreOutlined />,
       element: <Admin />,
+    },
+    {
+      path: "blog",
+      label: "博客",
+      key: "tool_blog",
+      auths: ["admin"],
+      icon: <AppstoreOutlined />,
+      element: <Blog />,
     },
   ],
 };

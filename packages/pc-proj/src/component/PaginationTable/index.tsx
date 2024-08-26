@@ -50,7 +50,7 @@ function PaginationTableAsync<T extends Record<any, any>>(
 interface SyncProps<T> {
   tableProps?: TableProps<T>;
   data: T[];
-  onChangeTable: (no: number, size: number) => void;
+  onChangeTable?: (no: number, size: number) => void;
 }
 
 function PaginationTableSync<T extends Record<any, any>>(props: SyncProps<T>) {
@@ -69,7 +69,7 @@ function PaginationTableSync<T extends Record<any, any>>(props: SyncProps<T>) {
       setPageNo(no);
     }
     setLimit(size);
-    onChangeTable(no, size);
+    onChangeTable && onChangeTable(no, size);
   };
 
   useEffect(() => {
