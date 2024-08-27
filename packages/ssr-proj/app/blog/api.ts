@@ -1,12 +1,4 @@
 import { BlogArticle } from "@web/type/blog";
-import { headers } from "next/headers";
-
-export async function tt() {
-  if (typeof window !== "undefined") {
-    return navigator;
-  }
-  return headers();
-}
 
 export async function fetchGetBlogArticles(): Promise<BlogArticle[]> {
   return fetch(

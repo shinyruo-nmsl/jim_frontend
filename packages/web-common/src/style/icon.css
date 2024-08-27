@@ -42,3 +42,13 @@ i.icon-close::before {
   mask: url("../assets/close.svg") no-repeat center / contain;
   -webkit-mask: url("../assets/close.svg") no-repeat center / contain;
 }
+
+i.icon-arrow-down::before {
+  mask: url("../assets/arrow-down.svg") no-repeat center / contain;
+  -webkit-mask: url("../assets/arrow-down.svg") no-repeat center / contain;
+}
+
+i.icon-arrow-up::before {
+  mask: url("../assets/arrow-up.svg") no-repeat center / contain;
+  -webkit-mask: url("../assets/arrow-up.svg") no-repeat center / contain;
+}
