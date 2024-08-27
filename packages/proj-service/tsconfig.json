@@ -1,4 +1,4 @@
 {
   "extends": "../../config/tsconfig.json",
-  "include": ["src"]
+  "include": ["src", "../pc-proj/src/service/blog.ts"]
 }

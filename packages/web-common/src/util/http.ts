@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Http, Tool } from "proj-util";
+import * as Http from "@util/http";
+import * as Tool from "@util/tool";
 import { HttpMethod } from "@web/type/http";
 import StorageUtil from "./storage";
 

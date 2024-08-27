@@ -1,10 +1,10 @@
 
 import { useEffect, useState } from "react";
-import { Table, Space } from "antd";
-import { Blog } from "proj-service";
-import * as API from "@web/api/blog";
+import { Modal, Form, Input } from "antd";
+import { useBlogAdmin } from "@web/service/blog";
+import { BlogArticleForm } from "@web/type/blog";
 import BlogTable from "./component/BlogTable";
-import BlogDialog, { BlogArticleForm } from "./component/BlogDialog";
+import BlogDialog from "./component/BlogDialog";
 
 
 function BlogAdminPage() {
@@ -16,19 +16,16 @@ function BlogAdminPage() {
         updateArticle,
         getCategory,
         getArticles,
-    } = Blog.useBlogAdmin({
-        getCategoryApi: API.fetchGetBlogCategories,
-        addCategoryApi: API.fetchAddBlogCategory,
-        getArticlesApi: API.fetchGetBlogArticles,
-        addArticleApi: API.fetchAddBlogArticle,
-        updateArticleApi: API.fetchUpdateBlogArticle,
-    });
+    } = useBlogAdmin();
+
 
 
     const categoryOptions = categories.map((category) => ({
         label: category.name,
         value: category.name,
     }));
+    const [categoryAddDialogVisible, setCategoryAddDialogVisible] = useState(false);
+    const [newCategory, setNewCategory] = useState('');
 
     const [articleIndex, setArticleIndex] = useState(-1);
     const currentArticle = articles[articleIndex];
@@ -53,6 +50,7 @@ function BlogAdminPage() {
 
     return <div>
         <button onClick={() => setBlogAddDialogVisible(true)}>Add Article</button>
+        <button onClick={() => setCategoryAddDialogVisible(true)}>Add Category</button>
 
         <BlogTable
             data={articles}
@@ -74,25 +72,44 @@ function BlogAdminPage() {
                 }
             />
         }
-
-        {
-            newArticle && <BlogDialog
-                visible={blogAddDialogVisible}
-                categories={categoryOptions}
-                article={newArticle}
-                onCloseModal={() => setBlogAddDialogVisible(false)}
-                onConfirm={(article) => {
-                    addArticle(article);
-                    setBlogAddDialogVisible(false);
-                    setNewArticle({
-                        category: '',
-                        link: '',
-                        title: '',
-                    });
-                }
-                }
-            />
-        }
+        <BlogDialog
+            visible={blogAddDialogVisible}
+            categories={categoryOptions}
+            article={newArticle}
+            onCloseModal={() => setBlogAddDialogVisible(false)}
+            onConfirm={(article) => {
+                addArticle(article);
+                setBlogAddDialogVisible(false);
+                setNewArticle({
+                    category: '',
+                    link: '',
+                    title: '',
+                });
+            }
+            }
+        />
+        <Modal
+            title="Add Category"
+            open={categoryAddDialogVisible}
+            onOk={() => {
+                addCategory(newCategory);
+                setCategoryAddDialogVisible(false);
+                setNewCategory('');
+            }}
+            onCancel={() => {
+                setCategoryAddDialogVisible(false);
+                setNewCategory('');
+            }}
+        >
+            <Form>
+                <Form.Item label="Category">
+                    <Input
+                        value={newCategory}
+                        onChange={(e) => setNewCategory(e.target.value)}
+                    />
+                </Form.Item>
+            </Form>
+        </Modal>
     </div>;
 }
 

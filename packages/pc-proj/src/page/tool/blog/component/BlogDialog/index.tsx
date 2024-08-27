@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form, Select, Modal, Input, Upload, Button, UploadFile } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { Blog } from "proj-service";
+import { BlogArticleForm } from "@web/type/blog";
 import { Opiton } from "@type/model";
 import { fetchUploadMarkdownFile } from "@web/api/file";
 
@@ -9,9 +9,9 @@ import { fetchUploadMarkdownFile } from "@web/api/file";
 interface BlogDialogProps {
     visible: boolean;
     categories: Opiton<string>[];
-    article: Blog.BlogArticleForm;
+    article: BlogArticleForm;
     onCloseModal: () => void;
-    onConfirm: (form: Blog.BlogArticleForm) => void;
+    onConfirm: (form: BlogArticleForm) => void;
 }
 
 function BlogDialog({
@@ -67,7 +67,7 @@ function BlogDialog({
                 <Form.Item label="Link">
                     <p>{form.link}</p>
                     <Upload
-                        accept="image/png, image/jpeg"
+                        accept=".md"
                         customRequest={() => { }}
                         onChange={({ file }) => handleUploadMarkdown(file)}
                         itemRender={() => <></>}

@@ -1,40 +1,40 @@
 import { request } from "@web/util/http";
-import { Blog } from "proj-service";
+import { BlogArticle, BlogArticleForm, BlogCategory } from "@web/type/blog";
 
 export function fetchGetBlogCategories() {
-  return request<Blog.BlogCategory[]>({
+  return request<BlogCategory[]>({
     method: "get",
-    url: Blog.URL.GET_BLOG_CATEGORIES,
+    url: "/blog/getBlogCategories",
   });
 }
 
-export async function fetchAddBlogCategory(category: Blog.BlogCategory) {
+export async function fetchAddBlogCategory(category: string) {
   await request({
     method: "post",
-    url: Blog.URL.ADD_BLOG_CATEGORY,
-    data: category,
+    url: "/blog/addBlogCategory",
+    data: { name: category },
   });
 }
 
 export function fetchGetBlogArticles() {
-  return request<Blog.BlogArticle[]>({
+  return request<BlogArticle[]>({
     method: "get",
-    url: Blog.URL.GET_BLOG_ARTICLES,
+    url: "/blog/getBlogArticles",
   });
 }
 
-export async function fetchAddBlogArticle(article: Blog.BlogArticleForm) {
+export async function fetchAddBlogArticle(article: BlogArticleForm) {
   await request({
     method: "post",
-    url: Blog.URL.ADD_BLOG_ARTICLE,
+    url: "/blog/addBlogArticle",
     data: article,
   });
 }
 
-export async function fetchUpdateBlogArticle(article: Blog.BlogArticle) {
+export async function fetchUpdateBlogArticle(article: BlogArticle) {
   await request({
     method: "post",
-    url: Blog.URL.UPDATE_BLOG_ARTICLE,
+    url: "/blog/updateBlogArticle",
     data: article,
   });
 }

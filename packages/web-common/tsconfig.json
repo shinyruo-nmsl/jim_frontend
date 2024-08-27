@@ -3,8 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@web/*": ["src/*"] // @将映射到src目录
+      "@web/*": ["src/*"], // @将映射到src目录
+      "@util/*": ["../proj-util/src/*"],
+      "@type/*": ["../proj-type/src/*"],
+      "@service/*": ["../proj-service/src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "../pc-proj/src/service/blog.ts"]
 }

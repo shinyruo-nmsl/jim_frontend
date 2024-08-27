@@ -1,15 +1,15 @@
 import { Table, Space, TableProps } from "antd";
-import { Blog } from "proj-service";
+import { BlogArticle } from "@web/type/blog";
 
 interface BlogTableProps {
-    data: Blog.BlogArticle[];
+    data: BlogArticle[];
     onEdit: (index: number) => void;
 }
 
 
 function BlogTable({ data, onEdit }: BlogTableProps) {
 
-    const columns: TableProps<Blog.BlogArticle>['columns'] = [
+    const columns: TableProps<BlogArticle>['columns'] = [
         {
             title: "ID",
             dataIndex: "id",

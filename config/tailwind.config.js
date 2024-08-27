@@ -94,6 +94,10 @@ export default {
         prioty: 9999,
         modal: 9998,
       },
+      screens: {
+        md: { max: "768px" },
+        tb: "768px",
+      },
     },
   },
   plugins: [],
