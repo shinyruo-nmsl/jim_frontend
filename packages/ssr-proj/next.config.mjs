@@ -12,6 +12,16 @@ const nextConfig = {
   // experimental: {
   //   ppr: true,
   // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.jimvivenbridge.fun",
+        port: "",
+        pathname: "/ssr/**",
+      },
+    ],
+  },
   webpack(config) {
     config.resolve.alias = {
       ...config.resolve.alias,

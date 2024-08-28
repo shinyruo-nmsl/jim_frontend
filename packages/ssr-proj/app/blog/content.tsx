@@ -83,7 +83,7 @@ function PCContent({
                 <ul>
                     {curArticles?.map((article) => (
                         <li className="flex justify-between items-center" key={article.id}>
-                            <Link href={`/blog/${article.id}`}>{article.title}</Link>
+                            <Link href={`/ssr/blog/${article.id}`}>{article.title}</Link>
                             <p>{article.createdAt}</p>
                         </li>
                     ))}
