@@ -13,7 +13,7 @@ export default function Header() {
         <img src={LOGO_PNG.src} width={40} height={40} alt="" />
         <h1 className="text-xl font-bold">My Blog</h1>
       </div>
-      <Link href="/blog">
+      <Link href="/ssr/blog">
         <Image src={HOME_SVG} alt="Home" width={24} height={24} />
       </Link>
     </header>
