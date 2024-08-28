@@ -29,8 +29,6 @@ export default async function BlogArticlePage({ params }: { params: { id: string
         .use(remarkGfm)
         .use(rehypeImgSize)
         .use(rehypeStarryNight)
-        // .use(rehypeSanitize)
-        // .use(rehypeHighlight)
         .use(rehypeStringify).process(markdownText);
 
 
