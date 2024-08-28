@@ -8,20 +8,10 @@ const isProd = process.env.NODE_ENV === "production";
 const nextConfig = {
   assetPrefix: isProd ? "/ssr" : "",
   distDir: "build",
-  // basePath: "/ssr",
+  basePath: isProd ? "/ssr" : "",
   // experimental: {
   //   ppr: true,
   // },
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "www.jimvivenbridge.fun",
-        port: "",
-        pathname: "/ssr/**",
-      },
-    ],
-  },
   webpack(config) {
     config.resolve.alias = {
       ...config.resolve.alias,
