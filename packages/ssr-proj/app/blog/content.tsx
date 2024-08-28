@@ -2,7 +2,6 @@
 import { BlogArticle } from "@web/type/blog";
 import Link from "next/link";
 import { useState } from "react";
-import { basePath } from 'next/config';
 
 function MobileContent({
     data,
@@ -46,7 +45,7 @@ function MobileContentItem({
                 <ul className="text-12">
                     {articles.map((article) => (
                         <li className="flex justify-between items-center" key={article.id}>
-                            <Link href={`${basePath}/blog/${article.id}`}>{article.title}</Link>
+                            <Link href={`/ssr/blog/${article.id}`}>{article.title}</Link>
                             <p>{article.createdAt}</p>
                         </li>
                     ))}
