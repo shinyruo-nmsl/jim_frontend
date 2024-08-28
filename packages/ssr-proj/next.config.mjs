@@ -11,6 +11,7 @@ const nextConfig = {
   // experimental: {
   //   ppr: true,
   // },
+  serverComponentsExternalPackages: ["vscode-oniguruma", "shiki"],
   webpack(config) {
     config.resolve.alias = {
       ...config.resolve.alias,
