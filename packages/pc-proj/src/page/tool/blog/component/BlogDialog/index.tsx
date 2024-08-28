@@ -59,7 +59,7 @@ function BlogDialog({
                         onChange={(category) => setForm({ ...form, category })}
                     >
                         {categories.map(({ label, value }) => (
-                            <Select.Option value={value}>{label}</Select.Option>
+                            <Select.Option key={value} value={value}>{label}</Select.Option>
                         ))}
                     </Select>
                 </Form.Item>

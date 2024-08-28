@@ -12,7 +12,6 @@ const nextConfig = {
   //   ppr: true,
   // },
   webpack(config) {
-    console.log("isServer", resolve(__dirname, "../web-common/src"));
     config.resolve.alias = {
       ...config.resolve.alias,
       "@": resolve(__dirname, "src"),
