@@ -59,12 +59,14 @@ jobs:
                 -v /usr/local/nginx/ssl/www.jimvivenbridge.fun.key:/etc/nginx/ssl/www.jimvivenbridge.fun.key \
                 -v /usr/local/nginx/ssl/www.jimvivenbridge.fun.pem:/etc/nginx/ssl/www.jimvivenbridge.fun.pem \
                 registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest
+              docker rmi $(docker images | grep "none" | awk '{print $3}')
             elif [[ "${{ github.ref }}" == "refs/heads/ssr" ]]; then
               docker stop jim_ssr
               docker rm jim_ssr
               docker pull registry.cn-hangzhou.aliyuncs.com/jim_hub/jim_ssr:latest 
               docker run -d -p 3000:3000 --name jim_ssr \
                 registry.cn-hangzhou.aliyuncs.com/jim_hub/jim_ssr:latest
+              docker rmi $(docker images | grep "none" | awk '{print $3}')
             else
               echo "Unsupported branch"
               exit 1
