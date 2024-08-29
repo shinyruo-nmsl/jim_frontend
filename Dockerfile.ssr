@@ -16,3 +16,8 @@ COPY packages/ssr-proj ./
 EXPOSE 3000
 
 CMD [ "npm", "run", "start" ]
+
+FROM --platform=linux/amd64 nginx:latest
+COPY nginx.conf /etc/nginx/nginx.conf
+RUN mkdir -p /etc/nginx/ssl
+
