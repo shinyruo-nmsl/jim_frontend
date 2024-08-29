@@ -10,7 +10,7 @@ export default function Header() {
     return (
         <header className="flex items-center justify-between  p-10 tb:px-30 md:bg-azure">
             <div className="flex items-center gap-4">
-                <img src={LOGO_PNG.src} width={40} height={40} alt="" />
+                <Image src={LOGO_PNG} alt="Logo" width={24} height={24} />
                 <h1 className="text-xl font-bold">My Blog</h1>
             </div>
             <Link href="/blog">
