@@ -55,7 +55,7 @@ jobs:
               docker stop poetry_frotend
               docker rm poetry_frotend
               docker pull registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest 
-              docker run -d -p 80:80 -p 443:443 --name poetry_frotend \
+              docker run -d -p 80:80 -p 443:443 --name poetry_frontend \
                 -v /usr/local/nginx/ssl/www.jimvivenbridge.fun.key:/etc/nginx/ssl/www.jimvivenbridge.fun.key \
                 -v /usr/local/nginx/ssl/www.jimvivenbridge.fun.pem:/etc/nginx/ssl/www.jimvivenbridge.fun.pem \
                 registry.cn-hangzhou.aliyuncs.com/jim_hub/poetry_frontend:latest
