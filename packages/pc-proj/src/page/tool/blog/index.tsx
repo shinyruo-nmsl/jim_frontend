@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Modal, Form, Input } from "antd";
+import { Modal, Form, Input, Button, message } from "antd";
 import { useBlogAdmin } from "@web/service/blog";
 import { BlogArticleForm } from "@web/type/blog";
 import BlogTable from "./component/BlogTable";
@@ -18,8 +18,6 @@ function BlogAdminPage() {
         getArticles,
     } = useBlogAdmin();
 
-
-
     const categoryOptions = categories.map((category) => ({
         label: category.name,
         value: category.name,
@@ -30,7 +28,6 @@ function BlogAdminPage() {
     const [articleIndex, setArticleIndex] = useState(-1);
     const currentArticle = articles[articleIndex];
     const [blogEditDialogVisible, setBlogEditDialogVisible] = useState(false);
-
     const [newArticle, setNewArticle] = useState<BlogArticleForm>({
         category: '',
         link: '',
@@ -48,9 +45,11 @@ function BlogAdminPage() {
 
 
 
-    return <div>
-        <button onClick={() => setBlogAddDialogVisible(true)}>Add Article</button>
-        <button onClick={() => setCategoryAddDialogVisible(true)}>Add Category</button>
+    return <div className="w-full p-24">
+        <div className="flex justify-end mb-16">
+            <Button onClick={() => setBlogAddDialogVisible(true)}>上传文章</Button>
+            <Button className="ml-16" onClick={() => setCategoryAddDialogVisible(true)}>添加分类</Button>
+        </div>
 
         <BlogTable
             data={articles}
@@ -89,9 +88,13 @@ function BlogAdminPage() {
             }
         />
         <Modal
-            title="Add Category"
+            title="添加分类"
             open={categoryAddDialogVisible}
             onOk={() => {
+                if (!newCategory) {
+                    message.error('请输入分类');
+                    return;
+                }
                 addCategory(newCategory);
                 setCategoryAddDialogVisible(false);
                 setNewCategory('');
@@ -102,8 +105,9 @@ function BlogAdminPage() {
             }}
         >
             <Form>
-                <Form.Item label="Category">
+                <Form.Item label="分类">
                     <Input
+
                         value={newCategory}
                         onChange={(e) => setNewCategory(e.target.value)}
                     />

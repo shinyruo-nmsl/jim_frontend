@@ -15,23 +15,21 @@ function BlogTable({ data, onEdit }: BlogTableProps) {
             dataIndex: "id",
         },
         {
-            title: "Category",
+            title: "分类",
             dataIndex: "category",
         },
         {
-            title: "Link",
-            dataIndex: "link",
-        },
-        {
-            title: "Title",
+            title: "标题",
             dataIndex: "title",
+            render: (text, record) => <Space><a href={record.link}>{text}</a>
+            </Space>
         },
         {
-            title: "CreatedAt",
+            title: "创建时间",
             dataIndex: "createdAt",
         },
         {
-            title: "UpdatedAt",
+            title: "修改时间",
             dataIndex: "updatedAt",
         },
         {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Form, Select, Modal, Input, Upload, Button, UploadFile } from "antd";
+import { Form, Select, Modal, Input, Upload, Button, UploadFile, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { BlogArticleForm } from "@web/type/blog";
 import { Opiton } from "@type/model";
@@ -34,6 +34,18 @@ function BlogDialog({
 
 
     const handleConfirm = () => {
+        if (!form.category) {
+            message.error("请选择分类");
+            return;
+        }
+        if (!form.link) {
+            message.error("请上传文章");
+            return;
+        }
+        if (!form.title) {
+            message.error("请输入标题");
+            return;
+        }
         onConfirm(form);
     }
 
@@ -45,7 +57,7 @@ function BlogDialog({
     return (
         <Modal
             open={visible}
-            title="用户信息调整"
+            title="上传文章"
             centered
             cancelText="取消"
             okText="确认"
@@ -53,7 +65,7 @@ function BlogDialog({
             onOk={handleConfirm}
         >
             <Form>
-                <Form.Item label="Category">
+                <Form.Item label="分类">
                     <Select
                         value={form.category}
                         onChange={(category) => setForm({ ...form, category })}
@@ -64,7 +76,7 @@ function BlogDialog({
                     </Select>
                 </Form.Item>
 
-                <Form.Item label="Link">
+                <Form.Item label="链接">
                     <p>{form.link}</p>
                     <Upload
                         accept=".md"
@@ -78,7 +90,7 @@ function BlogDialog({
                     </Upload>
                 </Form.Item>
 
-                <Form.Item label="Title">
+                <Form.Item label="标题">
                     <Input
                         value={form.title}
                         onChange={(e) => setForm({ ...form, title: e.target.value })}
