@@ -43,9 +43,9 @@ jobs:
           file: ${{ env.DOCKERFILE }}
           push: true
           tags: registry.cn-hangzhou.aliyuncs.com/jim_hub/${{ env.TAG }}:latest
-          script:
-            - echo $TEST
-            - node -e "console.log(process.env.MY_VARIABLE)"
+
+      - name: Print environment variables
+        run: node -e "console.log(process.env.TEST)"
 
       - name: Deploy
         uses: appleboy/ssh-action@master
